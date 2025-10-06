@@ -1,110 +1,60 @@
 import React from "react";
-import "./Tracks.css";
+import TrackListItem from "./TrackListItem";
+import '../index.css'
+
+import lightBlueClosed from './TrackImages/lightblue_closed 1.svg';
+import lightBlueOpen from './TrackImages/lightblue_open 1.svg';
+import cyanClosed from './TrackImages/cyan_closed 1.svg';
+import cyanOpen from './TrackImages/cyan_open 1.svg';
+import navyClosed from './TrackImages/navy_closed 1.svg';
+import navyOpen from './TrackImages/navy_open 1.svg';
 
 const Tracks = () => {
   const tracks = [
     {
-      id: 1,
-      title: "Web Development",
-      description:
-        "Build innovative web applications using modern frameworks and technologies",
-      technologies: ["React", "Node.js", "Python", "JavaScript"],
-      color: "#3498db",
+      open: lightBlueOpen,
+      closed: lightBlueClosed,
+      name: "Track 1",
     },
     {
-      id: 2,
-      title: "Mobile Development",
-      description: "Create mobile apps for iOS and Android platforms",
-      technologies: ["React Native", "Flutter", "Swift", "Kotlin"],
-      color: "#e74c3c",
+      open: navyOpen,
+      closed: navyClosed,
+      name: "Track 2",
     },
     {
-      id: 3,
-      title: "AI & Machine Learning",
-      description:
-        "Develop intelligent solutions using artificial intelligence and machine learning",
-      technologies: ["Python", "TensorFlow", "PyTorch", "OpenAI"],
-      color: "#9b59b6",
+      open: cyanOpen,
+      closed: cyanClosed,
+      name: "Track 3",
     },
     {
-      id: 4,
-      title: "Blockchain & Web3",
-      description:
-        "Explore decentralized applications and blockchain technology",
-      technologies: ["Solidity", "Ethereum", "Web3.js", "IPFS"],
-      color: "#f39c12",
+      open: lightBlueOpen,
+      closed: lightBlueClosed,
+      name: "Track 4",
     },
     {
-      id: 5,
-      title: "Data Science",
-      description:
-        "Analyze data and create insights using data science techniques",
-      technologies: ["Python", "R", "SQL", "Pandas"],
-      color: "#27ae60",
+      open: navyOpen,
+      closed: navyClosed,
+      name: "Track 5",
     },
     {
-      id: 6,
-      title: "Cybersecurity",
-      description:
-        "Protect systems and data from cyber threats and vulnerabilities",
-      technologies: ["Python", "C++", "Linux", "Cryptography"],
-      color: "#e67e22",
+      open: cyanOpen,
+      closed: cyanClosed,
+      name: "Track 6",
     },
   ];
 
   return (
-    <section className="tracks" id="tracks">
-      <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">Competition Tracks</h2>
-          <p className="section-subtitle">
-            Choose your path and showcase your skills in specialized categories
-          </p>
-        </div>
+    <section className="w-full flex flex-col justify-center items-center" id="tracks">
+      <h1 className="text-6xl pt-12 pb-24"> 
+        Tracks
+      </h1>
 
-        <div className="tracks-grid">
-          {tracks.map((track) => (
-            <div
-              key={track.id}
-              className="track-card"
-              style={{ "--track-color": track.color }}
-            >
-              <div className="track-header">
-                <div
-                  className="track-icon"
-                  style={{ backgroundColor: track.color }}
-                >
-                  {track.title.charAt(0)}
-                </div>
-                <h3 className="track-title">{track.title}</h3>
-              </div>
-
-              <p className="track-description">{track.description}</p>
-
-              <div className="track-technologies">
-                <h4 className="tech-title">Technologies:</h4>
-                <div className="tech-tags">
-                  {track.technologies.map((tech, index) => (
-                    <span key={index} className="tech-tag">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <button className="track-button">Learn More</button>
-            </div>
-          ))}
-        </div>
-
-        <div className="tracks-cta">
-          <h3>Ready to compete?</h3>
-          <p>
-            Register now and choose your track to get started on your hackathon
-            journey!
-          </p>
-          <button className="btn btn-primary">Register Now</button>
-        </div>
+      <div className="grid grid-cols-2 gap-8 gap-x-24 pb-12">
+        {tracks.map((item, index) => {
+          return (
+            <TrackListItem key={index} open={item.open} closed={item.closed} name={item.name} />
+          );
+        })}
       </div>
     </section>
   );
