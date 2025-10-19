@@ -1,71 +1,67 @@
-/* Sticky, translucent over the textured bg */
-.bh-nav {
-  position: sticky; top: 0; z-index: 50;
-  backdrop-filter: blur(8px);
-  background: rgba(219, 242, 241, 0.65); /* DBF2F1 w/ transparency */
-  border-bottom: 1px solid rgba(0,0,0,.06);
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  /* slightly taller */
+  padding: 1.2rem 0; /* was 1rem */
 }
 
-.bh-nav-inner {
-  max-width: 1200px;
+.nav-container {
+  max-width: 1300px;       /* gives more breathing room */
   margin: 0 auto;
-  padding: 12px 24px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr; /* left / center / right */
+  padding: 0 3rem;         /* adds horizontal spacing */
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  font-family: "Pixelify Sans", system-ui, sans-serif;
 }
 
-/* Logo */
-.bh-logo img {
-  width: 44px; height: 44px; image-rendering: pixelated;
-  display: block;
+.nav-logo h2 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
-/* Center links */
-.bh-links {
-  list-style: none; margin: 0; padding: 0;
-  display: flex; gap: clamp(18px, 3.2vw, 44px);
-  justify-content: center; align-items: center;
-  text-transform: uppercase; letter-spacing: .08em;
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 3rem; /* increased from 2rem */
+  margin: 0;
+  padding: 0;
 }
 
-.bh-links a {
-  color: #0f2b33; text-decoration: none; font-weight: 700;
-}
-.bh-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
-
-/* Right cluster */
-.bh-right {
-  justify-self: end; display: flex; align-items: center; gap: 12px;
+.nav-item {
+  margin: 0;
+  font-size: larger;
 }
 
-.bh-apply {
-  display: inline-block;
-  padding: 10px 22px;
-  border-radius: 999px;
-  background: #00b3aa;
-  color: #fff; font-weight: 800; letter-spacing: .03em;
+.nav-link {
+  font-family: "Pixelify Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #0e1a1a;
   text-decoration: none;
-  box-shadow: 0 6px 20px rgba(0,0,0,.12);
+  transition: color 0.2s ease;
 }
-.bh-apply:hover { filter: brightness(1.05); }
 
-/* Burger (hidden on desktop) */
-.bh-burger {
-  display: none; position: relative; width: 28px; height: 22px;
-  background: transparent; border: 0; padding: 0; cursor: pointer;
+
+.nav-link:hover {
+  color: #6ec1e4;
 }
-.bh-burger span {
-  position: absolute; left: 0; right: 0; height: 2px; background: #0f2b33;
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #6ec1e4;
+  transition: width 0.3s ease;
 }
-.bh-burger span:nth-child(1){ top: 2px; }
-.bh-burger span:nth-child(2){ top: 10px; }
-.bh-burger span:nth-child(3){ bottom: 2px; }
-.bh-burger.active span:nth-child(2){ opacity: 0; }
-.bh-burger.active span:nth-child(1){ transform: translateY(8px) rotate(45deg); transform-origin: center; }
-.bh-burger.active span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); transform-origin: center; }
 
 .nav-link:hover::after {
   width: 100%;
@@ -156,6 +152,43 @@
   margin: 3px 0;
   transition: 0.3s;
 }
+/* in src/components/Navbar.css */
+.apply-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+
+  /* Pixel font styling */
+  font-family: "Pixelify Sans", sans-serif; 
+  font-size: 1rem;   
+  font-weight: 700;        
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  /* Colors and effects */
+  color: #042d2c;
+  background: #15c6bb;
+  box-shadow: 0 8px 24px rgba(21,198,187,0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.apply-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 28px rgba(21,198,187,0.45);
+}
+
+
+.apply-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow: 0 10px 28px rgba(21,198,187,0.45);
+}
+
 
 @media screen and (max-width: 768px) {
   .nav-menu {
@@ -182,4 +215,18 @@
   .nav-auth {
     display: none;
   }
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-logo-img {
+  height: 46px;            /* up from 36px — makes logo noticeable */
+  width: auto;
+}
+
+.nav-logo-img:hover {
+  transform: scale(1.05);
 }
