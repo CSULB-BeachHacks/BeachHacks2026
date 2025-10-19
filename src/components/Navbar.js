@@ -1,53 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 
-const Navbar = () => {
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  const links = [
+    { href: "#about", label: "About" },
+    { href: "#tracks", label: "Tracks" },
+    { href: "#speakers", label: "Speakers" },
+    { href: "#faq", label: "FAQ" },
+    { href: "#sponsors", label: "Sponsors" },
+    { href: "#teams", label: "Teams" },
+  ];
+
   return (
-    <nav className="navbar">
-      <div className="nav-container">
-        <div className="nav-logo">
-          <h2>BeachHacks 2026</h2>
-        </div>
-        <ul className="nav-menu">
-          <li className="nav-item">
-            <a href="#about" className="nav-link">
-              About
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#tracks" className="nav-link">
-              Tracks
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#speakers" className="nav-link">
-              Speakers
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#faq" className="nav-link">
-              FAQ
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#sponsors" className="nav-link">
-              Sponsors
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#teams" className="nav-link">
-              Teams
-            </a>
-          </li>
+    <nav className="bh-nav" role="navigation" aria-label="Primary">
+      <div className="bh-nav-inner">
+        {/* Left: Logo */}
+        <a href="#home" className="bh-logo" aria-label="BeachHacks Home">
+          <img src="../acm_logo.png" alt="" />
+        </a>
+
+        {/* Center: Links */}
+        <ul className={`bh-links ${open ? "open" : ""}`}>
+          {links.map(({ href, label }) => (
+            <li key={href}>
+              <a href={href} onClick={() => setOpen(false)}>{label}</a>
+            </li>
+          ))}
         </ul>
-        <div className="nav-toggle">
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
+
+        {/* Right: Apply */}
+        <div className="bh-right">
+          <a href="/apply" className="bh-apply">Apply</a>
+
+          {/* Mobile hamburger */}
+          <button
+            className={`bh-burger ${open ? "active" : ""}`}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            onClick={() => setOpen(v => !v)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}

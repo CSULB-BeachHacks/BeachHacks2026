@@ -14,8 +14,10 @@ import Teams from "./components/Teams";
 function App() {
   return (
     <div className="App">
+      <div className="App is-landing">
       <Navbar />
       <Hero />
+    </div>
       <About />
       <Tracks />
       <Speakers />
