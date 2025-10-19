@@ -17,9 +17,15 @@ import { AuthProvider } from "./contexts/AuthContext";
 function App() {
   return (
     <AuthProvider>
-      <div className="App">
-        <Navbar />
-        <Hero />
+      {/* whole site has background now */}
+      <div className="App is-default">
+        {/* Hero keeps its own background */}
+        <div className="is-landing">
+          <Navbar />
+          <Hero />
+        </div>
+
+        {/* rest of the site sits on site-wide background */}
         <About />
         <Tracks />
         <Speakers />
@@ -30,5 +36,6 @@ function App() {
     </AuthProvider>
   );
 }
+
 
 export default App;
