@@ -11,20 +11,25 @@ import FAQ from "./components/FAQ";
 import Sponsors from "./components/Sponsors";
 import Teams from "./components/Teams";
 
+// Import Auth Provider
+import { AuthProvider } from "./contexts/AuthContext";
+
 function App() {
   return (
-    <div className="App">
-      <div className="App is-landing">
-      <Navbar />
-      <Hero />
-    </div>
-      <About />
-      <Tracks />
-      <Speakers />
-      <FAQ />
-      <Sponsors />
-      <Teams />
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <div className="App is-landing">
+        <Navbar />
+        <Hero />
+      </div>
+        <About />
+        <Tracks />
+        <Speakers />
+        <FAQ />
+        <Sponsors />
+        <Teams />
+      </div>
+    </AuthProvider>
   );
 }
 
