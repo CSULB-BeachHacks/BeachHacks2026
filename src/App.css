@@ -44,8 +44,8 @@ body {
 /* Landing page: color + texture on top */
 .is-landing {
   /* top layer: texture svg, bottom layer: solid color */
-  background-image: url("/public/landing_background.svg");
-  background-color: var(--bh-bg-landing);
+  background-image: url("/public/lp_light.svg");
+    background-color: var(--bh-bg-landing);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;   /* texture scales nicely */
@@ -54,7 +54,7 @@ body {
 /* Other pages: gradient + texture on top */
 .is-default {
   background-image:
-    url("/public/blue_texture_background.svg"),
+  url("/public/light_main_website_background.svg"),
     linear-gradient(90deg, var(--g-0) 0%, var(--g-50) 50%, var(--g-75) 75%, var(--g-100) 100%);
   background-repeat: no-repeat, no-repeat;
   background-position: center, center;
