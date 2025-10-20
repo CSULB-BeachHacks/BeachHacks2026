@@ -11,19 +11,31 @@ import FAQ from "./components/FAQ";
 import Sponsors from "./components/Sponsors";
 import Teams from "./components/Teams";
 
+// Import Auth Provider
+import { AuthProvider } from "./contexts/AuthContext";
+
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Hero />
-      <About />
-      <Tracks />
-      <Speakers />
-      <FAQ />
-      <Sponsors />
-      <Teams />
-    </div>
+    <AuthProvider>
+      {/* whole site has background now */}
+      <div className="App is-default">
+        {/* Hero keeps its own background */}
+        <div className="is-landing">
+          <Navbar />
+          <Hero />
+        </div>
+
+        {/* rest of the site sits on site-wide background */}
+        <About />
+        <Tracks />
+        <Speakers />
+        <FAQ />
+        <Sponsors />
+        <Teams />
+      </div>
+    </AuthProvider>
   );
 }
+
 
 export default App;

@@ -2,17 +2,15 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
   z-index: 1000;
-  padding: 1rem 0;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  /* slightly taller */
+  padding: 1.2rem 0; /* was 1rem */
 }
 
 .nav-container {
-  max-width: 1200px;
+  max-width: 1300px;       /* gives more breathing room */
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;         /* adds horizontal spacing */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,22 +26,27 @@
 .nav-menu {
   display: flex;
   list-style: none;
+  gap: 3rem; /* increased from 2rem */
   margin: 0;
   padding: 0;
-  gap: 2rem;
 }
 
 .nav-item {
   margin: 0;
+  font-size: larger;
 }
 
 .nav-link {
+  font-family: "Pixelify Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #0e1a1a;
   text-decoration: none;
-  color: #2c3e50;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  position: relative;
+  transition: color 0.2s ease;
 }
+
 
 .nav-link:hover {
   color: #6ec1e4;
@@ -64,6 +67,78 @@
   width: 100%;
 }
 
+/* Authentication Styles */
+.nav-auth {
+  display: flex;
+  align-items: center;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.auth-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.login-btn {
+  background: transparent;
+  color: #2c3e50;
+  border: 2px solid #2c3e50;
+}
+
+.login-btn:hover {
+  background: #2c3e50;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.signup-btn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+}
+
+.signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-name {
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.logout-btn {
+  padding: 0.5rem 1rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -77,6 +152,43 @@
   margin: 3px 0;
   transition: 0.3s;
 }
+/* in src/components/Navbar.css */
+.apply-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+
+  /* Pixel font styling */
+  font-family: "Pixelify Sans", sans-serif; 
+  font-size: 1rem;   
+  font-weight: 700;        
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  /* Colors and effects */
+  color: #042d2c;
+  background: #15c6bb;
+  box-shadow: 0 8px 24px rgba(21,198,187,0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.apply-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 28px rgba(21,198,187,0.45);
+}
+
+
+.apply-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow: 0 10px 28px rgba(21,198,187,0.45);
+}
+
 
 @media screen and (max-width: 768px) {
   .nav-menu {
@@ -99,4 +211,22 @@
   .nav-toggle {
     display: flex;
   }
+
+  .nav-auth {
+    display: none;
+  }
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-logo-img {
+  height: 46px;            /* up from 36px — makes logo noticeable */
+  width: auto;
+}
+
+.nav-logo-img:hover {
+  transform: scale(1.05);
 }
