@@ -1,60 +1,88 @@
-/* Global App Styles */
-.App {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+/* ---------- Brand + Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;700&display=swap');
+
+:root{
+  /* Colors */
+  --bh-bg-landing: #DBF2F1;
+  --bh-text: #0f2b33;
+  --bh-muted: #466671;
+
+  /* Gradient stops for non-landing pages */
+  --g-0:  #FFFFFF;  /* 0% */
+  --g-50: #69DBD9;  /* 50% */
+  --g-75: #CFFDFC;  /* 75% */
+  --g-100:#00BAB7;  /* 100% */
+
+  /* Typography scale */
+  --h1: 2em;
+  --h2: 1.5em;
+  --h3: 1.17em;
+  --h4: 1em;
+}
+
+/* Base */
+html, body, #root { height: 100%; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--bh-text);
+  font-family: "Pixelify Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+               "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scrolling for anchor links */
-html {
-  scroll-behavior: smooth;
+/* -----------------------------------
+   BACKGROUND MODES
+   Use ONE of these classes at a time:
+   - .is-landing  => DBF2F1 + texture
+   - .is-default  => gradient + texture
+------------------------------------ */
+
+/* Landing page: color + texture on top */
+.is-landing {
+  /* top layer: texture svg, bottom layer: solid color */
+  background-image: url("/public/lp_light.svg");
+    background-color: var(--bh-bg-landing);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;   /* texture scales nicely */
 }
 
-/* Global section styles */
-section {
-  scroll-margin-top: 80px;
+/* Other pages: gradient + texture on top */
+.is-default {
+  background-image:
+  url("/public/light_main_website_background.svg"),
+    linear-gradient(90deg, var(--g-0) 0%, var(--g-50) 50%, var(--g-75) 75%, var(--g-100) 100%);
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-size: cover, cover;
 }
 
-/* Common utility classes */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
+/* Headings */
+h1 { font-size: var(--h1); }
+h2 { font-size: var(--h2); }
+h3 { font-size: var(--h3); }
+h4 { font-size: var(--h4); }
 
-.section-header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
+/* Common layout helpers you already use */
+section { scroll-margin-top: 80px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section-header { text-align: center; margin-bottom: 4rem; }
 .section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 2.5rem; font-weight: 700; color: #0f3f53;
+  margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,.1);
 }
-
 .section-subtitle {
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  max-width: 600px;
-  margin: 0 auto;
+  font-size: 1.2rem; color: var(--bh-muted);
+  max-width: 600px; margin: 0 auto;
 }
 
-/* Responsive design */
-@media screen and (max-width: 768px) {
-  .container {
-    padding: 0 1rem;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .section-subtitle {
-    font-size: 1rem;
-  }
+/* Responsive */
+@media (max-width: 768px){
+  .container { padding: 0 1rem; }
+  .section-title { font-size: 2rem; }
+  .section-subtitle { font-size: 1rem; }
 }
