@@ -1,4 +1,6 @@
 import React from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import TrackListItem from "./TrackListItem";
 import '../index.css'
 
@@ -46,14 +48,25 @@ const Tracks = () => {
     },
   ];
 
+  useGSAP(() => {
+    gsap.to('.hover', {
+        y: -660,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power1.inOut',
+    });
+    }, [])
+
   return (
     <section className="relative w-full flex flex-col justify-center items-center" id="tracks">
-      <h1 className="text-6xl pt-12 pb-24"> 
+      <h1 className="text-8xl pt-12 pb-24 font-bold"> 
         Tracks
       </h1>
 
-      <img className="absolute" src={purpleBlueStar} alt="" />
-
+      <img className="absolute -translate-x-[40rem] -translate-y-[36rem] scale-[250%] rotate-[33deg]" src={purpleBlueStar} alt="" />
+      <img className="absolute translate-x-[40rem] -translate-y-[42rem] scale-75 rotate-[-17deg] hover" src={purpleSmallStar} alt="" />
+      <img className="absolute scale-[250%] translate-x-[30rem] translate-y-[26rem] rotate-[32deg]" src={bluePurpleStar} alt="" />
       <div className="grid grid-cols-2 gap-8 gap-x-24 pb-12">
         {tracks.map((item, index) => {
           return (
