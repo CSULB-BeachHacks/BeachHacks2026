@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 import "./Speakers.css";
 
 const Speakers = () => {
   const sectionRef = useRef(null);
   const crabRef = useRef(null);
+  const speakerContainerRef = useRef(null);
+  const floatingAnimationRef = useRef(null);
   const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0);
   const [isRotating, setIsRotating] = useState(false);
 
@@ -52,6 +55,55 @@ const Speakers = () => {
     return () => observer.disconnect();
   }, []);
 
+  // GSAP continuous floating animation
+  useEffect(() => {
+    if (!speakerContainerRef.current) return;
+
+    const container = speakerContainerRef.current;
+
+    // Create continuous floating animation and store reference
+    floatingAnimationRef.current = gsap.to(container, {
+      y: -30,
+      duration: 1.8,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+    });
+  }, []);
+
+  // GSAP spin animation when rotating
+  useEffect(() => {
+    if (!isRotating || !speakerContainerRef.current) return;
+
+    const container = speakerContainerRef.current;
+
+    // Pause floating animation during spin
+    if (floatingAnimationRef.current) {
+      floatingAnimationRef.current.pause();
+    }
+
+    // Create a dynamic spin animation with GSAP timeline
+    const spinTimeline = gsap.timeline({
+      onComplete: () => {
+        // Reset rotation after spin completes
+        gsap.set(container, { rotation: 0 });
+
+        // Resume floating animation
+        if (floatingAnimationRef.current) {
+          floatingAnimationRef.current.resume();
+        }
+      },
+    });
+
+    spinTimeline.to(container, {
+      rotation: 1080, // 3 full spins (1080 degrees)
+      scale: 1,
+      duration: 0.6,
+      ease: "power2.out",
+      force3D: true,
+    });
+  }, [isRotating]);
+
   // Speaker rotation timer
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,7 +115,7 @@ const Speakers = () => {
           (prevIndex) => (prevIndex + 1) % speakers.length
         );
         setIsRotating(false);
-      }, 1000); // Rotation duration
+      }, 1200); // Rotation duration (matches GSAP animation duration)
     }, 7000); // Change every 7 seconds
 
     return () => clearInterval(interval);
@@ -84,11 +136,7 @@ const Speakers = () => {
         </div>
 
         <div className="row-middle">
-          <div
-            className={`floating-speaker-container ${
-              isRotating ? "rotating" : ""
-            }`}
-          >
+          <div ref={speakerContainerRef} className="floating-speaker-container">
             <div className="bubbles-wrap">
               <img
                 src="/bubbles.png"
