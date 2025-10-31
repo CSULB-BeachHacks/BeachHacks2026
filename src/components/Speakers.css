@@ -1,13 +1,7 @@
 /* Section container */
 .speakers {
   padding: 8rem 0; /* equal top/bottom */
-  background: linear-gradient(
-    135deg,
-    #6ec1e4 0%,
-    #a6d9f9 40%,
-    #d2eaff 70%,
-    #b6aef9 100%
-  );
+
   min-height: 150vh;
   overflow: hidden; /* clip overhanging decorations */
   position: relative; /* anchor absolute crab */
