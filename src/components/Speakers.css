@@ -1,13 +1,7 @@
 /* Section container */
 .speakers {
   padding: 8rem 0; /* equal top/bottom */
-  background: linear-gradient(
-    135deg,
-    #6ec1e4 0%,
-    #a6d9f9 40%,
-    #d2eaff 70%,
-    #b6aef9 100%
-  );
+
   min-height: 150vh;
   overflow: hidden; /* clip overhanging decorations */
   position: relative; /* anchor absolute crab */
@@ -74,7 +68,6 @@
   letter-spacing: 0;
   line-height: 1;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
 }
 
 .star-title {
@@ -94,33 +87,7 @@
 
 /* Floating speaker container with animation */
 .floating-speaker-container {
-  animation: floatingBubble 1.8s ease-in-out infinite;
-}
-
-.floating-speaker-container.rotating {
-  animation: rotateSpeaker 1s ease-in-out;
-}
-
-@keyframes floatingBubble {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-30px);
-  }
-}
-
-@keyframes rotateSpeaker {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-15px) rotate(180deg);
-  }
-  100% {
-    transform: translateY(0px) rotate(360deg);
-  }
+  /* GSAP handles both floating and spin animations */
 }
 
 .speaker-text {
