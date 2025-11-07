@@ -1,185 +1,59 @@
+/* container */
 .tracks {
-  padding: 5rem 0;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  position: relative;          /* relative */
+  width: 100%;                 /* w-full */
+  display: flex;               /* flex */
+  flex-direction: column;      /* flex-col */
+  justify-content: center;     /* justify-center */
+  align-items: center;         /* items-center */
 }
 
-.tracks-grid {
+/* title */
+.tracks__title {
+  font-size: 6rem;             /* text-8xl (default Tailwind = 6rem) */
+  line-height: 1;              /* text-8xl line-height */
+  padding-top: 3rem;           /* pt-12  */
+  padding-bottom: 6rem;        /* pb-24 */
+  font-weight: 700;            /* font-bold */
+}
+
+/* stars (absolute + transforms) */
+.star--top-left {
+  position: absolute;          /* absolute */
+  /* -translate-x-[40rem] -translate-y-[36rem] rotate-[33deg] scale-[250%] */
+  transform: translate(-40rem, -36rem) rotate(33deg) scale(2.5);
+  transform-origin: center;
+}
+
+.star--small {
+  position: absolute;          /* absolute */
+  /* translate-x-[40rem] -translate-y-[42rem] rotate-[-17deg] scale-75 */
+  transform: translate(40rem, -42rem) rotate(-17deg) scale(0.75);
+  transform-origin: center;
+}
+
+/* this one has no negative y; it’s down/right and larger */
+.star--bottom-right {
+  position: absolute;          /* absolute */
+  /* translate-x-[30rem] translate-y-[26rem] rotate-[32deg] scale-[250%] */
+  transform: translate(30rem, 26rem) rotate(32deg) scale(2.5);
+  transform-origin: center;
+}
+
+.tracks__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
+  grid-template-columns: 1fr;                 /* mobile: 1 column */
+  row-gap: 1.5rem;                            /* smaller gaps on mobile if you want */
+  column-gap: 1.5rem;
+  padding-bottom: 3rem;                       /* pb-12 */
 }
 
-.track-card {
-  background: white;
-  border-radius: 15px;
-  padding: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.track-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--track-color);
-}
-
-.track-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-  border-color: var(--track-color);
-}
-
-.track-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.track-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.track-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin: 0;
-}
-
-.track-description {
-  color: #7f8c8d;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.track-technologies {
-  margin-bottom: 2rem;
-}
-
-.tech-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-}
-
-.tech-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.tech-tag {
-  background: #ecf0f1;
-  color: #2c3e50;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.track-button {
-  width: 100%;
-  padding: 0.8rem 1.5rem;
-  background: transparent;
-  border: 2px solid var(--track-color);
-  color: var(--track-color);
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.track-button:hover {
-  background: var(--track-color);
-  color: white;
-  transform: translateY(-2px);
-}
-
-.tracks-cta {
-  text-align: center;
-  background: linear-gradient(
-    135deg,
-    #6ec1e4 0%,
-    #a6d9f9 40%,
-    #d2eaff 70%,
-    #b6aef9 100%
-  );
-  color: white;
-  padding: 3rem 2rem;
-  border-radius: 20px;
-  margin-top: 2rem;
-}
-
-.tracks-cta h3 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.tracks-cta p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.btn {
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-}
-
-.btn-primary {
-  background: #6ec1e4;
-  color: white;
-  box-shadow: 0 4px 15px rgba(110, 193, 228, 0.3);
-}
-
-.btn-primary:hover {
-  background: #a6d9f9;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(166, 217, 249, 0.4);
-}
-
-@media screen and (max-width: 768px) {
-  .tracks-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .track-card {
-    padding: 1.5rem;
-  }
-
-  .tracks-cta {
-    padding: 2rem 1rem;
-  }
-
-  .tracks-cta h3 {
-    font-size: 1.5rem;
+/* ≥768px (Tailwind's md) → 2 columns + wider column gap */
+@media (min-width: 768px) {
+  .tracks__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2rem;                            /* gap-8 */
+    column-gap: 6rem;                         /* gap-x-24 */
   }
 }
+
