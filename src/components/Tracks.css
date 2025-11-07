@@ -57,3 +57,21 @@
   }
 }
 
+.track-item {
+  position: relative;            /* was: relative */
+  display: flex;                 /* was: flex */
+  align-items: center;           /* was: items-center */
+  justify-content: center;       /* was: justify-center */
+  will-change: transform;        /* nice for the GSAP y-anim */
+}
+
+/* These were just "absolute" before; keeping that behavior */
+.track-item__pearl {
+  position: absolute;
+}
+
+.track-item__name {
+  position: absolute;
+  font-size: 2.25rem;            /* ~ Tailwind text-4xl */
+  line-height: 2.5rem;
+}

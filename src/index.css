@@ -13,6 +13,7 @@ body {
     #b6aef9 100%
   );
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 code {
