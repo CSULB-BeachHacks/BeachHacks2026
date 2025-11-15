@@ -23,17 +23,17 @@ function App() {
         {/* Hero keeps its own background */}
         <div className="is-landing">
           <Navbar />
-          {/* <Hero /> */}
+          <Hero />
         </div>
 
         {/* rest of the site sits on site-wide background */}
-        <Application />
-        {/* <About />
+        {/* <Application /> */}
+        <About />
         <Tracks />
         <Speakers />
         <FAQ />
         <Sponsors />
-        <Teams /> */}
+        <Teams />
       </div>
     </AuthProvider>
   );

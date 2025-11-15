@@ -250,6 +250,12 @@
   font-weight: 700;
   color: #084860;
   caret-color: #084860;
+  text-align: center;
+}
+
+/* Discord username input - smaller size */
+input[name="discordUsername"] {
+  font-size: clamp(0.45rem, 0.9vw, 0.9rem);
 }
 
 /* Ensure all inputs/textareas inside the form render fully transparent */
