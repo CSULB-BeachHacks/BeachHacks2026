@@ -33,8 +33,8 @@
 
 /* ---- Grid with precise sizing and “kissed” borders ---- */
 :root {
-  --card-w: 320px;   /* tune these two if you need tiny adjustments */
-  --card-h: 180px;
+  --card-w: 250px;   /* tune these two if you need tiny adjustments */
+  --card-h: 190px;
   --kiss-x: -12px;   /* negative margin to touch borders horizontally */
   --kiss-y: -12px;   /* negative margin to touch borders vertically   */
 }
