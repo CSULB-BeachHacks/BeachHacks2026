@@ -1,0 +1,618 @@
+/* Application Section */
+.application {
+  padding: 10rem 2rem;
+  min-height: 100vh;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Underwater texture effect */
+.application::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(110, 193, 228, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(166, 217, 249, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(182, 174, 249, 0.08) 0%,
+      transparent 60%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.application-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Auth gate styles */
+.auth-gate {
+  background: rgba(255, 255, 255, 0.22);
+  border: 3px solid rgba(8, 72, 96, 0.35);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+.auth-gate-title {
+  margin: 0 0 0.5rem 0;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  color: #084860;
+}
+.auth-gate-text {
+  margin: 0;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  color: #084860;
+}
+
+.application-title {
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  color: #084860;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  margin-bottom: 3rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  image-rendering: pixelated;
+}
+
+/* Submit result banner */
+.submit-banner {
+  margin: -1rem auto 2rem auto;
+  padding: 0.9rem 1.25rem;
+  max-width: 720px;
+  border-radius: 10px;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  text-align: center;
+}
+.submit-banner.success {
+  background: rgba(104, 187, 114, 0.18);
+  color: #0e5a2a;
+  border: 2px solid rgba(104, 187, 114, 0.5);
+}
+.submit-banner.error {
+  background: rgba(220, 80, 80, 0.18);
+  color: #6b1010;
+  border: 2px solid rgba(220, 80, 80, 0.5);
+}
+
+.application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Crab positioned at top left next to Name label */
+.crab-application {
+  position: absolute;
+  left: clamp(-2rem, -5vw, 2rem);
+  top: clamp(12rem, 25vh, 20rem);
+  width: clamp(200px, 22vw, 320px);
+  height: auto;
+  image-rendering: pixelated;
+  z-index: 2;
+  pointer-events: none;
+  transform: translateY(-5%);
+}
+
+/* Cyan star positioned below the crab */
+.cyan-star-application {
+  position: absolute;
+  left: clamp(-1rem, 2vw, 4rem);
+  top: clamp(30rem, 55vh, 42rem);
+  width: clamp(110px, 11vw, 180px);
+  height: auto;
+  image-rendering: pixelated;
+  z-index: 2;
+  pointer-events: none;
+  transform: translateY(-5%) rotate(-10deg);
+}
+
+/* Purple star positioned at top right, opposite the crab */
+.star-application {
+  position: absolute;
+  right: clamp(2rem, 8vw, 6rem);
+  top: clamp(12rem, 25vh, 20rem);
+  width: clamp(60px, 6vw, 100px);
+  height: auto;
+  image-rendering: pixelated;
+  z-index: 2;
+  pointer-events: none;
+  transform: translateY(-5%) rotate(15deg);
+}
+
+/* Right rock positioned to the right of the purple star */
+.right-rock-application {
+  position: absolute;
+  right: clamp(-2rem, -5vw, 1rem);
+  top: clamp(68rem, 90vh, 80rem);
+  width: clamp(150px, 18vw, 250px);
+  height: auto;
+  image-rendering: pixelated;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Purple sea plant positioned at bottom left */
+.sea-plant-application {
+  position: absolute;
+  left: clamp(-1rem, 2vw, 4rem);
+  bottom: -2rem;
+  width: clamp(180px, 22vw, 280px);
+  height: auto;
+  image-rendering: pixelated;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Dark blue kelp positioned at bottom right */
+.kelp-right-application {
+  position: absolute;
+  right: clamp(-2rem, -5vw, 1rem);
+  bottom: -2rem;
+  width: clamp(150px, 18vw, 250px);
+  height: auto;
+  image-rendering: pixelated;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.application .form-label {
+  color: #084860;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  image-rendering: pixelated;
+  position: relative;
+  z-index: 2;
+}
+
+/* Form Row for side-by-side inputs */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Input Fields */
+
+/* Image-framed input wrapper */
+.input-wrap {
+  width: 100%;
+  position: relative; /* allows overlaying the input */
+  display: block; /* let image define height naturally */
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  /* Responsive inner padding for the overlayed input */
+  --pad-x: 6%; /* left/right inset as a percentage of width */
+  --pad-y: 28%; /* top/bottom inset as a percentage of height */
+}
+
+/* The underline image under the input */
+.input-image {
+  position: relative; /* participate in layout to set height */
+  display: block;
+  width: 100%;
+  height: auto; /* preserve aspect ratio */
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none; /* clicks go to input */
+}
+
+/* Transparent input inside the frame */
+.form-input {
+  width: 90%;
+  height: 100%;
+  background: transparent;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  /* Responsive overlay using percentage-based insets */
+  padding: 0;
+  position: absolute; /* overlay the image */
+  inset: var(--pad-y) var(--pad-x); /* top/bottom, left/right */
+  height: auto;
+  line-height: normal;
+  z-index: 1;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-size: clamp(0.9rem, 2vw, 2rem);
+  font-weight: 700;
+  color: #084860;
+  caret-color: #084860;
+}
+
+/* Ensure all inputs/textareas inside the form render fully transparent */
+.application .form-group input,
+.application .form-group textarea {
+  width: 80%;
+  background: transparent;
+  background-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.application .form-group textarea {
+  width: 90%;
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-size: clamp(1rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  color: #084860;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  transition: all 0.2s ease;
+  position: absolute;
+  inset: var(--ta-pad-y) var(--ta-pad-x);
+  line-height: 1.5;
+  overflow: auto; /* keep text inside frame */
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Remove UA focus rings where applicable */
+.form-input:focus-visible {
+  outline: none;
+}
+.form-input::-moz-focus-inner {
+  border: 0;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(16, 26, 42, 0.9);
+  opacity: 1;
+  font-size: clamp(0.9rem, 2vw, 2rem);
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-weight: 700;
+}
+
+/* Cross-browser placeholder color */
+.form-input::-webkit-input-placeholder,
+.form-textarea::-webkit-input-placeholder {
+  color: rgba(16, 26, 42, 0.9);
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-weight: 700;
+}
+.form-input::-moz-placeholder,
+.form-textarea::-moz-placeholder {
+  color: rgba(16, 26, 42, 0.9);
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-weight: 700;
+}
+.form-input:-ms-input-placeholder,
+.form-textarea:-ms-input-placeholder {
+  color: rgba(16, 26, 42, 0.9);
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-weight: 700;
+}
+.form-input::-ms-input-placeholder,
+.form-textarea::-ms-input-placeholder {
+  color: rgba(16, 26, 42, 0.9);
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-weight: 700;
+}
+
+/* Remove Chrome/Safari autofill background so field stays transparent */
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #084860;
+  transition: background-color 9999s ease-in-out 0s;
+  box-shadow: 0 0 0px 1000px transparent inset;
+}
+
+/* Textarea */
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+}
+
+/* Textarea framed image wrapper (like inputs) */
+.textarea-wrap {
+  position: relative;
+  width: 100%;
+  display: block;
+  image-rendering: pixelated;
+  /* Responsive insets for the textarea overlay */
+  --ta-pad-x: 5.5%;
+  --ta-pad-y: 10%;
+}
+
+.textarea-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* File Upload Area */
+.file-upload-area {
+  position: relative;
+}
+
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.file-upload-label {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  min-height: clamp(220px, 45vw, 520px);
+  aspect-ratio: 5 / 4;
+  margin: 0 auto;
+  background-image: url("../../public/dropbox.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 50px; /* smoother, rounded corners */
+  overflow: hidden; /* keep background neatly clipped on hover */
+  background-clip: padding-box;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), filter 280ms ease,
+    box-shadow 280ms ease;
+  will-change: transform, filter, box-shadow, border-radius;
+  image-rendering: pixelated;
+}
+
+.file-upload-label:hover {
+  transform: translateY(-2px); /* avoid scaling to keep fit */
+  filter: brightness(1.07) saturate(1.03);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.12);
+}
+
+.file-upload-label:active {
+  transform: translateY(0);
+  filter: brightness(1.02) saturate(1.01);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
+}
+
+.file-upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Dropbox image logo */
+.dropbox-image {
+  width: clamp(48px, 8vw, 84px);
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.file-placeholder,
+.file-name {
+  color: white;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  image-rendering: pixelated;
+}
+
+.file-placeholder {
+  display: none;
+}
+
+.file-name {
+  color: #a6d9f9;
+}
+
+/* Submit Button */
+.submit-button {
+  padding: 1.25rem 3rem;
+  background: #6ec1e4;
+  border: 3px solid #a6d9f9;
+  border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="none" stroke="%23a6d9f9" stroke-width="1"/></svg>')
+    3;
+  color: white;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  image-rendering: pixelated;
+  align-self: center;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background: #a6d9f9;
+  border-color: #d2eaff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(110, 193, 228, 0.4);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media screen and (min-width: 1200px) {
+  .crab-application {
+    width: clamp(280px, 24vw, 360px);
+    left: clamp(-1rem, -3vw, 3rem);
+    top: clamp(14rem, 28vh, 22rem);
+  }
+
+  .star-application {
+    width: clamp(80px, 7vw, 120px);
+    right: clamp(3rem, 10vw, 8rem);
+    top: clamp(14rem, 28vh, 22rem);
+  }
+
+  .right-rock-application {
+    width: clamp(180px, 20vw, 300px);
+    right: clamp(-1rem, -3vw, 2rem);
+    top: clamp(72rem, 95vh, 84rem);
+  }
+
+  .cyan-star-application {
+    width: clamp(130px, 12vw, 200px);
+    left: clamp(1rem, 5vw, 6rem);
+    top: clamp(36rem, 60vh, 46rem);
+  }
+
+  .sea-plant-application {
+    width: clamp(220px, 25vw, 320px);
+    left: clamp(1rem, 5vw, 6rem);
+    bottom: 0;
+  }
+
+  .kelp-right-application {
+    width: clamp(180px, 22vw, 280px);
+    right: clamp(-1rem, -3vw, 2rem);
+    bottom: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .application {
+    padding: 2rem 1rem;
+  }
+
+  .crab-application {
+    display: none;
+  }
+
+  .cyan-star-application {
+    display: none;
+  }
+
+  .star-application {
+    display: none;
+  }
+
+  .right-rock-application {
+    display: none;
+  }
+
+  .sea-plant-application {
+    bottom: 0rem;
+    width: clamp(180px, 35vw, 300px);
+  }
+
+  .kelp-right-application {
+    bottom: 0rem;
+    width: clamp(160px, 30vw, 260px);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Inputs: slightly tighter insets on mobile */
+  .input-wrap {
+    --pad-x: 7%;
+    --pad-y: 22%;
+  }
+  .textarea-wrap {
+    --ta-pad-x: 6%;
+    --ta-pad-y: 8%;
+  }
+
+  /* Upload area: responsive size */
+  .file-upload-label {
+    max-width: 560px;
+    min-height: clamp(220px, 60vw, 480px);
+    aspect-ratio: 5 / 4;
+  }
+
+  .dropbox-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .dropbox-square {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .application-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .crab-application {
+    display: none;
+  }
+
+  .application-form {
+    gap: 1.5rem;
+  }
+
+  /* Slightly larger font for readability on small screens */
+  .form-input,
+  .form-textarea,
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    font-size: clamp(1rem, 4.5vw, 1.4rem);
+  }
+
+  .file-upload-label {
+    max-width: 420px;
+    min-height: clamp(200px, 74vw, 420px);
+  }
+}
