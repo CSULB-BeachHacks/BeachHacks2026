@@ -1,208 +1,79 @@
 import React from "react";
+
+// sprite sheets (keep the exact filenames/casing you showed)
+import squareSet1 from "../assets/Square_set1.png";
+import squareSet2 from "../assets/Square_set2.png";
+import squareSet3 from "../assets/Square_set3.png";
+
+// section background (the grainy/rainbow svg you already have in /public)
 import "./Sponsors.css";
 
-const Sponsors = () => {
-  const sponsors = {
-    platinum: [
-      {
-        name: "Google",
-        logo: "https://via.placeholder.com/200x100/4285F4/FFFFFF?text=Google",
-        website: "https://google.com",
-      },
-      {
-        name: "Microsoft",
-        logo: "https://via.placeholder.com/200x100/00BCF2/FFFFFF?text=Microsoft",
-        website: "https://microsoft.com",
-      },
-      {
-        name: "Amazon",
-        logo: "https://via.placeholder.com/200x100/FF9900/FFFFFF?text=Amazon",
-        website: "https://amazon.com",
-      },
-    ],
-    gold: [
-      {
-        name: "Meta",
-        logo: "https://via.placeholder.com/150x75/1877F2/FFFFFF?text=Meta",
-        website: "https://meta.com",
-      },
-      {
-        name: "Apple",
-        logo: "https://via.placeholder.com/150x75/000000/FFFFFF?text=Apple",
-        website: "https://apple.com",
-      },
-      {
-        name: "Netflix",
-        logo: "https://via.placeholder.com/150x75/E50914/FFFFFF?text=Netflix",
-        website: "https://netflix.com",
-      },
-      {
-        name: "Tesla",
-        logo: "https://via.placeholder.com/150x75/CC0000/FFFFFF?text=Tesla",
-        website: "https://tesla.com",
-      },
-    ],
-    silver: [
-      {
-        name: "GitHub",
-        logo: "https://via.placeholder.com/120x60/181717/FFFFFF?text=GitHub",
-        website: "https://github.com",
-      },
-      {
-        name: "Slack",
-        logo: "https://via.placeholder.com/120x60/4A154B/FFFFFF?text=Slack",
-        website: "https://slack.com",
-      },
-      {
-        name: "Discord",
-        logo: "https://via.placeholder.com/120x60/5865F2/FFFFFF?text=Discord",
-        website: "https://discord.com",
-      },
-      {
-        name: "Spotify",
-        logo: "https://via.placeholder.com/120x60/1DB954/FFFFFF?text=Spotify",
-        website: "https://spotify.com",
-      },
-      {
-        name: "Adobe",
-        logo: "https://via.placeholder.com/120x60/FF0000/FFFFFF?text=Adobe",
-        website: "https://adobe.com",
-      },
-      {
-        name: "Salesforce",
-        logo: "https://via.placeholder.com/120x60/00A1E0/FFFFFF?text=Salesforce",
-        website: "https://salesforce.com",
-      },
-    ],
-    partners: [
-      {
-        name: "CSULB",
-        logo: "https://via.placeholder.com/100x50/003366/FFFFFF?text=CSULB",
-        website: "https://csulb.edu",
-      },
-      {
-        name: "ACM",
-        logo: "https://via.placeholder.com/100x50/FF6B35/FFFFFF?text=ACM",
-        website: "https://acm.org",
-      },
-      {
-        name: "IEEE",
-        logo: "https://via.placeholder.com/100x50/00629B/FFFFFF?text=IEEE",
-        website: "https://ieee.org",
-      },
-      {
-        name: "DevPost",
-        logo: "https://via.placeholder.com/100x50/003E54/FFFFFF?text=DevPost",
-        website: "https://devpost.com",
-      },
-    ],
+const pixelSponsors = [
+  { id: 1, name: "Sponsor 1" },
+  { id: 2, name: "Sponsor 2" },
+  { id: 3, name: "Sponsor 3" },
+  { id: 4, name: "Sponsor 4" },
+  { id: 5, name: "Sponsor 5" },
+  { id: 6, name: "Sponsor 6" },
+  { id: 7, name: "Sponsor 7" },
+];
+
+// Pick the right frame from each 3-wide sprite sheet
+const getCardStyle = (index) => {
+  if (index < 3) {
+    const frame = index % 3; // 0,1,2
+    return {
+      backgroundImage: `url(${squareSet1})`,
+      backgroundSize: "300% 100%",
+      backgroundPosition: `${frame * 50}% 0`,
+      backgroundRepeat: "no-repeat",
+      imageRendering: "pixelated",
+    };
+  }
+  if (index < 6) {
+    const frame = index % 3; // 0,1,2
+    return {
+      backgroundImage: `url(${squareSet2})`,
+      backgroundSize: "300% 100%",
+      backgroundPosition: `${frame * 50}% 0`,
+      backgroundRepeat: "no-repeat",
+      imageRendering: "pixelated",
+    };
+  }
+  // last, single frame
+  return {
+    backgroundImage: `url(${squareSet3})`,
+    backgroundSize: "100% 100%",
+    backgroundPosition: "0 0",
+    backgroundRepeat: "no-repeat",
+    imageRendering: "pixelated",
   };
+};
 
+export default function Sponsors() {
   return (
-    <section className="sponsors" id="sponsors">
-      <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">Our Sponsors</h2>
-          <p className="section-subtitle">
-            Thank you to our amazing sponsors who make BeachHacks possible
-          </p>
+    <section className="bhx-section" id="sponsors">
+      <div className="bhx-inner">
+        <h2 className="bhx-title">Sponsors</h2>
+
+        <div className="bhx-grid">
+          {pixelSponsors.slice(0, 6).map((s, i) => (
+            <div key={s.id} className="bhx-card" style={getCardStyle(i)}>
+              <div className="bhx-card-inner">
+                <span className="bhx-label">{s.name}</span>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="sponsor-tiers">
-          <div className="sponsor-tier">
-            <h3 className="tier-title platinum">Platinum Sponsors</h3>
-            <div className="sponsor-logos platinum-logos">
-              {sponsors.platinum.map((sponsor, index) => (
-                <a
-                  key={index}
-                  href={sponsor.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="sponsor-logo platinum-logo"
-                >
-                  <img src={sponsor.logo} alt={sponsor.name} />
-                </a>
-              ))}
+        <div className="bhx-lastrow">
+          <div className="bhx-card bhx-card--single" style={getCardStyle(6)}>
+            <div className="bhx-card-inner">
+              <span className="bhx-label">{pixelSponsors[6].name}</span>
             </div>
           </div>
-
-          <div className="sponsor-tier">
-            <h3 className="tier-title gold">Gold Sponsors</h3>
-            <div className="sponsor-logos gold-logos">
-              {sponsors.gold.map((sponsor, index) => (
-                <a
-                  key={index}
-                  href={sponsor.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="sponsor-logo gold-logo"
-                >
-                  <img src={sponsor.logo} alt={sponsor.name} />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="sponsor-tier">
-            <h3 className="tier-title silver">Silver Sponsors</h3>
-            <div className="sponsor-logos silver-logos">
-              {sponsors.silver.map((sponsor, index) => (
-                <a
-                  key={index}
-                  href={sponsor.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="sponsor-logo silver-logo"
-                >
-                  <img src={sponsor.logo} alt={sponsor.name} />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="sponsor-tier">
-            <h3 className="tier-title partners">Partners</h3>
-            <div className="sponsor-logos partners-logos">
-              {sponsors.partners.map((sponsor, index) => (
-                <a
-                  key={index}
-                  href={sponsor.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="sponsor-logo partners-logo"
-                >
-                  <img src={sponsor.logo} alt={sponsor.name} />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="sponsors-cta">
-          <h3>Interested in Sponsoring?</h3>
-          <p>
-            Join our community of sponsors and help us create an amazing
-            experience for students
-          </p>
-          <div className="sponsor-benefits">
-            <div className="benefit-item">
-              <span className="benefit-icon">👥</span>
-              <span className="benefit-text">Reach 500+ talented students</span>
-            </div>
-            <div className="benefit-item">
-              <span className="benefit-icon">🎯</span>
-              <span className="benefit-text">Recruit top talent</span>
-            </div>
-            <div className="benefit-item">
-              <span className="benefit-icon">🚀</span>
-              <span className="benefit-text">Showcase your technology</span>
-            </div>
-          </div>
-          <button className="btn btn-primary">Become a Sponsor</button>
         </div>
       </div>
     </section>
   );
-};
-
-export default Sponsors;
+}
