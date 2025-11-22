@@ -4,15 +4,15 @@ import { useGSAP } from "@gsap/react";
 import TrackListItem from "./TrackListItem";
 import "./Tracks.css"; // ← import the CSS file
 
-import lightBlueClosed from './TrackImages/lightblue_closed 1.svg';
-import lightBlueOpen from './TrackImages/lightblue_open 1.svg';
-import cyanClosed from './TrackImages/cyan_closed 1.svg';
-import cyanOpen from './TrackImages/cyan_open 1.svg';
-import navyClosed from './TrackImages/navy_closed 1.svg';
-import navyOpen from './TrackImages/navy_open 1.svg';
-import bluePurpleStar from "./TrackImages/blue_purple_star.svg";
-import purpleBlueStar from "./TrackImages/purple_blue_star.svg";
-import purpleSmallStar from "./TrackImages/purple_small_star.svg";
+import lightBlueClosed from '../assets/lightblue_closed 1.svg';
+import lightBlueOpen from '../assets/lightblue_open 1.svg';
+import cyanClosed from '../assets/cyan_closed 1.svg';
+import cyanOpen from '../assets/cyan_open 1.svg';
+import navyClosed from '../assets/navy_closed 1.svg';
+import navyOpen from '../assets/navy_open 1.svg';
+import bluePurpleStar from "../assets/blue_purple_star.svg";
+import purpleBlueStar from "../assets/purple_blue_star.svg";
+import purpleSmallStar from "../assets/purple_small_star.svg";
 
 const Tracks = () => {
   const tracks = [

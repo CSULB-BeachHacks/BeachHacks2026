@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import pearl from "./TrackImages/pearl.svg";
+import pearl from "../assets/pearl.svg";
 import "./Tracks.css";
 
 export default function TrackListItem({ open, closed, name }) {
