@@ -8,7 +8,7 @@
   display: grid;
   place-items: center;
   /* use the public svg so it resolves without bundler errors */
-  background: url("../assets/lp_light.svg") center / cover no-repeat fixed;
+
 }
 
 .bhx-inner {

@@ -30,7 +30,7 @@ function App() {
         {/* <Application /> */}
         <About />
         <Tracks />
-        <Speakers />
+        <Speakers />s
         <FAQ />
         <Sponsors />
         <Teams />
