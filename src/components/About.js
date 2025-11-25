@@ -1,81 +1,36 @@
 import React from "react";
 import "./About.css";
 
+import blueStar from "../assets/bluestar.svg"
+import cyanStar from "../assets/cyan_small_star.svg"
+import tinyBubbles from "../assets/tinybubbles.svg"
+import leftAboutCoral from "../assets/l_about_coral.svg"
+import rightAboutCoral from "../assets/r_about_coral.svg"
+
 const About = () => {
   return (
     <section className="about" id="about">
+      <img className="blue-star bg-img" src={blueStar} alt="blue star" />
+      <img className="cyan-star bg-img" src={cyanStar} alt="cyan star" />
+      <img className="tiny-bubbles bg-img" src={tinyBubbles} alt="tiny bubbles" />
+      <img className="right-about-coral bg-img" src={leftAboutCoral} alt="big coral" />
+      <img className="left-about-coral bg-img" src={rightAboutCoral} alt="big coral" />
+
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">About BeachHacks</h2>
-          <p className="section-subtitle">
-            Empowering the next generation of innovators
-          </p>
+          <h1 className="section-title">About</h1>
         </div>
 
-        <div className="about-content">
-          <div className="about-text">
-            <p className="about-description">
-              BeachHacks is California's premier student hackathon, bringing
-              together hundreds of passionate developers, designers, and
-              entrepreneurs for an unforgettable 36-hour experience. Since our
-              inception, we've been committed to fostering innovation,
-              creativity, and collaboration in the tech community.
-            </p>
-
-            <div className="about-stats">
-              <div className="stat-item">
-                <div className="stat-number">500+</div>
-                <div className="stat-label">Participants</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number">36</div>
-                <div className="stat-label">Hours</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number">50+</div>
-                <div className="stat-label">Projects</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number">$10K+</div>
-                <div className="stat-label">Prizes</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="about-features">
-            <div className="feature-card">
-              <div className="feature-icon">🚀</div>
-              <h3 className="feature-title">Innovation</h3>
-              <p className="feature-description">
-                Push the boundaries of technology and create something amazing
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">🤝</div>
-              <h3 className="feature-title">Collaboration</h3>
-              <p className="feature-description">
-                Work with talented peers and industry professionals
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">💡</div>
-              <h3 className="feature-title">Learning</h3>
-              <p className="feature-description">
-                Attend workshops and learn from experienced mentors
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">🏆</div>
-              <h3 className="feature-title">Competition</h3>
-              <p className="feature-description">
-                Compete for amazing prizes and recognition
-              </p>
-            </div>
-          </div>
-        </div>
+        <h2 className="about-description">
+            Lorem ipsum dolor sit amet          <br/>
+            consectetur. Adipiscing ut          <br/>
+            tempus felis in dignissim.          <br/>
+            Hendrerit lectus risus quis         <br/>
+            ullamcorper senectus tortor at      <br/>
+            varius. In in aliquam consequat ac. <br/>
+            Orci pretium eget nunc gravida      <br/>
+            euismod diam tincidunt.
+        </h2>
       </div>
     </section>
   );
