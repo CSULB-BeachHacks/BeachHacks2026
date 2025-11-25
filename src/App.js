@@ -25,7 +25,6 @@ function App() {
           <Navbar />
           <Hero />
         </div>
-
         {/* rest of the site sits on site-wide background */}
         {/* <Application /> */}
         <About />

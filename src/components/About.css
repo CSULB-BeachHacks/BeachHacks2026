@@ -1,11 +1,17 @@
 .about {
-  padding: 17rem 0 40rem 0;
+  padding: clamp(5rem, 12vw, 17rem) clamp(1rem, 4vw, 2rem)
+    clamp(20rem, 50vw, 60rem);
   position: relative;
+  overflow: hidden;
+  min-height: 100vh;
 }
 
 .container {
   position: relative;
   z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
 }
 
 .section-header {
@@ -15,45 +21,219 @@
 }
 
 .section-title {
-  font-size: 5rem;
+  font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 700;
   margin: 0;
 }
 
 .about-description {
   margin: 0;
-  font-size: 1.1rem;
-  font-size: 2.2rem;
-  line-height: 2;
+  font-size: clamp(1rem, 2.5vw, 2.2rem);
+  line-height: clamp(1.6, 2vw, 2);
   font-weight: 500;
   color: #084860;
-  max-width: 60%;
+  max-width: 100%;
+  width: 100%;
 }
 
 .bg-img {
   position: absolute;
   z-index: 0;
+  max-width: 100%;
+  height: auto;
 }
 
 .blue-star {
   top: 0;
+  width: clamp(80px, 15vw, 200px);
+  left: clamp(1rem, 5vw, 3rem);
 }
 
 .cyan-star {
-  transform: translate(11rem, 48.5rem);
+  transform: translate(clamp(2rem, 8vw, 11rem), clamp(15rem, 35vw, 48.5rem));
   z-index: 1;
+  width: clamp(60px, 10vw, 150px);
 }
 
 .tiny-bubbles {
-  transform: translate(24rem, -7rem);
+  transform: translate(clamp(5rem, 18vw, 24rem), clamp(-3rem, -5vw, -7rem));
+  width: clamp(100px, 20vw, 250px);
 }
 
 .right-about-coral {
   right: 0;
-  transform: translateY(-10.5rem);
+  transform: translateY(clamp(-5rem, -8vw, -10.5rem));
+  width: clamp(150px, 25vw, 400px);
+  max-height: 80vh;
+  object-fit: contain;
 }
 
 .left-about-coral {
   left: 0;
-  transform: translateY(38rem)
+  transform: translateY(clamp(10rem, 25vw, 38rem));
+  width: clamp(150px, 25vw, 400px);
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.purple-blue-star {
+  position: absolute;
+  z-index: 0;
+  right: clamp(1rem, 5vw, 3rem);
+  width: clamp(80px, 15vw, 200px);
+  /* Position below right-about-coral: coral is at -10.5rem, add space for coral height + gap */
+  transform: translateY(clamp(8rem, 20vw, 25rem));
+}
+
+/* Large screens */
+@media screen and (min-width: 1200px) {
+  .right-about-coral {
+    width: clamp(350px, 30vw, 450px);
+  }
+
+  .purple-blue-star {
+    right: clamp(2rem, 6vw, 4rem);
+    width: clamp(150px, 18vw, 220px);
+    transform: translateY(clamp(22rem, 25vw, 28rem));
+  }
+}
+
+/* Tablet and Medium Screens */
+@media screen and (max-width: 1024px) {
+  .right-about-coral {
+    width: clamp(200px, 35vw, 380px);
+    transform: translateY(clamp(-6rem, -7vw, -9rem));
+  }
+
+  .purple-blue-star {
+    right: clamp(0.75rem, 4vw, 2.5rem);
+    width: clamp(90px, 18vw, 180px);
+    transform: translateY(clamp(15rem, 28vw, 22rem));
+  }
+}
+
+/* Small Tablets */
+@media screen and (max-width: 768px) {
+  .about {
+    padding: clamp(4rem, 10vw, 12rem) clamp(1rem, 3vw, 1.5rem)
+      clamp(15rem, 40vw, 45rem);
+    min-height: auto;
+  }
+
+  .about-description {
+    max-width: 95%;
+    font-size: clamp(0.9rem, 2.2vw, 1.8rem);
+  }
+
+  .cyan-star {
+    transform: translate(clamp(0.5rem, 4vw, 5rem), clamp(10rem, 25vw, 35rem));
+    width: clamp(40px, 8vw, 100px);
+  }
+
+  .tiny-bubbles {
+    transform: translate(clamp(2rem, 12vw, 12rem), clamp(-1.5rem, -3vw, -4rem));
+    width: clamp(80px, 15vw, 180px);
+  }
+
+  .right-about-coral {
+    width: clamp(250px, 50vw, 400px);
+    transform: translateY(clamp(-4rem, -6vw, -8rem));
+  }
+
+  .left-about-coral {
+    width: clamp(120px, 20vw, 300px);
+  }
+
+  .purple-blue-star {
+    right: clamp(0.5rem, 3vw, 2rem);
+    width: clamp(100px, 25vw, 180px);
+    /* Position further below the coral - coral is bigger now */
+    transform: translateY(clamp(18rem, 35vw, 25rem));
+    z-index: 1;
+  }
+}
+
+/* Mobile Devices */
+@media screen and (max-width: 480px) {
+  .about {
+    padding: clamp(3rem, 8vw, 8rem) 1rem clamp(12rem, 35vw, 35rem);
+    min-height: auto;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    margin-bottom: 1rem;
+  }
+
+  .about-description {
+    max-width: 100%;
+    font-size: clamp(0.85rem, 4vw, 1.5rem);
+    line-height: 1.8;
+  }
+
+  .blue-star {
+    width: clamp(60px, 12vw, 120px);
+    left: 0.5rem;
+  }
+
+  .cyan-star {
+    transform: translate(clamp(0.25rem, 2vw, 2rem), clamp(8rem, 20vw, 25rem));
+    width: clamp(30px, 6vw, 70px);
+  }
+
+  .tiny-bubbles {
+    transform: translate(clamp(1rem, 8vw, 6rem), clamp(-1rem, -2vw, -2rem));
+    width: clamp(60px, 12vw, 120px);
+  }
+
+  .right-about-coral {
+    width: clamp(250px, 50vw, 380px);
+    transform: translateY(clamp(-3rem, -5vw, -6rem));
+  }
+
+  .left-about-coral {
+    transform: translateY(clamp(8rem, 18vw, 20rem));
+    width: clamp(100px, 18vw, 200px);
+  }
+
+  .purple-blue-star {
+    right: clamp(0.25rem, 2vw, 1.5rem);
+    width: clamp(90px, 22vw, 160px);
+    /* Position further below the bigger coral on mobile */
+    transform: translateY(clamp(20rem, 42vw, 28rem));
+  }
+}
+
+/* Very Small Mobile Devices */
+@media screen and (max-width: 320px) {
+  .about {
+    padding: 2rem 0.75rem 10rem;
+    min-height: auto;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .about-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .right-about-coral {
+    width: clamp(200px, 45vw, 320px);
+  }
+
+  .purple-blue-star {
+    width: clamp(70px, 20vw, 140px);
+    transform: translateY(clamp(18rem, 40vw, 24rem));
+  }
+
+  .bg-img {
+    opacity: 0.6;
+  }
 }
