@@ -10,6 +10,7 @@ import Speakers from "./components/Speakers";
 import FAQ from "./components/FAQ";
 import Sponsors from "./components/Sponsors";
 import Teams from "./components/Teams";
+import Application from "./components/Application";
 
 // Import Auth Provider
 import { AuthProvider } from "./contexts/AuthContext";
@@ -24,11 +25,11 @@ function App() {
           <Navbar />
           <Hero />
         </div>
-
         {/* rest of the site sits on site-wide background */}
+        {/* <Application /> */}
         <About />
         <Tracks />
-        <Speakers />
+        <Speakers />s
         <FAQ />
         <Sponsors />
         <Teams />
@@ -36,6 +37,5 @@ function App() {
     </AuthProvider>
   );
 }
-
 
 export default App;
