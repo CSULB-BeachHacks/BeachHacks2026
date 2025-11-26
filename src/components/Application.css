@@ -224,10 +224,12 @@
   position: relative; /* participate in layout to set height */
   display: block;
   width: 100%;
+  max-width: 600px;
   height: auto; /* preserve aspect ratio */
   object-fit: contain;
   image-rendering: pixelated;
   pointer-events: none; /* clicks go to input */
+  margin: 0 auto;
 }
 
 /* Transparent input inside the frame */
@@ -246,7 +248,7 @@
   line-height: normal;
   z-index: 1;
   font-family: "Pixelify Sans", "Courier New", monospace;
-  font-size: clamp(0.9rem, 2vw, 2rem);
+  font-size: clamp(1.2rem, 3vw, 2.5rem);
   font-weight: 700;
   color: #084860;
   caret-color: #084860;
@@ -255,7 +257,7 @@
 
 /* Discord username input - smaller size */
 input[name="discordUsername"] {
-  font-size: clamp(0.45rem, 0.9vw, 0.9rem);
+  font-size: clamp(1rem, 2.5vw, 2rem);
 }
 
 /* Ensure all inputs/textareas inside the form render fully transparent */
@@ -278,7 +280,7 @@ input[name="discordUsername"] {
   border: none;
   outline: none;
   font-family: "Pixelify Sans", "Courier New", monospace;
-  font-size: clamp(1rem, 2.2vw, 1.6rem);
+  font-size: clamp(1.2rem, 3vw, 2.2rem);
   font-weight: 700;
   color: #084860;
   box-sizing: border-box;
@@ -575,6 +577,14 @@ input[name="discordUsername"] {
   .textarea-wrap {
     --ta-pad-x: 6%;
     --ta-pad-y: 8%;
+  }
+
+  .input-image {
+    max-width: 500px;
+  }
+
+  .textarea-image {
+    max-width: 550px;
   }
 
   /* Upload area: responsive size */

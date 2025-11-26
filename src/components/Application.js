@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
@@ -6,6 +7,7 @@ import "./Application.css";
 
 const Application = () => {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -73,6 +75,12 @@ const Application = () => {
     e.preventDefault();
     if (!currentUser) return;
 
+    // Validate that resume is attached
+    if (!formData.resume) {
+      setSubmitMsg("Please attach your resume before submitting.");
+      return;
+    }
+
     try {
       setSubmitting(true);
       setSubmitMsg("");
@@ -102,6 +110,11 @@ const Application = () => {
       setSubmitMsg(
         "Thank you for submitting! Your application has been received."
       );
+
+      // Redirect to dashboard after successful submission
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1500);
     } catch (err) {
       console.error(err);
       setSubmitMsg("Submission failed. Please try again.");
@@ -332,7 +345,11 @@ const Application = () => {
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="submit-button" disabled={submitting}>
+          <button
+            type="submit"
+            className="submit-button"
+            disabled={submitting || !formData.resume}
+          >
             {submitting ? "Submitting..." : "Submit Application"}
           </button>
         </form>
