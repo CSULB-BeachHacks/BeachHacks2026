@@ -134,129 +134,175 @@ const FAQ = () => {
     };
 
     return (
-        <section className="faq" id="faq">
+        <section className="faq" id="faq" aria-labelledby="faq-main-title">
             <div className="container">
-                <div className="faq-header">
-                    <h2 className="faq-title">FAQ</h2>
+                <header className="faq-header">
+                    <h2 id="faq-main-title" className="faq-title">
+                        FAQ
+                    </h2>
                     <img
                         src={cyanStar}
                         alt="Cyan star"
                         className="header-star"
                     />
-                </div>
+                </header>
 
                 <div className="faq-grid">
-                    <div className="faq-column">
-                        <h3 className="column-title">GENERAL</h3>
-                        {faqData.general.map((item) => (
-                            <div key={item.id} className="faq-item">
-                                <div
-                                    className="faq-question"
-                                    onClick={() => toggleItem(item.id)}
-                                >
-                                    <img
-                                        src={item.star}
-                                        alt="Star"
-                                        className="question-star"
-                                    />
-                                    <span className="question-text">
-                                        {item.question}
-                                    </span>
-                                </div>
-                                <div
-                                    className={`faq-answer ${
-                                        openItem === item.id ? "open" : ""
-                                    }`}
-                                >
-                                    <p>{item.answer}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                    <section
+                        className="faq-column"
+                        aria-labelledby="general-title"
+                    >
+                        <h3 id="general-title" className="column-title">
+                            GENERAL
+                        </h3>
+                        <ul className="faq-list">
+                            {faqData.general.map((item) => (
+                                <li key={item.id} className="faq-item">
+                                    <button
+                                        className="faq-question"
+                                        onClick={() => toggleItem(item.id)}
+                                        aria-expanded={openItem === item.id}
+                                        aria-controls={`faq-answer-${item.id}`}
+                                    >
+                                        <img
+                                            src={item.star}
+                                            alt=""
+                                            className="question-star"
+                                        />
+                                        <span className="question-text">
+                                            {item.question}
+                                        </span>
+                                    </button>
+                                    <div
+                                        id={`faq-answer-${item.id}`}
+                                        className={`faq-answer ${
+                                            openItem === item.id ? "open" : ""
+                                        }`}
+                                        role="region"
+                                    >
+                                        <p>{item.answer}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
 
-                    <div className="faq-column">
-                        <h3 className="column-title">REGISTRATION</h3>
-                        {faqData.registration.map((item) => (
-                            <div key={item.id} className="faq-item">
-                                <div
-                                    className="faq-question"
-                                    onClick={() => toggleItem(item.id)}
-                                >
-                                    <img
-                                        src={item.star}
-                                        alt="Star"
-                                        className="question-star"
-                                    />
-                                    <span className="question-text">
-                                        {item.question}
-                                    </span>
-                                </div>
-                                <div
-                                    className={`faq-answer ${
-                                        openItem === item.id ? "open" : ""
-                                    }`}
-                                >
-                                    <p>{item.answer}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                    <section
+                        className="faq-column"
+                        aria-labelledby="registration-title"
+                    >
+                        <h3 id="registration-title" className="column-title">
+                            REGISTRATION
+                        </h3>
+                        <ul className="faq-list">
+                            {faqData.registration.map((item) => (
+                                <li key={item.id} className="faq-item">
+                                    <button
+                                        className="faq-question"
+                                        onClick={() => toggleItem(item.id)}
+                                        aria-expanded={openItem === item.id}
+                                        aria-controls={`faq-answer-${item.id}`}
+                                    >
+                                        <img
+                                            src={item.star}
+                                            alt=""
+                                            className="question-star"
+                                        />
+                                        <span className="question-text">
+                                            {item.question}
+                                        </span>
+                                    </button>
+                                    <div
+                                        id={`faq-answer-${item.id}`}
+                                        className={`faq-answer ${
+                                            openItem === item.id ? "open" : ""
+                                        }`}
+                                        role="region"
+                                    >
+                                        <p>{item.answer}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
 
-                    <div className="faq-column">
-                        <h3 className="column-title">TRACKS</h3>
-                        {faqData.tracks.map((item) => (
-                            <div key={item.id} className="faq-item">
-                                <div
-                                    className="faq-question"
-                                    onClick={() => toggleItem(item.id)}
-                                >
-                                    <img
-                                        src={item.star}
-                                        alt="Star"
-                                        className="question-star"
-                                    />
-                                    <span className="question-text">
-                                        {item.question}
-                                    </span>
-                                </div>
-                                <div
-                                    className={`faq-answer ${
-                                        openItem === item.id ? "open" : ""
-                                    }`}
-                                >
-                                    <p>{item.answer}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                    <section
+                        className="faq-column"
+                        aria-labelledby="tracks-title"
+                    >
+                        <h3 id="tracks-title" className="column-title">
+                            TRACKS
+                        </h3>
+                        <ul className="faq-list">
+                            {faqData.tracks.map((item) => (
+                                <li key={item.id} className="faq-item">
+                                    <button
+                                        className="faq-question"
+                                        onClick={() => toggleItem(item.id)}
+                                        aria-expanded={openItem === item.id}
+                                        aria-controls={`faq-answer-${item.id}`}
+                                    >
+                                        <img
+                                            src={item.star}
+                                            alt=""
+                                            className="question-star"
+                                        />
+                                        <span className="question-text">
+                                            {item.question}
+                                        </span>
+                                    </button>
+                                    <div
+                                        id={`faq-answer-${item.id}`}
+                                        className={`faq-answer ${
+                                            openItem === item.id ? "open" : ""
+                                        }`}
+                                        role="region"
+                                    >
+                                        <p>{item.answer}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
 
-                    <div className="faq-column">
-                        <h3 className="column-title">LOCATION</h3>
-                        {faqData.location.map((item) => (
-                            <div key={item.id} className="faq-item">
-                                <div
-                                    className="faq-question"
-                                    onClick={() => toggleItem(item.id)}
-                                >
-                                    <img
-                                        src={item.star}
-                                        alt="Star"
-                                        className="question-star"
-                                    />
-                                    <span className="question-text">
-                                        {item.question}
-                                    </span>
-                                </div>
-                                <div
-                                    className={`faq-answer ${
-                                        openItem === item.id ? "open" : ""
-                                    }`}
-                                >
-                                    <p>{item.answer}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                    <section
+                        className="faq-column"
+                        aria-labelledby="location-title"
+                    >
+                        <h3 id="location-title" className="column-title">
+                            LOCATION
+                        </h3>
+                        <ul className="faq-list">
+                            {faqData.location.map((item) => (
+                                <li key={item.id} className="faq-item">
+                                    <button
+                                        className="faq-question"
+                                        onClick={() => toggleItem(item.id)}
+                                        aria-expanded={openItem === item.id}
+                                        aria-controls={`faq-answer-${item.id}`}
+                                    >
+                                        <img
+                                            src={item.star}
+                                            alt=""
+                                            className="question-star"
+                                        />
+                                        <span className="question-text">
+                                            {item.question}
+                                        </span>
+                                    </button>
+                                    <div
+                                        id={`faq-answer-${item.id}`}
+                                        className={`faq-answer ${
+                                            openItem === item.id ? "open" : ""
+                                        }`}
+                                        role="region"
+                                    >
+                                        <p>{item.answer}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
                 </div>
             </div>
         </section>
