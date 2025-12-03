@@ -82,11 +82,11 @@ export default function Hero() {
   }, []);
   
   return (
-    <section id="home-hero" 
-    className="hero"
+    <section
+      id="home-hero"
+      className="hero"
       ref={sectionRef}
       aria-label="BeachHacks Hero"
-      style={{ backgroundImage: 'url(/LANDING_PAGE-litght.svg)' }}
     >
       <img
         ref={crabRef}
@@ -105,4 +105,5 @@ export default function Hero() {
       </div>
     </section>
   );
+  
 }

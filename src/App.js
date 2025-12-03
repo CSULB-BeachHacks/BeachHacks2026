@@ -1,7 +1,7 @@
-import React from "react";
+// src/App.js
+import React, { useState } from "react";
 import "./App.css";
 
-// Import all components
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -11,21 +11,21 @@ import FAQ from "./components/FAQ";
 import Sponsors from "./components/Sponsors";
 import Teams from "./components/Teams";
 
-// Import Auth Provider
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
+  const [isDark, setIsDark] = useState(false);
+
+  const toggleTheme = () => setIsDark((prev) => !prev);
+
+  // base background class is is-default, dark just swaps the image
+  const appClassName = `App is-default ${isDark ? "dark" : ""}`;
+
   return (
     <AuthProvider>
-      {/* whole site has background now */}
-      <div className="App is-default">
-        {/* Hero keeps its own background */}
-        <div className="is-landing">
-          <Navbar />
-          <Hero />
-        </div>
-
-        {/* rest of the site sits on site-wide background */}
+      <div className={appClassName}>
+        <Navbar isDark={isDark} onToggleTheme={toggleTheme} />
+        <Hero />
         <About />
         <Tracks />
         <Speakers />
@@ -36,6 +36,5 @@ function App() {
     </AuthProvider>
   );
 }
-
 
 export default App;

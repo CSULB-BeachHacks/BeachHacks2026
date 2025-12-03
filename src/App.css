@@ -8,10 +8,13 @@
   --bh-muted: #466671;
 
   /* Gradient stops for non-landing pages */
-  --g-0:  #FFFFFF;  /* 0% */
-  --g-50: #69DBD9;  /* 50% */
-  --g-75: #CFFDFC;  /* 75% */
-  --g-100:#00BAB7;  /* 100% */
+  --g-0:  #FFFFFF;
+  --g-50: #69DBD9;
+  --g-75: #CFFDFC;
+  --g-100:#00BAB7;
+
+  /* Hero background (LIGHT by default) */
+  --hero-bg: url("/public/FULL_light.svg");
 
   /* Typography scale */
   --h1: 2em;
@@ -19,6 +22,7 @@
   --h3: 1.17em;
   --h4: 1em;
 }
+
 
 /* Base */
 html, body, #root { height: 100%; }
@@ -53,13 +57,37 @@ body {
 
 /* Other pages: gradient + texture on top */
 .is-default {
-  background-image:
-  url("/public/light_main_website_background.svg"),
-    linear-gradient(90deg, var(--g-0) 0%, var(--g-50) 50%, var(--g-75) 75%, var(--g-100) 100%);
-  background-repeat: no-repeat, no-repeat;
-  background-position: center, center;
-  background-size: cover, cover;
+  background-image: url("/public/FULL_light.svg");
+  background-repeat: no-repeat;
+  background-position: top center;  /* was center */
+  background-size: cover;
 }
+
+/* Dark mode background: same wrapper, different image + colors */
+.dark.is-default {
+  background-image: url("/public/dm_main_ web.svg");
+  background-repeat: no-repeat;
+  background-position: top center;  /* match light */
+  background-size: cover;
+}
+
+@media (max-width: 980px) {
+  .is-default {
+    background-image: url("/public/light-mobile.svg");
+  }
+
+  .dark.is-default {
+    background-image: url("/public/dark-mobile.svg");
+  }
+}
+
+/* make text colors flip in dark mode */
+.dark {
+  --bh-text: #ffffff;
+  --bh-muted: #c8e4ff;
+  color: var(--bh-text);
+}
+
 
 /* Headings */
 h1 { font-size: var(--h1); }
@@ -72,13 +100,20 @@ section { scroll-margin-top: 80px; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
 .section-header { text-align: center; margin-bottom: 4rem; }
 .section-title {
-  font-size: 2.5rem; font-weight: 700; color: #0f3f53;
-  margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,.1);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--bh-text);      /* CHANGED */
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,.1);
 }
+
 .section-subtitle {
-  font-size: 1.2rem; color: var(--bh-muted);
-  max-width: 600px; margin: 0 auto;
+  font-size: 1.2rem;
+  color: var(--bh-muted);     /* already uses variable */
+  max-width: 600px;
+  margin: 0 auto;
 }
+
 
 /* Responsive */
 @media (max-width: 768px){
@@ -86,3 +121,4 @@ section { scroll-margin-top: 80px; }
   .section-title { font-size: 2rem; }
   .section-subtitle { font-size: 1rem; }
 }
+

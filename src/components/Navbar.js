@@ -5,21 +5,33 @@ import Login from "./Login";
 import Signup from "./Signup";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ isDark = false, onToggleTheme }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { currentUser } = useAuth();
 
-  const openLogin = () => { setShowSignup(false); setShowLogin(true); };
-  const openSignup = () => { setShowLogin(false); setShowSignup(true); };
-  const closeModals = () => { setShowLogin(false); setShowSignup(false); };
+  const openLogin = () => {
+    setShowSignup(false);
+    setShowLogin(true);
+  };
+
+  const openSignup = () => {
+    setShowLogin(false);
+    setShowSignup(true);
+  };
+
+  const closeModals = () => {
+    setShowLogin(false);
+    setShowSignup(false);
+  };
 
   const handleApplyClick = (e) => {
     e.preventDefault();
     if (currentUser) {
-      window.location.href = "/apply"; // replace with your actual route
+      window.location.href = "/apply"; // adjust if needed
     } else {
-      openSignup(); // show signup (users can switch to login)
+      openSignup();
     }
   };
 
@@ -27,30 +39,76 @@ const Navbar = () => {
     <>
       <nav className="navbar">
         <div className="nav-container">
-        <a href="#top" className="nav-logo">
-          <img src="/acm_logo.png" alt="ACM BeachHacks logo" className="nav-logo-img" />
-        </a>
 
+          {/* LOGO */}
+          <a href="#top" className="nav-logo">
+            <img
+              src={isDark ? "/white_logo.svg" : "/acm_logo.png"}
+              alt="ACM BeachHacks logo"
+              className="nav-logo-img"
+            />
+          </a>
 
-
-          <ul className="nav-menu">
-            <li className="nav-item"><a href="#about" className="nav-link">About</a></li>
-            <li className="nav-item"><a href="#tracks" className="nav-link">Tracks</a></li>
-            <li className="nav-item"><a href="#speakers" className="nav-link">Speakers</a></li>
-            <li className="nav-item"><a href="#faq" className="nav-link">FAQ</a></li>
-            <li className="nav-item"><a href="#sponsors" className="nav-link">Sponsors</a></li>
-            <li className="nav-item"><a href="#teams" className="nav-link">Teams</a></li>
+          {/* NAV MENU */}
+          <ul className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
+            <li className="nav-item">
+              <a href="#about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</a>
+            </li>
+            <li className="nav-item">
+              <a href="#tracks" className="nav-link" onClick={() => setIsMenuOpen(false)}>Tracks</a>
+            </li>
+            <li className="nav-item">
+              <a href="#speakers" className="nav-link" onClick={() => setIsMenuOpen(false)}>Speakers</a>
+            </li>
+            <li className="nav-item">
+              <a href="#faq" className="nav-link" onClick={() => setIsMenuOpen(false)}>FAQ</a>
+            </li>
+            <li className="nav-item">
+              <a href="#sponsors" className="nav-link" onClick={() => setIsMenuOpen(false)}>Sponsors</a>
+            </li>
+            <li className="nav-item">
+              <a href="#teams" className="nav-link" onClick={() => setIsMenuOpen(false)}>Teams</a>
+            </li>
           </ul>
 
-          <button className="apply-btn" onClick={handleApplyClick}>
-            APPLY
-          </button>
+          {/* RIGHT SIDE: APPLY + SUN/MOON */}
+          <div className="nav-right">
+            <button className="apply-btn" onClick={handleApplyClick}>
+              APPLY
+            </button>
+
+            {onToggleTheme && (
+              <button
+                type="button"
+                className="nav-theme-icon"
+                onClick={onToggleTheme}
+                aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                <img
+                  src={isDark ? "/sun.png" : "/moon.png"}
+                  alt="Toggle theme"
+                  className="nav-theme-icon-img"
+                />
+              </button>
+            )}
+          </div>
+
+          {/* HAMBURGER ICON */}
+          <div className="nav-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </div>
         </div>
       </nav>
 
-      {/* Modals */}
-      {showLogin && <Login onClose={closeModals} onSwitchToSignup={openSignup} />}
-      {showSignup && <Signup onClose={closeModals} onSwitchToLogin={openLogin} />}
+      {/* LOGIN/SIGNUP MODALS */}
+      {showLogin && (
+        <Login onClose={closeModals} onSwitchToSignup={openSignup} />
+      )}
+      {showSignup && (
+        <Signup onClose={closeModals} onSwitchToLogin={openLogin} />
+      )}
     </>
   );
 };

@@ -21,16 +21,6 @@
 }
 
 
-.hero__copy {
-  position: absolute;
-  right: clamp(4%, 8vw, 12%);
-  top: clamp(120px, 18vh, 240px);
-  width: fit-content; 
-  white-space: nowrap; 
-  color: #0f2b33;
-  z-index: 3;
-}
-
 .hero__title {
   font-size: clamp(80px, 7vw, 120px);
   line-height: 1;
@@ -42,7 +32,7 @@
   margin: 0 0 28px;
   font-weight: 700;
   letter-spacing: .06em;
-  color: #0b6f7a;
+  color: var(--bh-muted);
   font-size: clamp(16px, 1.8vw, 28px);
 }
 
@@ -76,7 +66,7 @@
   top: clamp(120px, 18vh, 240px);
   width: fit-content;
   white-space: nowrap;
-  color: #0f2b33;
+  color: var(--bh-text);
   z-index: 3;
   will-change: transform, opacity;
 }

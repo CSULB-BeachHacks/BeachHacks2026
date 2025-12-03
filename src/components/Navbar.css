@@ -17,7 +17,7 @@
 }
 
 .nav-logo h2 {
-  color: #2c3e50;
+  color: var(--bh-text);
   margin: 0;
   font-size: 1.5rem;
   font-weight: 700;
@@ -35,21 +35,26 @@
   margin: 0;
   font-size: larger;
 }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
 
 .nav-link {
   font-family: "Pixelify Sans", sans-serif;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #0e1a1a;
+  color: var(--bh-text);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 
 .nav-link:hover {
-  color: #6ec1e4;
+  color: var(--bh-muted);
 }
 
 .nav-link::after {
@@ -90,8 +95,8 @@
 
 .login-btn {
   background: transparent;
-  color: #2c3e50;
-  border: 2px solid #2c3e50;
+  color: var(--bh-text);
+  border: 2px solid var(--bh-text);
 }
 
 .login-btn:hover {
@@ -117,7 +122,7 @@
 }
 
 .user-name {
-  color: #2c3e50;
+  color: var(--bh-text);
   font-weight: 500;
   font-size: 0.9rem;
 }
@@ -148,7 +153,7 @@
 .bar {
   width: 25px;
   height: 3px;
-  background-color: #2c3e50;
+  background-color: var(--bh-text);
   margin: 3px 0;
   transition: 0.3s;
 }
@@ -189,6 +194,24 @@
   box-shadow: 0 10px 28px rgba(21,198,187,0.45);
 }
 
+.nav-theme-icon {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.nav-theme-icon-img {
+  width: 28px;
+  height: 28px;
+  image-rendering: pixelated;
+}
+
+
 
 @media screen and (max-width: 768px) {
   .nav-menu {
@@ -196,7 +219,7 @@
     left: -100%;
     top: 70px;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(114, 209, 233, 0.95);
     width: 100%;
     text-align: center;
     transition: 0.3s;
@@ -211,6 +234,10 @@
   .nav-toggle {
     display: flex;
   }
+  .dark .nav-menu {
+    background-color: rgba(2, 7, 23, 0.8);
+  }
+  
 
   .nav-auth {
     display: none;
