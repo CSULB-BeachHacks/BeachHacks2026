@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import "./Auth.css";
 
-export default function Login({ onClose, onSwitchToSignup }) {
+export default function Login({ onClose, onSwitchToSignup, onAuthSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,7 +17,11 @@ export default function Login({ onClose, onSwitchToSignup }) {
       setError("");
       setLoading(true);
       await login(email, password);
-      onClose();
+      if (onAuthSuccess) {
+        onAuthSuccess();
+      } else {
+        onClose();
+      }
     } catch (error) {
       setError("Failed to log in: " + error.message);
     }
@@ -29,7 +33,11 @@ export default function Login({ onClose, onSwitchToSignup }) {
       setError("");
       setLoading(true);
       await loginWithGoogle();
-      onClose();
+      if (onAuthSuccess) {
+        onAuthSuccess();
+      } else {
+        onClose();
+      }
     } catch (error) {
       setError("Failed to sign in with Google: " + error.message);
     }

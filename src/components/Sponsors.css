@@ -1,199 +1,103 @@
-.sponsors {
-  padding: 5rem 0;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+/* Pixel heading font (same look as your reference) */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/* ---- Section: full-bleed background and centering ---- */
+.bhx-section {
+  width: 100vw;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  /* use the public svg so it resolves without bundler errors */
+
 }
 
-.sponsor-tiers {
-  margin-bottom: 4rem;
+.bhx-inner {
+  /* keep content comfortably centered and not too wide */
+  max-width: 1100px;
+  width: 100%;
+  padding: 48px 16px 80px;
 }
 
-.sponsor-tier {
-  margin-bottom: 3rem;
-}
-
-.tier-title {
+/* ---- Title exactly like the mock ---- */
+.bhx-title {
+  font-family: "Press Start 2P", system-ui, monospace;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1;
+  letter-spacing: 1px;
   text-align: center;
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  border-radius: 10px;
+  margin: 8px 0 88px;
+  /* subtle pixel-ish highlight like the screenshot */
 }
 
-.tier-title.platinum {
-  background: linear-gradient(135deg, #e5e4e2, #c0c0c0);
-  color: #2c3e50;
+/* ---- Grid with precise sizing and “kissed” borders ---- */
+:root {
+  --card-w: 250px;   /* tune these two if you need tiny adjustments */
+  --card-h: 190px;
+  --kiss-x: -12px;   /* negative margin to touch borders horizontally */
+  --kiss-y: -12px;   /* negative margin to touch borders vertically   */
 }
 
-.tier-title.gold {
-  background: linear-gradient(135deg, #ffd700, #ffa500);
-  color: #2c3e50;
+.bhx-grid {
+  display: grid;
+  grid-template-columns: repeat(3, var(--card-w));
+  gap:20px 0px;
+  justify-content: center;
+  margin: 0 auto 14px;
 }
 
-.tier-title.silver {
-  background: linear-gradient(135deg, #c0c0c0, #a8a8a8);
-  color: #2c3e50;
+@media (max-width: 880px) {
+  .bhx-grid {
+    grid-template-columns: repeat(2, var(--card-w));
+  }
+}
+@media (max-width: 580px) {
+  .bhx-grid {
+    grid-template-columns: var(--card-w);
+  }
 }
 
-.tier-title.partners {
-  background: linear-gradient(135deg, #6ec1e4, #a6d9f9);
-  color: white;
-}
-
-.sponsor-logos {
+/* single bottom card row */
+.bhx-lastrow {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
 }
 
-.sponsor-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  text-decoration: none;
+/* ---- Card (sprite background) ---- */
+.bhx-card {
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 6px;
+  overflow: visible;
+  image-rendering: pixelated;
+  /* create the “joined” look */
+  margin: 0 var(--kiss-x) var(--kiss-y) 0;
+}
+.bhx-grid > .bhx-card:nth-child(3n) {
+  margin-right: 0; /* last in each row shouldn’t overlap to the right */
+}
+.bhx-card--single {
+  margin: 0; /* no overlap for the single card row */
 }
 
-.sponsor-logo:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+/* remove any soft shadows that might bleed in from global styles */
+.bhx-card, .bhx-inner * {
+  box-shadow: none !important;
 }
 
-.sponsor-logo img {
-  max-width: 100%;
-  height: auto;
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
+/* center label and nudge down so it matches the screenshot */
+.bhx-card-inner {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding-top: 18px;
 }
 
-.sponsor-logo:hover img {
-  filter: grayscale(0%);
-}
-
-.platinum-logo {
-  min-height: 80px;
-}
-
-.gold-logo {
-  min-height: 60px;
-}
-
-.silver-logo {
-  min-height: 50px;
-}
-
-.partners-logo {
-  min-height: 40px;
-}
-
-.sponsors-cta {
-  text-align: center;
-  background: linear-gradient(
-    135deg,
-    #6ec1e4 0%,
-    #a6d9f9 40%,
-    #d2eaff 70%,
-    #b6aef9 100%
-  );
-  color: white;
-  padding: 3rem 2rem;
-  border-radius: 20px;
-  margin-top: 2rem;
-}
-
-.sponsors-cta h3 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.sponsors-cta p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.sponsor-benefits {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.benefit-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem 1.5rem;
-  border-radius: 25px;
-  backdrop-filter: blur(10px);
-}
-
-.benefit-icon {
-  font-size: 1.2rem;
-}
-
-.benefit-text {
-  font-weight: 500;
-}
-
-.btn {
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-}
-
-.btn-primary {
-  background: #6ec1e4;
-  color: white;
-  box-shadow: 0 4px 15px rgba(110, 193, 228, 0.3);
-}
-
-.btn-primary:hover {
-  background: #a6d9f9;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(166, 217, 249, 0.4);
-}
-
-@media screen and (max-width: 768px) {
-  .sponsor-logos {
-    gap: 1rem;
-    padding: 1rem;
-  }
-
-  .sponsors-cta {
-    padding: 2rem 1rem;
-  }
-
-  .sponsors-cta h3 {
-    font-size: 1.5rem;
-  }
-
-  .sponsor-benefits {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .benefit-item {
-    padding: 0.8rem 1rem;
-  }
+.bhx-label {
+  font-family: "Press Start 2P", system-ui, monospace;
+  font-size: 18px;               /* bigger label like the reference */
+  line-height: 1.15;
+  color: #0f2036;
+  letter-spacing: 0.5px;
 }

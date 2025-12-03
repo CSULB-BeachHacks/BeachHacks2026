@@ -1,5 +1,6 @@
 // src/components/Navbar.js
 import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -9,7 +10,10 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const openLogin = () => {
     setShowSignup(false);
@@ -29,9 +33,54 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
   const handleApplyClick = (e) => {
     e.preventDefault();
     if (currentUser) {
-      window.location.href = "/apply"; // adjust if needed
+      // If on dashboard, just scroll up; otherwise go to dashboard
+      if (location.pathname === "/dashboard") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/dashboard");
+      }
     } else {
       openSignup();
+    }
+  };
+
+  const handleAuthSuccess = () => {
+    closeModals();
+    navigate("/apply");
+  };
+
+  const handleNavLinkClick = (e, sectionId) => {
+    e.preventDefault();
+
+    // Close mobile menu when a link is clicked
+    setIsMenuOpen(false);
+
+    // If not on main page, go there first then scroll
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+
+    if (location.pathname !== "/") {
+      navigate("/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -39,9 +88,8 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
     <>
       <nav className="navbar">
         <div className="nav-container">
-
           {/* LOGO */}
-          <a href="#top" className="nav-logo">
+          <a href="#top" className="nav-logo" onClick={handleLogoClick}>
             <img
               src={isDark ? "/white_logo.svg" : "/acm_logo.png"}
               alt="ACM BeachHacks logo"
@@ -52,22 +100,58 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
           {/* NAV MENU */}
           <ul className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
             <li className="nav-item">
-              <a href="#about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</a>
+              <a
+                href="#about"
+                className="nav-link"
+                onClick={(e) => handleNavLinkClick(e, "about")}
+              >
+                About
+              </a>
             </li>
             <li className="nav-item">
-              <a href="#tracks" className="nav-link" onClick={() => setIsMenuOpen(false)}>Tracks</a>
+              <a
+                href="#tracks"
+                className="nav-link"
+                onClick={(e) => handleNavLinkClick(e, "tracks")}
+              >
+                Tracks
+              </a>
             </li>
             <li className="nav-item">
-              <a href="#speakers" className="nav-link" onClick={() => setIsMenuOpen(false)}>Speakers</a>
+              <a
+                href="#speakers"
+                className="nav-link"
+                onClick={(e) => handleNavLinkClick(e, "speakers")}
+              >
+                Speakers
+              </a>
             </li>
             <li className="nav-item">
-              <a href="#faq" className="nav-link" onClick={() => setIsMenuOpen(false)}>FAQ</a>
+              <a
+                href="#faq"
+                className="nav-link"
+                onClick={(e) => handleNavLinkClick(e, "faq")}
+              >
+                FAQ
+              </a>
             </li>
             <li className="nav-item">
-              <a href="#sponsors" className="nav-link" onClick={() => setIsMenuOpen(false)}>Sponsors</a>
+              <a
+                href="#sponsors"
+                className="nav-link"
+                onClick={(e) => handleNavLinkClick(e, "sponsors")}
+              >
+                Sponsors
+              </a>
             </li>
             <li className="nav-item">
-              <a href="#teams" className="nav-link" onClick={() => setIsMenuOpen(false)}>Teams</a>
+              <a
+                href="#teams"
+                className="nav-link"
+                onClick={(e) => handleNavLinkClick(e, "teams")}
+              >
+                Teams
+              </a>
             </li>
           </ul>
 
@@ -94,7 +178,10 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
           </div>
 
           {/* HAMBURGER ICON */}
-          <div className="nav-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <div
+            className="nav-toggle"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+          >
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
@@ -104,10 +191,18 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
 
       {/* LOGIN/SIGNUP MODALS */}
       {showLogin && (
-        <Login onClose={closeModals} onSwitchToSignup={openSignup} />
+        <Login
+          onClose={closeModals}
+          onSwitchToSignup={openSignup}
+          onAuthSuccess={handleAuthSuccess}
+        />
       )}
       {showSignup && (
-        <Signup onClose={closeModals} onSwitchToLogin={openLogin} />
+        <Signup
+          onClose={closeModals}
+          onSwitchToLogin={openLogin}
+          onAuthSuccess={handleAuthSuccess}
+        />
       )}
     </>
   );
