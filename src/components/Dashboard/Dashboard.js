@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../Navbar";
 import "./Dashboard.css";
 
 // Import assets from Dashboard-images folder
@@ -12,7 +11,6 @@ import starDecoQR from "../Dashboard-images/Untitled design (12) 3.png";
 const Dashboard = () => {
     return (
         <main className="dashboard-container">
-            <Navbar />
 
             <img
                 src={starDecoLeft}
