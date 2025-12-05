@@ -1,7 +1,8 @@
 .teams {
-  padding: 5rem 0;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  padding: 3rem 0 3rem 0;
+  position: relative;
+  z-index: 0;
+  backdrop-filter: Transparent;
 }
 
 .organizers-section,
@@ -308,4 +309,114 @@
   .benefit-item {
     padding: 0.8rem 1rem;
   }
+}
+
+.crab-img {
+  position: absolute;
+  inset: 0;
+  width: 72%;         /* was ~58% */
+  height: auto;
+  margin: auto;
+  transform: translateY(4%); /* nudge if needed */
+  pointer-events: none;
+}
+.bh-crab {
+  width: 220px;       /* was 180px */
+}
+
+/* Stage and crab can stay as you already have */
+.bh-bubble-stage {
+  position: relative;
+  width:  100%;
+  height: 360px;              /* space for crab + base of bubbles */
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: visible;          /* allow bubbles to escape upward */
+  pointer-events: none;
+  z-index: 2;   
+}
+
+
+.bh-crab {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: auto;
+  pointer-events: none;
+   z-index: 3;  
+}
+
+/* Image bubbles */
+.bh-bubble-img {
+ position: absolute;
+  bottom: 140px;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 3;
+
+  animation-name: bh-float-up;
+  animation-timing-function: linear;    /* constant speed */
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+}
+
+/* Upwards motion, slight sway, fade out */
+@keyframes bh-float-up {
+  0% {
+    transform: translateY(20%) translateX(0) scale(0.95) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    /* starts moving, fully visible */
+    transform: translateY(10%) translateX(calc(var(--bh-drift, 0px) * 0.1))
+      scale(0.98) rotate(1deg);
+    opacity: 1;
+  }
+
+  90% {
+    /* still moving upward at same speed */
+    transform: translateY(-110%) translateX(calc(var(--bh-drift, 0px) * 0.9))
+      scale(1.04) rotate(3deg);
+    opacity: 1;
+  }
+
+  100% {
+    /* last bit of movement + fade out */
+    transform: translateY(-125%) translateX(var(--bh-drift, 0px))
+      scale(1.05) rotate(4deg);
+    opacity: 0;
+  }
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  .bh-bubble-img {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
+.bh-sand {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  height: 300px;                       /* adjust height as desired */
+  clip-path: ellipse(70% 60% at 50% 100%);
+  background: linear-gradient(
+    to top,
+    #d9c29b 0%,                        /* sand base */
+    #e8d8b8 70%,                       /* lighter upper sand */
+    transparent 100%                   /* fade into the stage */
+  );
+
+  z-index: 1;                          /* behind crab, above background */
+  pointer-events: none;
+  border-radius: 0 0 20px 20px;        /* optional curvature */
 }
