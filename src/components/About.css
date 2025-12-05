@@ -32,7 +32,7 @@
   font-size: clamp(1rem, 2.5vw, 2.2rem);
   line-height: clamp(1.6, 2vw, 2);
   font-weight: 500;
-  color: #084860;
+  color: var(--bh-text); 
   max-width: 100%;
   width: 100%;
 }
