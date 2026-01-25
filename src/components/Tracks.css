@@ -10,7 +10,7 @@
 
 /* title */
 .tracks__title {
-  font-size: 6rem;             /* text-8xl (default Tailwind = 6rem) */
+  font-size: clamp(3rem, 10vw, 6rem);             /* text-8xl (default Tailwind = 6rem) */
   line-height: 1;              /* text-8xl line-height */
   padding-top: 3rem;           /* pt-12  */
   padding-bottom: 6rem;        /* pb-24 */
@@ -75,4 +75,81 @@
   font-size: 2.25rem;            /* ~ Tailwind text-4xl */
   line-height: 2.5rem;
   color: #0f2036;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .tracks__title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .star--top-left {
+    transform: translate(-30rem, -28rem) rotate(33deg) scale(2);
+  }
+
+  .star--small {
+    transform: translate(30rem, -32rem) rotate(-17deg) scale(0.65);
+  }
+
+  .star--bottom-right {
+    transform: translate(20rem, 20rem) rotate(32deg) scale(2);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tracks__title {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .tracks__grid {
+    row-gap: 1.5rem;
+    column-gap: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .track-item__name {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    line-height: 1.8;
+  }
+
+  .star--top-left {
+    transform: translate(-20rem, -20rem) rotate(33deg) scale(1.5);
+  }
+
+  .star--small {
+    transform: translate(20rem, -24rem) rotate(-17deg) scale(0.5);
+  }
+
+  .star--bottom-right {
+    transform: translate(15rem, 15rem) rotate(32deg) scale(1.5);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .tracks__title {
+    font-size: clamp(2rem, 12vw, 4rem);
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+  .tracks__grid {
+    row-gap: 1rem;
+    column-gap: 1rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .track-item__name {
+    font-size: clamp(1.2rem, 6vw, 1.8rem);
+    line-height: 1.6;
+  }
+
+  .star--top-left,
+  .star--small,
+  .star--bottom-right {
+    display: none; /* Hide decorative stars on very small screens */
+  }
 }

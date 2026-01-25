@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, getDoc } from "firebase/firestore";
 import ConfirmModal from "../ConfirmModal";
 import ReauthModal from "../ReauthModal";
 import "./Dashboard.css";
@@ -21,9 +21,42 @@ const Dashboard = () => {
     const [showWithdrawModal, setShowWithdrawModal] = useState(false);
     const [showReauthModal, setShowReauthModal] = useState(false);
     const [error, setError] = useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [hasApplication, setHasApplication] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    // Check if application is submitted
+    useEffect(() => {
+        async function checkApplicationStatus() {
+            if (!currentUser) {
+                setLoading(false);
+                return;
+            }
+
+            try {
+                const applicationRef = doc(db, "applications", currentUser.uid);
+                const applicationSnap = await getDoc(applicationRef);
+                
+                if (applicationSnap.exists()) {
+                    const data = applicationSnap.data();
+                    setHasApplication(true);
+                    setIsSubmitted(!!data.submittedAt);
+                } else {
+                    setHasApplication(false);
+                    setIsSubmitted(false);
+                }
+            } catch (error) {
+                console.error("Error checking application status:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        checkApplicationStatus();
+    }, [currentUser]);
 
     const handleEditClick = () => {
-        navigate("/apply", { state: { editing: true } });
+        navigate("/apply");
     };
 
     const handleWithdrawClick = () => {
@@ -133,7 +166,7 @@ const Dashboard = () => {
                             className="status-bar-bg"
                         />
                         <figcaption className="status-text">
-                            STATUS: Processing Application
+                            STATUS: {loading ? "Loading..." : (isSubmitted ? "Processing Application" : (hasApplication ? "Incomplete" : "Not Submitted"))}
                         </figcaption>
                     </figure>
 
@@ -142,12 +175,14 @@ const Dashboard = () => {
                         role="group"
                         aria-label="Application actions"
                     >
-                        <button 
-                            className="dashboard-btn edit-btn"
-                            onClick={handleEditClick}
-                        >
-                            EDIT
-                        </button>
+                        {!loading && !isSubmitted && (
+                            <button 
+                                className="dashboard-btn edit-btn"
+                                onClick={handleEditClick}
+                            >
+                                EDIT
+                            </button>
+                        )}
                         <button 
                             className="dashboard-btn withdraw-btn"
                             onClick={handleWithdrawClick}

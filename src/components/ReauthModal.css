@@ -112,8 +112,12 @@
   background-color: rgba(255, 255, 255, 0.95);
   font-size: 1rem;
   font-family: "Pixelify Sans", "Courier New", monospace;
-  color: var(--bh-text);
+  color: #0f2b33; /* Always dark text since input background is white */
   box-sizing: border-box;
+}
+
+.reauth-form .form-input::placeholder {
+  color: rgba(15, 43, 51, 0.6); /* Dark placeholder text */
 }
 
 .reauth-form .form-input:focus {
@@ -121,6 +125,17 @@
   background-color: white;
   box-shadow: 0 0 0 3px rgba(21, 198, 187, 0.3);
   border-color: #15c6bb;
+  color: #0f2b33; /* Ensure text stays dark on focus */
+}
+
+/* Ensure autofill text is visible */
+.reauth-form .form-input:-webkit-autofill,
+.reauth-form .form-input:-webkit-autofill:hover,
+.reauth-form .form-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #0f2b33 !important;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .error-message {
@@ -163,13 +178,14 @@
 
 .reauth-modal-btn-cancel {
   background: rgba(255, 255, 255, 0.9);
-  color: var(--bh-text);
+  color: #0f2b33; /* Always dark text since button background is white */
 }
 
 .reauth-modal-btn-cancel:hover:not(:disabled) {
   background: white;
   transform: translateY(-1px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  color: #0f2b33; /* Ensure text stays dark on hover */
 }
 
 .reauth-modal-btn-confirm {

@@ -63,3 +63,34 @@
   .bh-bubble-number{ font-size: clamp(16px, 4.6vw, 24px); }
   .bh-bubble-label{ font-size: clamp(9px, 2.8vw, 11px); margin-top: 2px; }
 }
+
+@media (max-width: 480px) {
+  .bh-countdown {
+    grid-template-columns: repeat(4, minmax(45px, 15vw));
+    gap: clamp(4px, 1.5vw, 8px);
+  }
+
+  .bh-bubble-number {
+    font-size: clamp(14px, 5vw, 20px);
+  }
+
+  .bh-bubble-label {
+    font-size: clamp(8px, 3vw, 10px);
+    margin-top: 1px;
+  }
+}
+
+@media (max-width: 320px) {
+  .bh-countdown {
+    grid-template-columns: repeat(4, minmax(40px, 14vw));
+    gap: clamp(3px, 1vw, 6px);
+  }
+
+  .bh-bubble-number {
+    font-size: clamp(12px, 5.5vw, 18px);
+  }
+
+  .bh-bubble-label {
+    font-size: clamp(7px, 3.5vw, 9px);
+  }
+}

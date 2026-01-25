@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
@@ -8,8 +8,6 @@ import "./Application.css";
 const Application = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  const isEditing = location.state?.editing === true;
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -66,7 +64,6 @@ const Application = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitMsg, setSubmitMsg] = useState("");
   const [loading, setLoading] = useState(true);
-  const [hasExistingApplication, setHasExistingApplication] = useState(false);
   const bannerRef = useRef(null);
 
   // Check if user has an existing application
@@ -83,9 +80,15 @@ const Application = () => {
         
         if (applicationSnap.exists()) {
           const data = applicationSnap.data();
-          setHasExistingApplication(true);
           
-          // Pre-fill form with existing data
+          // If application is submitted (has submittedAt), redirect to dashboard
+          // Otherwise, allow editing (application started but not submitted)
+          if (data.submittedAt) {
+            navigate("/dashboard");
+            return;
+          }
+          
+          // Application exists but not submitted - pre-fill form for editing
           setFormData({
             firstName: data.firstName || "",
             lastName: data.lastName || "",
@@ -95,16 +98,10 @@ const Application = () => {
             whyParticipate: data.whyParticipate || "",
             resume: null, // Can't pre-fill file input for security reasons
           });
-          
-          // Only redirect to dashboard if NOT editing (i.e., coming from sign-in)
-          if (!isEditing) {
-            navigate("/dashboard");
-            return;
-          }
         }
         
-        // No existing application, allow them to fill out the form
         setLoading(false);
+        
       } catch (error) {
         console.error("Error checking existing application:", error);
         setLoading(false);
@@ -112,7 +109,7 @@ const Application = () => {
     }
 
     checkExistingApplication();
-  }, [currentUser, navigate, isEditing]);
+  }, [currentUser, navigate]);
 
   useEffect(() => {
     if (submitMsg && bannerRef.current) {
@@ -122,11 +119,42 @@ const Application = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!currentUser) return;
+    console.log("Form submitted", formData);
+    
+    if (!currentUser) {
+      setSubmitMsg("Please sign in to submit your application.");
+      return;
+    }
 
-    // Validate that resume is attached
+    // Check all required fields and collect missing ones
+    const missingFields = [];
+    
+    if (!formData.firstName || !formData.firstName.trim()) {
+      missingFields.push("First Name");
+    }
+    if (!formData.lastName || !formData.lastName.trim()) {
+      missingFields.push("Last Name");
+    }
+    if (!formData.discordUsername || !formData.discordUsername.trim()) {
+      missingFields.push("Discord Username");
+    }
+    if (!formData.school || !formData.school.trim()) {
+      missingFields.push("School");
+    }
+    if (!formData.year || !formData.year.trim()) {
+      missingFields.push("Year");
+    }
+    if (!formData.whyParticipate || !formData.whyParticipate.trim()) {
+      missingFields.push("Why Participate");
+    }
     if (!formData.resume) {
-      setSubmitMsg("Please attach your resume before submitting.");
+      missingFields.push("Resume");
+    }
+
+    // If any fields are missing, show a comprehensive message
+    if (missingFields.length > 0) {
+      const fieldsList = missingFields.join(", ");
+      setSubmitMsg(`Please complete all required fields before submitting. Missing: ${fieldsList}.`);
       return;
     }
 
@@ -140,29 +168,25 @@ const Application = () => {
       }
 
       const applicationRef = doc(db, "applications", currentUser.uid);
+      // Only set submittedAt if all required fields are filled
       await setDoc(
         applicationRef,
         {
           userId: currentUser.uid,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          discordUsername: formData.discordUsername,
-          school: formData.school,
-          year: formData.year,
-          whyParticipate: formData.whyParticipate,
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
+          discordUsername: formData.discordUsername.trim(),
+          school: formData.school.trim(),
+          year: formData.year.trim(),
+          whyParticipate: formData.whyParticipate.trim(),
           resumeUrl,
+          submittedAt: serverTimestamp(), // Mark as submitted only when all fields are complete
           updatedAt: serverTimestamp(),
         },
         { merge: true }
       );
 
-      setSubmitMsg(
-        hasExistingApplication
-          ? "Your application has been updated successfully!"
-          : "Thank you for submitting! Your application has been received."
-      );
-
-      setHasExistingApplication(true);
+      setSubmitMsg("Thank you for submitting! Your application has been received.");
 
       // Redirect to dashboard after successful submission
       setTimeout(() => {
@@ -241,7 +265,7 @@ const Application = () => {
         {submitMsg && (
           <div
             className={`submit-banner ${
-              submitMsg.toLowerCase().includes("fail") ? "error" : "success"
+              submitMsg.toLowerCase().includes("fail") || submitMsg.toLowerCase().includes("missing") || submitMsg.toLowerCase().includes("complete") ? "error" : "success"
             }`}
             role="status"
             aria-live="polite"
@@ -413,10 +437,21 @@ const Application = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="submit-button"
-            disabled={submitting || !formData.resume}
+            className={`submit-button ${submitting ? "submitting" : ""}`}
+            disabled={submitting}
           >
-            {submitting ? "Submitting..." : "Submit Application"}
+            {submitting ? (
+              <span>
+                Submitting
+                <span className="loading-dots">
+                  <span>.</span>
+                  <span>.</span>
+                  <span>.</span>
+                </span>
+              </span>
+            ) : (
+              "Submit Application"
+            )}
           </button>
         </form>
       </div>

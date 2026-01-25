@@ -102,9 +102,13 @@
   background-color: rgba(255, 255, 255, 0.95);
   font-size: 1rem;
   font-family: "Pixelify Sans", "Courier New", monospace;
-  color: var(--bh-text);
+  color: #0f2b33; /* Always dark text since input background is white */
   transition: all 0.2s;
   box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+  color: rgba(15, 43, 51, 0.6); /* Dark placeholder text */
 }
 
 .form-group input:focus {
@@ -112,6 +116,17 @@
   background-color: white;
   box-shadow: 0 0 0 3px rgba(21, 198, 187, 0.3);
   border-color: #15c6bb;
+  color: #0f2b33; /* Ensure text stays dark on focus */
+}
+
+/* Ensure autofill text is visible */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #0f2b33 !important;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .auth-btn {

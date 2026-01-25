@@ -105,3 +105,108 @@
     height: auto;
     display: block;
 }
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .teams {
+        padding: 10rem 0 2rem;
+    }
+
+    .crab-pyramid-container {
+        width: 380px;
+        height: 380px;
+    }
+
+    .crab-mascot {
+        width: 320px;
+    }
+
+    .rotating-text-ring {
+        width: 500px;
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .teams {
+        padding: 8rem 0 2rem;
+    }
+
+    .teams-hero-wrapper {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .crab-pyramid-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .crab-mascot {
+        width: 250px;
+    }
+
+    .rotating-text-ring {
+        width: 400px;
+        height: 400px;
+    }
+
+    .bubbles-container {
+        height: 500px;
+    }
+
+    .teams-wave svg {
+        width: 100vw; /* Increased height for tablet screens */
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .teams {
+        padding: 6rem 0 1rem;
+    }
+
+    .crab-pyramid-container {
+        width: 250px;
+        height: 250px;
+    }
+
+    .crab-mascot {
+        width: 200px;
+    }
+
+    .rotating-text-ring {
+        width: 320px;
+        height: 320px;
+    }
+
+    .bubbles-container {
+        height: 400px;
+    }
+
+    .teams-wave svg {
+        height: 120px; /* Increased height for small screens */
+        min-height: 120px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .crab-pyramid-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    .crab-mascot {
+        width: 160px;
+    }
+
+    .rotating-text-ring {
+        width: 260px;
+        height: 260px;
+    }
+
+    .teams-wave svg {
+        height: 150px; /* Even taller for very small screens */
+        min-height: 150px;
+    }
+}

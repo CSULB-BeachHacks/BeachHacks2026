@@ -23,7 +23,7 @@
 }
 
 .about-title {
-  font-size: 6rem;
+  font-size: clamp(3rem, 10vw, 6rem);
   font-weight: 700;
   margin: 0 0 2rem 0;  
 }
@@ -171,7 +171,7 @@
   }
 
   .about-title {
-    font-size: 6rem;
+    font-size: clamp(2.5rem, 12vw, 5rem);
     margin-bottom: 1rem;
   }
   
@@ -222,7 +222,7 @@
   }
 
   .about-title {
-    font-size: 6rem;
+    font-size: clamp(2rem, 14vw, 4rem);
     margin-bottom: 1rem;
   }
   

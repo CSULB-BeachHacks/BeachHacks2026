@@ -101,3 +101,82 @@
   color: var(--bh-text);  
   letter-spacing: 0.5px;
 }
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .bhx-inner {
+    padding: 40px 16px 60px;
+  }
+
+  .bhx-title {
+    font-size: clamp(32px, 6vw, 48px);
+    margin: 8px 0 60px;
+  }
+
+  :root {
+    --card-w: 220px;
+    --card-h: 170px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bhx-inner {
+    padding: 32px 12px 48px;
+  }
+
+  .bhx-title {
+    font-size: clamp(28px, 7vw, 40px);
+    margin: 8px 0 48px;
+  }
+
+  :root {
+    --card-w: 200px;
+    --card-h: 150px;
+  }
+
+  .bhx-label {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 580px) {
+  .bhx-inner {
+    padding: 24px 8px 40px;
+  }
+
+  .bhx-title {
+    font-size: clamp(24px, 8vw, 32px);
+    margin: 8px 0 32px;
+  }
+
+  :root {
+    --card-w: 180px;
+    --card-h: 140px;
+  }
+
+  .bhx-label {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --card-w: 160px;
+    --card-h: 120px;
+  }
+
+  .bhx-label {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  :root {
+    --card-w: 140px;
+    --card-h: 110px;
+  }
+
+  .bhx-label {
+    font-size: 10px;
+  }
+}

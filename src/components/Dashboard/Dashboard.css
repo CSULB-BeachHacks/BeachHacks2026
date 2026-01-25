@@ -245,23 +245,144 @@
     z-index: 0;
 }
 
+@media (max-width: 1024px) {
+    .dashboard-content {
+        padding: 6rem 1.5rem 2rem;
+    }
+
+    .bottom-section {
+        gap: 6rem;
+    }
+
+    .mascot-container {
+        width: 400px;
+        height: 400px;
+    }
+
+    .crab-mascot {
+        width: 380px;
+    }
+
+    .chat-bubble-container {
+        width: 360px;
+        top: -180px;
+        left: 60px;
+    }
+}
+
 @media (max-width: 768px) {
+    .dashboard-content {
+        padding: 5rem 1rem 2rem;
+    }
+
+    .dashboard-title {
+        font-size: clamp(2rem, 8vw, 4rem);
+        margin-bottom: 4rem;
+    }
+
+    .section-title {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+
     .bottom-section {
         justify-content: center;
         flex-direction: column-reverse;
         align-items: center;
+        gap: 4rem;
+        margin-top: 8rem;
     }
 
     .mascot-container {
+        width: 350px;
+        height: 350px;
         margin-top: 2rem;
+    }
+
+    .crab-mascot {
+        width: 320px;
+    }
+
+    .chat-bubble-container {
+        width: 300px;
+        top: -150px;
+        left: 40px;
     }
 
     .qr-section {
         margin-right: 0;
         text-align: center;
+        margin-top: 0;
     }
 
     .qr-title {
         justify-content: center;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    .qr-desc {
+        font-size: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    .status-text {
+        font-size: clamp(1rem, 3vw, 1.2rem);
+    }
+
+    .dashboard-btn {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-content {
+        padding: 4rem 0.75rem 1.5rem;
+    }
+
+    .dashboard-title {
+        font-size: clamp(1.8rem, 10vw, 3rem);
+        margin-bottom: 3rem;
+    }
+
+    .mascot-container {
+        width: 280px;
+        height: 280px;
+    }
+
+    .crab-mascot {
+        width: 250px;
+    }
+
+    .chat-bubble-container {
+        width: 240px;
+        top: -120px;
+        left: 30px;
+    }
+
+    .chat-text {
+        font-size: clamp(0.85rem, 2.5vw, 1rem);
+    }
+
+    .qr-placeholder {
+        padding: 10px;
+    }
+
+    .qr-box {
+        width: 180px;
+        height: 180px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0;
+    }
+
+    .dashboard-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .star-deco-left,
+    .star-deco-qr {
+        display: none;
     }
 }

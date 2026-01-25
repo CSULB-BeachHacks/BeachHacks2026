@@ -98,13 +98,14 @@
 
 .confirm-modal-btn-cancel {
   background: rgba(255, 255, 255, 0.9);
-  color: var(--bh-text);
+  color: #0f2b33; /* Always dark text since button background is white */
 }
 
 .confirm-modal-btn-cancel:hover {
   background: white;
   transform: translateY(-1px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  color: #0f2b33; /* Ensure text stays dark on hover */
 }
 
 .confirm-modal-btn-confirm {
