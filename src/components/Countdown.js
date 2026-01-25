@@ -1,5 +1,5 @@
 // src/components/Countdown.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./Countdown.css";
 
 function getTimeLeft(target) {
@@ -14,7 +14,9 @@ function getTimeLeft(target) {
 }
 
 export default function Countdown({ date }) {
-  const target = typeof date === "string" ? new Date(date) : date;
+  const target = useMemo(() => {
+    return typeof date === "string" ? new Date(date) : date;
+  }, [date]);
   const [left, setLeft] = useState(getTimeLeft(target));
 
   useEffect(() => {
