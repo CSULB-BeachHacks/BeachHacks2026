@@ -428,6 +428,42 @@ const Dashboard = () => {
                                 className="crab-mascot"
                             />
                         </aside>
+                        
+                        {/* Discord Invite Container - Show when status is "We are currently reviewing your submission" or "waitlisted" */}
+                        {isSubmitted && (applicationStatus === "pending" || !applicationStatus || applicationStatus === "waitlisted") && (
+                            <div className={`discord-invite-container ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}>
+                                <div className="discord-invite-wrapper">
+                                    <p className={`discord-invite-description ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}>
+                                        {applicationStatus === "waitlisted" ? (
+                                            <>
+                                                Please look for DMs on Discord! We might make exceptions by asking questions to some waitlisted participants. 
+                                                Make sure to join the BeachHacks Discord server and check your messages!
+                                            </>
+                                        ) : (
+                                            <>
+                                                We will contact you via Discord, so please join our server to be accepted. 
+                                                We still try to contact via email, but Discord is highly recommended. 
+                                                Join the BeachHacks Discord!
+                                            </>
+                                        )}
+                                    </p>
+                                    <a
+                                        href="https://discord.gg/J4NGeVd"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`discord-invite-link ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}
+                                        aria-label="Join our Discord server"
+                                    >
+                                        <img
+                                            src="/discord_logo.jpg"
+                                            alt="Discord Logo"
+                                            className="discord-logo"
+                                        />
+                                        <p className="discord-invite-text">Join Our Discord</p>
+                                    </a>
+                                </div>
+                            </div>
+                        )}
                     </section>
                 )}
             </section>

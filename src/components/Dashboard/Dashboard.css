@@ -156,10 +156,13 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 10rem;
+    flex-wrap: nowrap;
+    gap: 4rem;
     margin-top: 15rem;
     padding: 0 2rem;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .mascot-container {
@@ -299,13 +302,156 @@
     z-index: 0;
 }
 
+/* Discord Invite Container */
+.discord-invite-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+    margin-left: 4rem;
+}
+
+.discord-invite-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 280px;
+}
+
+.discord-invite-description {
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    font-weight: 600;
+    color: var(--bh-text);
+    text-align: center;
+    line-height: 1.6;
+    margin: 0;
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: 3px solid #000;
+    border-radius: 8px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+    font-family: "Pixelify Sans", "Courier New", monospace;
+}
+
+.App.dark .discord-invite-description {
+    background: rgba(15, 43, 51, 0.95);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #DBF2F1;
+}
+
+/* Waitlisted Discord Container - Yellow Background */
+.discord-invite-description.waitlisted {
+    background: rgba(255, 235, 59, 0.95);
+    border-color: #F57F17;
+    color: #0f2b33;
+    box-shadow: 4px 4px 0px rgba(245, 127, 23, 0.3);
+}
+
+.App.dark .discord-invite-description.waitlisted {
+    background: rgba(255, 235, 59, 0.9);
+    border-color: #FFD54F;
+    color: #0f2b33;
+}
+
+.discord-invite-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px solid #000;
+    border-radius: 8px;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    min-width: 220px;
+    font-family: "Pixelify Sans", "Courier New", monospace;
+}
+
+.discord-invite-link:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0px rgba(0, 0, 0, 0.4);
+}
+
+.discord-logo {
+    width: 140px;
+    height: auto;
+    margin-bottom: 1rem;
+    image-rendering: pixelated;
+    border-radius: 8px;
+    display: block;
+}
+
+.discord-invite-text {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-weight: 700;
+    color: #0f2b33;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    font-family: "Pixelify Sans", "Courier New", monospace;
+}
+
+.App.dark .discord-invite-link {
+    background: rgba(15, 43, 51, 0.98);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.App.dark .discord-invite-text {
+    color: #DBF2F1;
+}
+
+/* Waitlisted Discord Link - Yellow Background */
+.discord-invite-link.waitlisted {
+    background: rgba(255, 235, 59, 0.95);
+    border-color: #F57F17;
+    box-shadow: 6px 6px 0px rgba(245, 127, 23, 0.3);
+}
+
+.discord-invite-link.waitlisted:hover {
+    box-shadow: 9px 9px 0px rgba(245, 127, 23, 0.4);
+}
+
+.discord-invite-link.waitlisted .discord-invite-text {
+    color: #0f2b33;
+}
+
+.App.dark .discord-invite-link.waitlisted {
+    background: rgba(255, 235, 59, 0.9);
+    border-color: #FFD54F;
+}
+
+.App.dark .discord-invite-link.waitlisted .discord-invite-text {
+    color: #0f2b33;
+}
+
 @media (max-width: 1024px) {
     .dashboard-content {
         padding: 6rem 1.5rem 2rem;
     }
 
     .bottom-section {
-        gap: 6rem;
+        gap: 3rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .discord-invite-container {
+        margin-left: 2rem;
+        margin-top: 0;
+        flex: 0 0 auto;
+    }
+
+    .discord-invite-wrapper {
+        max-width: 260px;
+    }
+
+    .discord-invite-description {
+        font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+        padding: 1rem 1.25rem;
     }
 
     .mascot-container {
@@ -344,6 +490,34 @@
         align-items: center;
         gap: 4rem;
         margin-top: 8rem;
+    }
+
+    .discord-invite-container {
+        margin-left: 0;
+        margin-top: 2rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .discord-invite-wrapper {
+        max-width: 100%;
+        width: 100%;
+        padding: 0 1rem;
+    }
+
+    .discord-invite-description {
+        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        padding: 1rem 1.25rem;
+    }
+
+    .discord-invite-link {
+        min-width: 200px;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .discord-logo {
+        width: 100px;
     }
 
     .mascot-container {
