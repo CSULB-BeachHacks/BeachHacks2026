@@ -1,311 +1,89 @@
 .teams {
-  padding: 5rem 0;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-}
-
-.organizers-section,
-.committees-section {
-  margin-bottom: 4rem;
-}
-
-.subsection-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 3rem;
-}
-
-.organizers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.organizer-card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-}
-
-.organizer-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-}
-
-.organizer-image {
-  position: relative;
-  height: 250px;
-  overflow: hidden;
-}
-
-.organizer-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.organizer-card:hover .organizer-image img {
-  transform: scale(1.1);
-}
-
-.organizer-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(52, 73, 94, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.organizer-card:hover .organizer-overlay {
-  opacity: 1;
-}
-
-.organizer-social {
-  display: flex;
-  gap: 1rem;
-}
-
-.social-link {
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border: 2px solid white;
-  border-radius: 25px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.social-link:hover {
-  background: white;
-  color: #34495e;
-}
-
-.organizer-info {
-  padding: 2rem;
-}
-
-.organizer-name {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-}
-
-.organizer-role {
-  font-size: 1rem;
-  color: #6ec1e4;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.organizer-bio {
-  color: #34495e;
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-.committees-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.committee-card {
-  background: white;
-  border-radius: 15px;
-  padding: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.committee-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--committee-color);
-}
-
-.committee-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-  border-color: var(--committee-color);
-}
-
-.committee-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.committee-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.committee-name {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin: 0;
-}
-
-.committee-description {
-  color: #7f8c8d;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.committee-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.member-count {
-  background: #ecf0f1;
-  color: #2c3e50;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.teams-cta {
-  text-align: center;
-  background: linear-gradient(
-    135deg,
-    #6ec1e4 0%,
-    #a6d9f9 40%,
-    #d2eaff 70%,
-    #b6aef9 100%
-  );
-  color: white;
-  padding: 3rem 2rem;
-  border-radius: 20px;
-  margin-top: 2rem;
-}
-
-.teams-cta h3 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.teams-cta p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.join-benefits {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.benefit-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem 1.5rem;
-  border-radius: 25px;
-  backdrop-filter: blur(10px);
-}
-
-.benefit-icon {
-  font-size: 1.2rem;
-}
-
-.benefit-text {
-  font-weight: 500;
-}
-
-.btn {
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-}
-
-.btn-primary {
-  background: #6ec1e4;
-  color: white;
-  box-shadow: 0 4px 15px rgba(110, 193, 228, 0.3);
-}
-
-.btn-primary:hover {
-  background: #a6d9f9;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(166, 217, 249, 0.4);
-}
-
-@media screen and (max-width: 768px) {
-  .organizers-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .organizer-info {
-    padding: 1.5rem;
-  }
-
-  .committees-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .committee-card {
-    padding: 1.5rem;
-  }
-
-  .teams-cta {
-    padding: 2rem 1rem;
-  }
-
-  .teams-cta h3 {
-    font-size: 1.5rem;
-  }
-
-  .join-benefits {
-    flex-direction: column;
+    padding: 35rem 0 4rem;
+    height: auto;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 1rem;
-  }
+    position: relative;
+}
+.teams-hero-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+    width: 100%;
+}
+.crab-pyramid-container {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-  .benefit-item {
-    padding: 0.8rem 1rem;
-  }
+.crab-mascot {
+    width: 380px;
+    height: auto;
+    z-index: 2;
+    position: relative;
+    transform: translateY(10px);
+}
+
+.rotating-text-ring {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-ring-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.bubbles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 700px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bubble {
+    position: absolute;
+    width: 350px;
+    height: auto;
+    opacity: 0.9;
+}
+
+.bubble-top-right {
+    top: 0px;
+    left: 67%;
+    width: 400px;
+}
+
+.bubble-middle-left {
+    top: 130px;
+    left: 13%;
+    width: 320px;
+}
+
+.bubble-center-bottom {
+    top: 350px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px;
 }
