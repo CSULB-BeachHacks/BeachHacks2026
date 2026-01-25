@@ -14,7 +14,7 @@ export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { signup, loginWithGoogle, logout } = useAuth();
+  const { signup, loginWithGoogle } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();

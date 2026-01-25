@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from "react";
 import "./Rain.css";
 
 const NUM_RAINDROPS = 200;
-const RAIN_COLOR = "rgba(100, 150, 200, 0.6)";
-const PI_2 = 2 * Math.PI;
 
 const range = (a, b) => (b - a) * Math.random() + a;
 
