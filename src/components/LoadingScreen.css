@@ -1,0 +1,68 @@
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #6ec1e4 0%, #a6d9f9 40%, #d2eaff 70%, #b6aef9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  pointer-events: auto;
+}
+
+.loading-screen.fading-out {
+  pointer-events: none;
+}
+
+.App.dark .loading-screen {
+  background: linear-gradient(135deg, #0a1a2e 0%, #1a2a3e 40%, #2a3a4e 70%, #1a1a3e 100%);
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.loading-crab {
+  width: clamp(200px, 30vw, 400px);
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+.loading-text {
+  color: var(--bh-text);
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .loading-crab {
+    width: clamp(150px, 40vw, 300px);
+  }
+
+  .loading-text {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+  }
+}

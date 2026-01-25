@@ -74,6 +74,19 @@ const Application = () => {
         return;
       }
 
+      // Block admin user from accessing application form
+      try {
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists() && userSnap.data().isAdmin) {
+          setLoading(false);
+          navigate("/admin/dashboard");
+          return;
+        }
+      } catch (error) {
+        console.error("Error checking admin status:", error);
+      }
+
       try {
         const applicationRef = doc(db, "applications", currentUser.uid);
         const applicationSnap = await getDoc(applicationRef);
@@ -173,6 +186,7 @@ const Application = () => {
         applicationRef,
         {
           userId: currentUser.uid,
+          email: currentUser.email || "", // Save email for admin contact
           firstName: formData.firstName.trim(),
           lastName: formData.lastName.trim(),
           discordUsername: formData.discordUsername.trim(),
@@ -180,6 +194,7 @@ const Application = () => {
           year: formData.year.trim(),
           whyParticipate: formData.whyParticipate.trim(),
           resumeUrl,
+          status: "pending", // Default status: pending, accepted, waitlisted, rejected
           submittedAt: serverTimestamp(), // Mark as submitted only when all fields are complete
           updatedAt: serverTimestamp(),
         },

@@ -1,7 +1,9 @@
 // src/components/Navbar.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import Login from "./Login";
 import Signup from "./Signup";
 import "./Navbar.css";
@@ -14,6 +16,26 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Check if user is admin
+  useEffect(() => {
+    async function checkAdminStatus() {
+      if (currentUser) {
+        try {
+          const userRef = doc(db, "users", currentUser.uid);
+          const userSnap = await getDoc(userRef);
+          setIsAdmin(userSnap.exists() && userSnap.data().isAdmin);
+        } catch (error) {
+          console.error("Error checking admin status:", error);
+          setIsAdmin(false);
+        }
+      } else {
+        setIsAdmin(false);
+      }
+    }
+    checkAdminStatus();
+  }, [currentUser]);
 
   const openLogin = () => {
     setShowSignup(false);
@@ -33,6 +55,11 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
   const handleApplyClick = (e) => {
     e.preventDefault();
     if (currentUser) {
+      // Check if admin user
+      if (isAdmin) {
+        navigate("/admin/dashboard");
+        return;
+      }
       // If on dashboard, just scroll up; otherwise go to dashboard
       if (location.pathname === "/dashboard") {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -44,8 +71,21 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
     }
   };
 
-  const handleAuthSuccess = () => {
+  const handleAuthSuccess = async () => {
     closeModals();
+    // Check if admin user - redirect to admin dashboard instead
+    if (currentUser) {
+      try {
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists() && userSnap.data().isAdmin) {
+          navigate("/admin/dashboard");
+          return;
+        }
+      } catch (error) {
+        console.error("Error checking admin status:", error);
+      }
+    }
     navigate("/apply");
   };
 

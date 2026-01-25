@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import "./Auth.css";
 
 export default function Login({ onClose, onSwitchToSignup, onAuthSuccess }) {
@@ -7,6 +10,7 @@ export default function Login({ onClose, onSwitchToSignup, onAuthSuccess }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const { login, loginWithGoogle } = useAuth();
 
@@ -16,7 +20,21 @@ export default function Login({ onClose, onSwitchToSignup, onAuthSuccess }) {
     try {
       setError("");
       setLoading(true);
-      await login(email, password);
+      const result = await login(email, password);
+      
+      // Check if admin user - redirect to admin dashboard
+      try {
+        const userRef = doc(db, "users", result.user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists() && userSnap.data().isAdmin) {
+          onClose();
+          navigate("/admin/dashboard");
+          return;
+        }
+      } catch (error) {
+        console.error("Error checking admin status:", error);
+      }
+      
       if (onAuthSuccess) {
         onAuthSuccess();
       } else {
@@ -32,7 +50,21 @@ export default function Login({ onClose, onSwitchToSignup, onAuthSuccess }) {
     try {
       setError("");
       setLoading(true);
-      await loginWithGoogle();
+      const result = await loginWithGoogle();
+      
+      // Check if admin user - redirect to admin dashboard
+      try {
+        const userRef = doc(db, "users", result.user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists() && userSnap.data().isAdmin) {
+          onClose();
+          navigate("/admin/dashboard");
+          return;
+        }
+      } catch (error) {
+        console.error("Error checking admin status:", error);
+      }
+      
       if (onAuthSuccess) {
         onAuthSuccess();
       } else {

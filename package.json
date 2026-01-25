@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "firebase": "^10.14.1",
     "gsap": "^3.13.0",
+    "qrcode.react": "^4.2.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.6",

@@ -6,12 +6,15 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  updatePassword,
   deleteUser,
   reauthenticateWithPopup,
   reauthenticateWithCredential,
   EmailAuthProvider,
 } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
+import { db } from "../firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -29,6 +32,20 @@ export function AuthProvider({ children }) {
     if (displayName) {
       await updateProfile(result.user, { displayName });
     }
+    
+    // Save user data to Firestore users collection
+    try {
+      const userRef = doc(db, "users", result.user.uid);
+      await setDoc(userRef, {
+        email: result.user.email || email,
+        displayName: displayName || result.user.displayName || "",
+        createdAt: new Date(),
+      }, { merge: true });
+    } catch (error) {
+      console.error("Error saving user to Firestore:", error);
+      // Don't throw error - user is created in Auth, Firestore save is secondary
+    }
+    
     return result;
   }
 
@@ -38,8 +55,36 @@ export function AuthProvider({ children }) {
   }
 
   // Sign in with Google
-  function loginWithGoogle() {
-    return signInWithPopup(auth, googleProvider);
+  async function loginWithGoogle() {
+    const result = await signInWithPopup(auth, googleProvider);
+    
+    // Save/update user data to Firestore users collection if it doesn't exist
+    try {
+      const userRef = doc(db, "users", result.user.uid);
+      const userSnap = await getDoc(userRef);
+      
+      if (!userSnap.exists()) {
+        // User doesn't exist in Firestore, create the document
+        await setDoc(userRef, {
+          email: result.user.email || "",
+          displayName: result.user.displayName || "",
+          createdAt: new Date(),
+        });
+      } else {
+        // User exists, update email if it's missing
+        const userData = userSnap.data();
+        if (!userData.email && result.user.email) {
+          await setDoc(userRef, {
+            email: result.user.email,
+          }, { merge: true });
+        }
+      }
+    } catch (error) {
+      console.error("Error saving user to Firestore:", error);
+      // Don't throw error - user is signed in, Firestore save is secondary
+    }
+    
+    return result;
   }
 
   // Sign out
@@ -69,6 +114,16 @@ export function AuthProvider({ children }) {
     return reauthenticateWithCredential(currentUser, credential);
   }
 
+  // Update password (user is already authenticated, no need for re-authentication)
+  async function changePassword(newPassword) {
+    if (!currentUser) {
+      throw new Error("No user is currently signed in");
+    }
+    
+    // Update password directly since user is already authenticated
+    await updatePassword(currentUser, newPassword);
+  }
+
   // Delete user account (requires re-authentication first)
   async function deleteAccount() {
     if (!currentUser) {
@@ -93,6 +148,7 @@ export function AuthProvider({ children }) {
     loginWithGoogle,
     logout,
     updateUserProfile,
+    changePassword,
     deleteAccount,
     reauthenticateGoogle,
     reauthenticateEmail,

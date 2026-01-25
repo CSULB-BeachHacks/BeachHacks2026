@@ -609,6 +609,11 @@ input[name="discordUsername"],
 @media screen and (max-width: 768px) {
   .application {
     padding: 2rem 1rem;
+    overflow: hidden;
+  }
+  
+  .application-container {
+    overflow: hidden;
   }
 
   .crab-application {
@@ -678,6 +683,14 @@ input[name="discordUsername"],
 }
 
 @media screen and (max-width: 480px) {
+  .application {
+    overflow: hidden;
+  }
+  
+  .application-container {
+    overflow: hidden;
+  }
+  
   .application-title {
     font-size: 1.5rem;
     margin-bottom: 2rem;
@@ -689,6 +702,7 @@ input[name="discordUsername"],
 
   .application-form {
     gap: 1.5rem;
+    overflow: hidden;
   }
 
   /* Slightly larger font for readability on small screens */

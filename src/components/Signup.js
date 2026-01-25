@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import "./Auth.css";
 
 export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
@@ -9,8 +12,9 @@ export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
   const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const { signup, loginWithGoogle } = useAuth();
+  const { signup, loginWithGoogle, logout } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -19,10 +23,14 @@ export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
       return setError("Passwords do not match");
     }
 
+    // Note: Admin accounts should be created through /admin/signup
+    // Regular signup is for regular users only
+
     try {
       setError("");
       setLoading(true);
       await signup(email, password, displayName);
+      
       if (onAuthSuccess) {
         onAuthSuccess();
       } else {
@@ -38,7 +46,21 @@ export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
     try {
       setError("");
       setLoading(true);
-      await loginWithGoogle();
+      const result = await loginWithGoogle();
+      
+      // Check if admin user - redirect to admin dashboard
+      try {
+        const userRef = doc(db, "users", result.user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists() && userSnap.data().isAdmin) {
+          onClose();
+          navigate("/admin/dashboard");
+          return;
+        }
+      } catch (error) {
+        console.error("Error checking admin status:", error);
+      }
+      
       if (onAuthSuccess) {
         onAuthSuccess();
       } else {
