@@ -2,6 +2,9 @@
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
 }
 
 .dashboard-content {
@@ -15,6 +18,9 @@
     color: var(--bh-text);
     position: relative;
     z-index: 1; /* Ensure content is above decorations */
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .dashboard-title {
@@ -24,14 +30,25 @@
     font-weight: 700;
     image-rendering: pixelated;
     letter-spacing: 4px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .section-title {
     font-size: clamp(2rem, 4vw, 2.5rem);
     margin-bottom: 1rem;
-    text-align: left;
+    text-align: center;
     width: 100%;
     padding-left: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .application-status-section {
@@ -39,8 +56,10 @@
     max-width: 1050px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin: 0 auto 4rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 .status-bar-container {
@@ -58,6 +77,8 @@
     height: 100px;
     object-fit: fill;
     image-rendering: pixelated;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .status-text {
@@ -72,6 +93,10 @@
     transform: translateY(-50%);
     letter-spacing: 3px;
     line-height: 1;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .action-buttons {
@@ -82,6 +107,7 @@
     padding: 0 6.7%;
     box-sizing: border-box;
     margin-bottom: 2rem;
+    overflow-x: hidden;
 }
 
 .account-actions {
@@ -169,7 +195,7 @@
     position: relative;
     width: 500px;
     height: 500px;
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 
 .chat-bubble-container {
@@ -197,6 +223,11 @@
     font-weight: 700;
     line-height: 1.5;
     color: var(--bh-text);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
 }
 
 .crab-mascot {
@@ -317,6 +348,8 @@
     align-items: center;
     gap: 1.5rem;
     max-width: 280px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .discord-invite-description {
@@ -332,6 +365,11 @@
     border-radius: 8px;
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
     font-family: "Pixelify Sans", "Courier New", monospace;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .App.dark .discord-invite-description {
@@ -367,6 +405,9 @@
     box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
     min-width: 220px;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
     font-family: "Pixelify Sans", "Courier New", monospace;
 }
 
@@ -393,6 +434,10 @@
     letter-spacing: 0.1em;
     text-align: center;
     font-family: "Pixelify Sans", "Courier New", monospace;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
 }
 
 .App.dark .discord-invite-link {
@@ -457,6 +502,7 @@
     .mascot-container {
         width: 400px;
         height: 400px;
+        margin-top: 3rem;
     }
 
     .crab-mascot {
@@ -470,60 +516,108 @@
     }
 }
 
+@media (max-width: 980px) {
+    .bottom-section {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .discord-invite-container {
+        margin-left: 2rem;
+    }
+}
+
 @media (max-width: 768px) {
     .dashboard-content {
         padding: 5rem 1rem 2rem;
+        overflow-x: hidden;
     }
 
     .dashboard-title {
-        font-size: clamp(2rem, 8vw, 4rem);
+        font-size: clamp(1.8rem, 7vw, 3.5rem);
         margin-bottom: 4rem;
+        letter-spacing: 2px;
+        padding: 0 1.5rem;
     }
 
     .section-title {
         font-size: clamp(1.5rem, 5vw, 2rem);
     }
 
+    .status-bar-bg {
+        height: 85px;
+    }
+
+    .application-status-section {
+        padding: 0 0.75rem;
+        margin-bottom: 3rem;
+    }
+
+    .status-text {
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        letter-spacing: 2px;
+        padding: 0 0.75rem;
+    }
+
     .bottom-section {
         justify-content: center;
         flex-direction: column-reverse;
         align-items: center;
-        gap: 4rem;
-        margin-top: 8rem;
+        gap: 3rem;
+        margin-top: 6rem;
+        padding: 0 1rem;
+        box-sizing: border-box;
     }
 
     .discord-invite-container {
         margin-left: 0;
         margin-top: 2rem;
         width: 100%;
+        max-width: 100%;
         display: flex;
         justify-content: center;
+        padding: 0 1rem;
+        box-sizing: border-box;
     }
 
     .discord-invite-wrapper {
         max-width: 100%;
         width: 100%;
-        padding: 0 1rem;
+        padding: 0;
+        box-sizing: border-box;
     }
 
     .discord-invite-description {
-        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-        padding: 1rem 1.25rem;
+        font-size: clamp(0.85rem, 2.5vw, 1rem);
+        padding: 1rem;
+        line-height: 1.5;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .discord-invite-link {
-        min-width: 200px;
+        min-width: auto;
+        width: 100%;
+        max-width: 100%;
         padding: 1.25rem 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .discord-invite-text {
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        letter-spacing: 0.05em;
+        padding: 0 0.5rem;
     }
 
     .discord-logo {
         width: 100px;
+        max-width: 100%;
     }
 
     .mascot-container {
         width: 350px;
         height: 350px;
-        margin-top: 2rem;
+        margin-top: 3rem;
     }
 
     .crab-mascot {
@@ -566,19 +660,129 @@
     }
 }
 
+@media (max-width: 580px) {
+    .status-bar-bg {
+        height: 75px;
+    }
+
+    .application-status-section {
+        padding: 0 0.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .status-text {
+        font-size: clamp(0.85rem, 3.5vw, 1rem);
+        letter-spacing: 1.5px;
+        padding: 0 0.5rem;
+    }
+
+    .application-status-section {
+        margin-bottom: 3rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0;
+        align-items: stretch;
+    }
+
+    .account-actions {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0;
+    }
+
+    .dashboard-btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem 1rem;
+    }
+
+    .logout-btn,
+    .change-password-btn {
+        width: 100%;
+        max-width: 100%;
+        padding: 0.75rem 1.5rem;
+    }
+
+    .discord-invite-container {
+        margin-left: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 0 0.75rem;
+        box-sizing: border-box;
+    }
+
+    .discord-invite-wrapper {
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .discord-invite-description {
+        font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+        padding: 0.9rem 0.85rem;
+        line-height: 1.5;
+    }
+
+    .discord-invite-link {
+        min-width: auto;
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem 1.25rem;
+        box-sizing: border-box;
+    }
+
+    .discord-invite-text {
+        font-size: clamp(0.85rem, 3.5vw, 1rem);
+        letter-spacing: 0.03em;
+        padding: 0 0.5rem;
+    }
+
+    .discord-logo {
+        width: 90px;
+        max-width: 100%;
+    }
+}
+
 @media (max-width: 480px) {
     .dashboard-content {
         padding: 4rem 0.75rem 1.5rem;
+        overflow-x: hidden;
     }
 
     .dashboard-title {
-        font-size: clamp(1.8rem, 10vw, 3rem);
+        font-size: clamp(1.5rem, 8vw, 2.5rem);
         margin-bottom: 3rem;
+        letter-spacing: 1.5px;
+        padding: 0 1rem;
+        line-height: 1.2;
+    }
+
+    .section-title {
+        font-size: clamp(1.2rem, 5vw, 1.5rem);
+    }
+
+    .status-bar-bg {
+        height: 65px;
+    }
+
+    .application-status-section {
+        padding: 0 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .status-text {
+        font-size: clamp(0.8rem, 3.5vw, 1rem);
+        letter-spacing: 1px;
     }
 
     .mascot-container {
         width: 280px;
         height: 280px;
+        margin-top: 2.5rem;
     }
 
     .crab-mascot {
@@ -595,6 +799,18 @@
         font-size: clamp(0.85rem, 2.5vw, 1rem);
     }
 
+    .qr-section {
+        margin-top: 2rem;
+    }
+
+    .qr-title {
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
+    }
+
+    .qr-desc {
+        font-size: clamp(0.9rem, 3vw, 1.2rem);
+    }
+
     .qr-placeholder {
         padding: 10px;
     }
@@ -609,32 +825,90 @@
         height: 180px;
     }
 
-    .action-buttons {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 0;
-    }
-
-    .account-actions {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 0;
-    }
-
-    .dashboard-btn {
-        width: 100%;
-        text-align: center;
-    }
-
-    .logout-btn,
-    .change-password-btn {
-        width: 100%;
-        max-width: 100%;
-        padding: 0.75rem 1.5rem;
+    .bottom-section {
+        margin-top: 5rem;
+        gap: 2.5rem;
+        padding: 0 0.75rem;
     }
 
     .star-deco-left,
     .star-deco-qr {
         display: none;
+    }
+}
+
+@media (max-width: 320px) {
+    .dashboard-content {
+        padding: 3.5rem 0.5rem 1rem;
+        overflow-x: hidden;
+    }
+
+    .dashboard-title {
+        font-size: clamp(1.3rem, 10vw, 2rem);
+        margin-bottom: 2rem;
+        letter-spacing: 1px;
+        padding: 0 0.75rem;
+        line-height: 1.2;
+    }
+
+    .status-bar-bg {
+        height: 55px;
+    }
+
+    .application-status-section {
+        padding: 0 0.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .status-text {
+        font-size: clamp(0.7rem, 4.5vw, 0.85rem);
+        letter-spacing: 1px;
+        padding: 0 0.5rem;
+        line-height: 1.1;
+    }
+
+    .mascot-container {
+        width: 240px;
+        height: 240px;
+        margin-top: 2rem;
+    }
+
+    .crab-mascot {
+        width: 220px;
+    }
+
+    .chat-bubble-container {
+        width: 200px;
+        top: -100px;
+        left: 20px;
+    }
+
+    .qr-box,
+    .qr-code {
+        width: 150px;
+        height: 150px;
+    }
+
+    .discord-invite-container {
+        padding: 0 0.5rem;
+    }
+
+    .discord-invite-description {
+        font-size: clamp(0.75rem, 3vw, 0.85rem);
+        padding: 0.75rem 0.65rem;
+        line-height: 1.4;
+    }
+
+    .discord-invite-link {
+        padding: 0.85rem 1rem;
+    }
+
+    .discord-invite-text {
+        font-size: clamp(0.75rem, 4vw, 0.9rem);
+        letter-spacing: 0.02em;
+    }
+
+    .discord-logo {
+        width: 80px;
     }
 }

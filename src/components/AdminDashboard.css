@@ -352,6 +352,25 @@
 }
 
 /* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .admin-dashboard {
+    padding: 9rem 1.5rem 3rem;
+  }
+
+  .admin-dashboard-content {
+    padding: 2.5rem 2rem;
+  }
+
+  .admin-sections {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .admin-users-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
 @media screen and (max-width: 768px) {
   .admin-list-header {
     flex-direction: column;
@@ -360,7 +379,9 @@
 
   .admin-search-container {
     max-width: 100%;
+    min-width: 100%;
   }
+
   .admin-dashboard {
     padding: 8rem 1.5rem 3rem;
     overflow: hidden;
@@ -370,13 +391,34 @@
     padding: 2rem 1.5rem;
   }
 
+  .admin-dashboard-title {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+
+  .admin-dashboard-subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  }
+
+  .admin-qr-section {
+    padding: 1.5rem;
+  }
+
   .admin-sections {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
+  .admin-section {
+    padding: 1.5rem;
+  }
+
   .admin-users-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .admin-user-card {
+    padding: 1.25rem;
   }
 
   .admin-header-actions {
@@ -388,6 +430,63 @@
   .admin-logout-btn {
     width: 100%;
     max-width: 300px;
+  }
+
+  .admin-stats {
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .admin-dashboard {
+    padding: 7rem 1.25rem 2.5rem;
+    overflow: hidden;
+  }
+
+  .admin-dashboard-content {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .admin-dashboard-title {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+
+  .admin-dashboard-subtitle {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+  }
+
+  .admin-qr-section {
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .admin-section {
+    padding: 1.25rem 1rem;
+  }
+
+  .admin-section-title {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+  }
+
+  .admin-section-desc {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+  }
+
+  .admin-user-card {
+    padding: 1rem;
+  }
+
+  .admin-user-name {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+  }
+
+  .admin-user-details {
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+  }
+
+  .admin-search-input {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    padding: 0.65rem 0.85rem;
   }
 }
 
@@ -402,19 +501,50 @@
   }
 
   .admin-dashboard-title {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 10vw, 2rem);
   }
 
   .admin-dashboard-subtitle {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
+  }
+
+  .admin-qr-section {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .admin-section {
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 0.75rem;
+  }
+
+  .admin-section-title {
+    font-size: clamp(1.1rem, 5vw, 1.3rem);
+  }
+
+  .admin-section-desc {
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+  }
+
+  .admin-section-btn {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    padding: 0.65rem 1.5rem;
   }
 
   .admin-users-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .admin-user-card {
+    padding: 1rem 0.75rem;
+  }
+
+  .admin-user-name {
+    font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+  }
+
+  .admin-user-details {
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
   }
 
   .admin-header-actions {
@@ -426,7 +556,43 @@
   .admin-logout-btn {
     width: 100%;
     max-width: 280px;
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
     padding: 0.65rem 1.5rem;
+  }
+
+  .admin-stats {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .admin-list-title {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+  }
+
+  .admin-search-input {
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    padding: 0.6rem 0.75rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .admin-dashboard {
+    padding: 5.5rem 0.75rem 1.5rem;
+  }
+
+  .admin-dashboard-content {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .admin-dashboard-title {
+    font-size: clamp(1.3rem, 12vw, 1.8rem);
+  }
+
+  .admin-section {
+    padding: 1rem 0.5rem;
+  }
+
+  .admin-user-card {
+    padding: 0.85rem 0.5rem;
   }
 }
