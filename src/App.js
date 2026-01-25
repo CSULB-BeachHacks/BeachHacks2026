@@ -79,6 +79,7 @@ function App() {
                 <div className={appClassName}>
                   <Navbar isDark={isDark} onToggleTheme={toggleTheme} />
                   <Dashboard />
+                  <Teams />
                 </div>
               </ProtectedRoute>
             }

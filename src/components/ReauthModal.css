@@ -1,0 +1,209 @@
+/* Re-auth Modal Styles */
+.reauth-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10002;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reauth-modal-content {
+  background: linear-gradient(135deg, #6ec1e4 0%, #a6d9f9 40%, #d2eaff 70%, #b6aef9 100%);
+  padding: 2rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideIn 0.3s ease-out;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  border: 3px solid var(--bh-text);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.reauth-modal-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.reauth-modal-title {
+  color: var(--bh-text);
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.reauth-modal-body {
+  margin-bottom: 2rem;
+}
+
+.reauth-modal-message {
+  color: var(--bh-text);
+  margin: 0 0 1.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.reauth-modal-info {
+  color: var(--bh-text);
+  margin: 1rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  text-align: center;
+}
+
+.reauth-form {
+  margin-top: 1rem;
+}
+
+.reauth-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.reauth-form .form-label {
+  display: block;
+  color: var(--bh-text);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reauth-form .form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--bh-text);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  font-size: 1rem;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  color: var(--bh-text);
+  box-sizing: border-box;
+}
+
+.reauth-form .form-input:focus {
+  outline: none;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(21, 198, 187, 0.3);
+  border-color: #15c6bb;
+}
+
+.error-message {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  padding: 0.75rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  border: 2px solid rgba(231, 76, 60, 0.3);
+  font-size: 0.9rem;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-weight: 700;
+  text-align: center;
+}
+
+.reauth-modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.reauth-modal-btn {
+  padding: 0.75rem 2rem;
+  border: 2px solid var(--bh-text);
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  min-width: 120px;
+}
+
+.reauth-modal-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.reauth-modal-btn-cancel {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--bh-text);
+}
+
+.reauth-modal-btn-cancel:hover:not(:disabled) {
+  background: white;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.reauth-modal-btn-confirm {
+  background: #15c6bb;
+  color: #042d2c;
+  box-shadow: 0 8px 24px rgba(21, 198, 187, 0.35);
+}
+
+.reauth-modal-btn-confirm:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 28px rgba(21, 198, 187, 0.45);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .reauth-modal-content {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .reauth-modal-title {
+    font-size: 1.5rem;
+  }
+
+  .reauth-modal-message {
+    font-size: 1rem;
+  }
+
+  .reauth-modal-actions {
+    flex-direction: column;
+  }
+
+  .reauth-modal-btn {
+    width: 100%;
+  }
+}

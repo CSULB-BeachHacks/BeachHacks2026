@@ -9,12 +9,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 10000;
   backdrop-filter: blur(5px);
 }
 
 .auth-content {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #6ec1e4 0%, #a6d9f9 40%, #d2eaff 70%, #b6aef9 100%);
   padding: 2rem;
   border-radius: 20px;
   width: 90%;
@@ -22,6 +22,7 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   position: relative;
   animation: slideIn 0.3s ease-out;
+  font-family: "Pixelify Sans", "Courier New", monospace;
 }
 
 @keyframes slideIn {
@@ -43,16 +44,19 @@
 }
 
 .auth-header h2 {
-  color: white;
+  color: var(--bh-text);
   margin: 0;
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .close-btn {
   background: none;
   border: none;
-  color: white;
+  color: var(--bh-text);
   font-size: 2rem;
   cursor: pointer;
   padding: 0;
@@ -63,10 +67,12 @@
   justify-content: center;
   border-radius: 50%;
   transition: background-color 0.2s;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-weight: 700;
 }
 
 .close-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .auth-form {
@@ -79,19 +85,24 @@
 
 .form-group label {
   display: block;
-  color: white;
+  color: var(--bh-text);
   margin-bottom: 0.5rem;
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .form-group input {
   width: 100%;
   padding: 0.75rem;
-  border: none;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid var(--bh-text);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
   font-size: 1rem;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  color: var(--bh-text);
   transition: all 0.2s;
   box-sizing: border-box;
 }
@@ -99,44 +110,53 @@
 .form-group input:focus {
   outline: none;
   background-color: white;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 3px rgba(21, 198, 187, 0.3);
+  border-color: #15c6bb;
 }
 
 .auth-btn {
   width: 100%;
   padding: 0.75rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 999px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s ease;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
 }
 
 .auth-btn.primary {
-  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-  color: white;
+  background: #15c6bb;
+  color: #042d2c;
+  box-shadow: 0 8px 24px rgba(21, 198, 187, 0.35);
 }
 
 .auth-btn.primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 28px rgba(21, 198, 187, 0.45);
 }
 
 .auth-btn.google {
   background: white;
-  color: #333;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--bh-text);
+  border: 2px solid var(--bh-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 .auth-btn.google:hover:not(:disabled) {
-  background-color: #f8f9fa;
-  transform: translateY(-2px);
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -167,11 +187,13 @@
 }
 
 .divider span {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #6ec1e4 0%, #a6d9f9 40%, #d2eaff 70%, #b6aef9 100%);
+  color: var(--bh-text);
   padding: 0 1rem;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 700;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  text-transform: uppercase;
 }
 
 .auth-footer {
@@ -179,33 +201,39 @@
 }
 
 .auth-footer p {
-  color: white;
+  color: var(--bh-text);
   margin: 0;
   font-size: 0.9rem;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-weight: 700;
 }
 
 .link-btn {
   background: none;
   border: none;
-  color: #ffd700;
+  color: #15c6bb;
   text-decoration: underline;
   cursor: pointer;
   font-size: inherit;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  transition: color 0.2s;
 }
 
 .link-btn:hover {
-  color: #ffed4e;
+  color: #0fa89d;
 }
 
 .error-message {
   background-color: rgba(255, 0, 0, 0.1);
-  color: #ff6b6b;
+  color: #e74c3c;
   padding: 0.75rem;
   border-radius: 10px;
   margin-bottom: 1rem;
-  border: 1px solid rgba(255, 107, 107, 0.3);
+  border: 2px solid rgba(231, 76, 60, 0.3);
   font-size: 0.9rem;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-weight: 700;
   text-align: center;
 }
 

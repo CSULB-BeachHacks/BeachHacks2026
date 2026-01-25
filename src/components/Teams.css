@@ -1,5 +1,5 @@
 .teams {
-    padding: 35rem 0 4rem;
+    padding: 15rem 0 4rem;
     height: auto;
     display: flex;
     justify-content: center;
@@ -8,9 +8,10 @@
 }
 .teams-hero-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 0;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-bottom: 0;
+    margin-bottom: 0;
     width: 100%;
 }
 .crab-pyramid-container {
@@ -50,6 +51,7 @@
     display: block;
     overflow: visible;
     pointer-events: none;
+    color: var(--bh-text);
 }
 
 .bubbles-container {
@@ -86,4 +88,20 @@
     left: 50%;
     transform: translateX(-50%);
     width: 380px;
+}
+
+.teams-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.teams-wave svg {
+    width: 100%;
+    height: auto;
+    display: block;
 }

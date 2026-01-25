@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import "./Application.css";
 
 const Application = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isEditing = location.state?.editing === true;
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -63,7 +65,54 @@ const Application = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [submitMsg, setSubmitMsg] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [hasExistingApplication, setHasExistingApplication] = useState(false);
   const bannerRef = useRef(null);
+
+  // Check if user has an existing application
+  useEffect(() => {
+    async function checkExistingApplication() {
+      if (!currentUser) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const applicationRef = doc(db, "applications", currentUser.uid);
+        const applicationSnap = await getDoc(applicationRef);
+        
+        if (applicationSnap.exists()) {
+          const data = applicationSnap.data();
+          setHasExistingApplication(true);
+          
+          // Pre-fill form with existing data
+          setFormData({
+            firstName: data.firstName || "",
+            lastName: data.lastName || "",
+            discordUsername: data.discordUsername || "",
+            school: data.school || "",
+            year: data.year || "",
+            whyParticipate: data.whyParticipate || "",
+            resume: null, // Can't pre-fill file input for security reasons
+          });
+          
+          // Only redirect to dashboard if NOT editing (i.e., coming from sign-in)
+          if (!isEditing) {
+            navigate("/dashboard");
+            return;
+          }
+        }
+        
+        // No existing application, allow them to fill out the form
+        setLoading(false);
+      } catch (error) {
+        console.error("Error checking existing application:", error);
+        setLoading(false);
+      }
+    }
+
+    checkExistingApplication();
+  }, [currentUser, navigate, isEditing]);
 
   useEffect(() => {
     if (submitMsg && bannerRef.current) {
@@ -108,8 +157,12 @@ const Application = () => {
       );
 
       setSubmitMsg(
-        "Thank you for submitting! Your application has been received."
+        hasExistingApplication
+          ? "Your application has been updated successfully!"
+          : "Thank you for submitting! Your application has been received."
       );
+
+      setHasExistingApplication(true);
 
       // Redirect to dashboard after successful submission
       setTimeout(() => {
@@ -132,6 +185,19 @@ const Application = () => {
             <p className="auth-gate-text">
               Please sign in to view and submit the BeachHacks application.
             </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (loading) {
+    return (
+      <section className="application" id="application">
+        <div className="application-container">
+          <div className="auth-gate" role="alert">
+            <h2 className="auth-gate-title">Loading...</h2>
+            <p className="auth-gate-text">Checking your application status...</p>
           </div>
         </div>
       </section>

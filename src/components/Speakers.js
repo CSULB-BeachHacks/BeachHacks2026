@@ -82,7 +82,7 @@ const Speakers = () => {
       floatingAnimationRef.current.pause();
     }
 
-    // Create a dynamic spin animation with GSAP timeline
+    // Create a smooth single spin animation
     const spinTimeline = gsap.timeline({
       onComplete: () => {
         // Reset rotation after spin completes
@@ -95,11 +95,11 @@ const Speakers = () => {
       },
     });
 
+    // Single smooth spin with natural easing
     spinTimeline.to(container, {
-      rotation: 1080, // 3 full spins (1080 degrees)
-      scale: 1,
-      duration: 0.6,
-      ease: "power2.out",
+      rotation: 360, // One full rotation
+      duration: 0.8,
+      ease: "power1.inOut", // Smooth ease with slight speed variation
       force3D: true,
     });
   }, [isRotating]);
@@ -115,7 +115,7 @@ const Speakers = () => {
           (prevIndex) => (prevIndex + 1) % speakers.length
         );
         setIsRotating(false);
-      }, 1200); // Rotation duration (matches GSAP animation duration)
+      }, 800); // Rotation duration (matches GSAP animation duration: 0.8s)
     }, 7000); // Change every 7 seconds
 
     return () => clearInterval(interval);

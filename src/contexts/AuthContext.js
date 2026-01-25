@@ -6,6 +6,10 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  deleteUser,
+  reauthenticateWithPopup,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
 } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
 
@@ -48,6 +52,31 @@ export function AuthProvider({ children }) {
     return updateProfile(currentUser, profile);
   }
 
+  // Re-authenticate user (for Google sign-in)
+  async function reauthenticateGoogle() {
+    if (!currentUser) {
+      throw new Error("No user is currently signed in");
+    }
+    return reauthenticateWithPopup(currentUser, googleProvider);
+  }
+
+  // Re-authenticate user (for email/password)
+  async function reauthenticateEmail(password) {
+    if (!currentUser || !currentUser.email) {
+      throw new Error("No user is currently signed in");
+    }
+    const credential = EmailAuthProvider.credential(currentUser.email, password);
+    return reauthenticateWithCredential(currentUser, credential);
+  }
+
+  // Delete user account (requires re-authentication first)
+  async function deleteAccount() {
+    if (!currentUser) {
+      throw new Error("No user is currently signed in");
+    }
+    await deleteUser(currentUser);
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
@@ -64,6 +93,9 @@ export function AuthProvider({ children }) {
     loginWithGoogle,
     logout,
     updateUserProfile,
+    deleteAccount,
+    reauthenticateGoogle,
+    reauthenticateEmail,
   };
 
   return (

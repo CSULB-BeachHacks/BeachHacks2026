@@ -217,6 +217,7 @@
   /* Responsive inner padding for the overlayed input */
   --pad-x: 6%; /* left/right inset as a percentage of width */
   --pad-y: 28%; /* top/bottom inset as a percentage of height */
+  overflow: visible; /* ensure decorative bars aren't clipped */
 }
 
 /* The underline image under the input */
@@ -230,6 +231,7 @@
   image-rendering: pixelated;
   pointer-events: none; /* clicks go to input */
   margin: 0 auto;
+  z-index: 0; /* ensure it's behind the input */
 }
 
 /* Transparent input inside the frame */
@@ -238,36 +240,56 @@
   height: 100%;
   background: transparent;
   background-color: transparent;
-  border: none;
-  outline: none;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   /* Responsive overlay using percentage-based insets */
   padding: 0;
   position: absolute; /* overlay the image */
   inset: var(--pad-y) var(--pad-x); /* top/bottom, left/right */
   height: auto;
   line-height: normal;
-  z-index: 1;
+  z-index: 2; /* ensure it's above the decorative image */
   font-family: "Pixelify Sans", "Courier New", monospace;
   font-size: clamp(1.2rem, 3vw, 2.5rem);
   font-weight: 700;
   color: #084860;
   caret-color: #084860;
   text-align: center;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  -moz-appearance: textfield !important;
+  /* Remove any browser default styling */
+  margin: 0;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
 }
 
-/* Discord username input - smaller size */
-input[name="discordUsername"] {
+/* Discord username input - smaller size and ensure no borders */
+input[name="discordUsername"],
+.form-input[name="discordUsername"] {
   font-size: clamp(1rem, 2.5vw, 2rem);
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
 }
 
 /* Ensure all inputs/textareas inside the form render fully transparent */
 .application .form-group input,
 .application .form-group textarea {
   width: 80%;
-  background: transparent;
-  background-color: transparent;
-  -webkit-appearance: none;
-  appearance: none;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  -moz-appearance: textfield !important;
 }
 .application .form-group textarea {
   width: 90%;
