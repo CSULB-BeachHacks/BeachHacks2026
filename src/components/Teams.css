@@ -64,6 +64,24 @@
     z-index: 0;
 }
 
+.bubbles-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 0; /* Behind crab (z-index 2) */
+}
+
+.animated-bubble {
+    position: absolute;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
 .bubble {
     position: absolute;
     width: 350px;
@@ -210,5 +228,157 @@
         height: 200px; /* Even taller for very small screens */
         min-height: 200px;
         width: 100vw;
+    }
+}
+
+/* Update main section layout to support bottom full-width elements */
+.teams {
+    flex-direction: column;
+    padding-bottom: 0; /* Remove bottom padding so wave/ticker sits at bottom */
+    /* Ensure existing flex properties still center the main content */
+    justify-content: flex-start; 
+}
+
+/* Wave Styling */
+.teams-wave {
+    width: 100%;
+    line-height: 0; /* Removing vertical gap */
+    position: relative;
+    z-index: 1;
+    margin-top: 4rem; /* Add some space above the wave */
+}
+
+.teams-wave svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Ticker Tape Styling */
+.teams-ticker-container {
+    background-color: #D2C79A; /* Seamlessly extends the wave color */
+    width: 100%;
+    padding: 0 0 4rem 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+
+.teams-ticker-wrapper {
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); /* Fade edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.teams-ticker-track {
+    display: flex;
+    gap: 4rem; /* Spacing between members */
+    width: max-content;
+    animation: ticker-scroll 40s linear infinite;
+    padding: 1rem 0;
+}
+
+/* Pause scroll on hover for accessibility/readability */
+.teams-ticker-wrapper:hover .teams-ticker-track {
+    animation-play-state: paused;
+}
+
+.team-member-card {
+    flex: 0 0 auto;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.team-member-card:hover {
+    transform: translateY(-5px);
+}
+
+.member-image-wrapper {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border: 4px solid rgba(255, 255, 255, 0.4);
+    background-color: #e6dac3; /* Slightly darker than bg for placeholder */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.member-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-image-wrapper.image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Placeholder Icon Style if needed */
+.member-image-wrapper.image-placeholder::before {
+    content: "🦀";
+    font-size: 3rem;
+    opacity: 0.5;
+}
+
+.member-name {
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #4a4a4a; /* Dark gray for contrast on yellow */
+    margin: 0.5rem 0 0.2rem 0;
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
+.member-role {
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+@keyframes ticker-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Move by 1/3 of the width since we triplicated the list */
+        transform: translateX(calc(-100% / 3));
+    }
+}
+
+/* Adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+    .teams-ticker-track {
+        gap: 2rem;
+        animation-duration: 30s; /* Faster scroll on small screens? Or keeping same speed */
+    }
+    
+    .team-member-card {
+        width: 160px;
+    }
+    
+    .member-image-wrapper {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .member-name {
+        font-size: 1rem;
+    }
+    
+    .member-role {
+        font-size: 0.8rem;
     }
 }

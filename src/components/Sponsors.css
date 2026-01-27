@@ -3,180 +3,57 @@
 
 /* ---- Section: full-bleed background and centering ---- */
 .bhx-section {
-  width: 100vw;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  /* use the public svg so it resolves without bundler errors */
-
+    width: 100vw;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    /* use the public svg so it resolves without bundler errors */
 }
 
 .bhx-inner {
-  /* keep content comfortably centered and not too wide */
-  max-width: 1100px;
-  width: 100%;
-  padding: 48px 16px 80px;
+    /* keep content comfortably centered and not too wide */
+    max-width: 1100px;
+    width: 100%;
+    padding: 48px 16px 80px;
 }
 
 /* ---- Title exactly like the mock ---- */
 .bhx-title {
-  font-family: "Press Start 2P", system-ui, monospace;
-  font-size: clamp(40px, 5vw, 56px);
-  line-height: 1;
-  letter-spacing: 1px;
-  text-align: center;
-  margin: 8px 0 88px;
-  /* subtle pixel-ish highlight like the screenshot */
+    font-family: "Press Start 2P", system-ui, monospace;
+    font-size: clamp(40px, 5vw, 56px);
+    line-height: 1;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 8px 0 40px;
 }
 
-/* ---- Grid with precise sizing and “kissed” borders ---- */
-:root {
-  --card-w: 250px;   /* tune these two if you need tiny adjustments */
-  --card-h: 190px;
-  --kiss-x: -12px;   /* negative margin to touch borders horizontally */
-  --kiss-y: -12px;   /* negative margin to touch borders vertically   */
+.bhx-upcoming-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
 }
 
-.bhx-grid {
-  display: grid;
-  grid-template-columns: repeat(3, var(--card-w));
-  gap:20px 0px;
-  justify-content: center;
-  margin: 0 auto 14px;
+.bhx-upcoming-text {
+    font-family: inherit; /* Inherit global font (JetBrains Mono) */
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-weight: 500;
+    color: var(--bh-text);
+    text-align: center;
+    animation: pulseFade 3s infinite ease-in-out;
 }
 
-@media (max-width: 880px) {
-  .bhx-grid {
-    grid-template-columns: repeat(2, var(--card-w));
-  }
-}
-@media (max-width: 580px) {
-  .bhx-grid {
-    grid-template-columns: var(--card-w);
-  }
-}
-
-/* single bottom card row */
-.bhx-lastrow {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-/* ---- Card (sprite background) ---- */
-.bhx-card {
-  position: relative;
-  width: var(--card-w);
-  height: var(--card-h);
-  border-radius: 6px;
-  overflow: visible;
-  image-rendering: pixelated;
-  /* create the “joined” look */
-  margin: 0 var(--kiss-x) var(--kiss-y) 0;
-}
-.bhx-grid > .bhx-card:nth-child(3n) {
-  margin-right: 0; /* last in each row shouldn’t overlap to the right */
-}
-.bhx-card--single {
-  margin: 0; /* no overlap for the single card row */
-}
-
-/* remove any soft shadows that might bleed in from global styles */
-.bhx-card, .bhx-inner * {
-  box-shadow: none !important;
-}
-
-/* center label and nudge down so it matches the screenshot */
-.bhx-card-inner {
-  height: 100%;
-  display: grid;
-  place-items: center;
-  padding-top: 18px;
-}
-
-.bhx-label {
-  font-family: "Press Start 2P", system-ui, monospace;
-  font-size: 18px;               /* bigger label like the reference */
-  line-height: 1.15;
-  color: var(--bh-text);  
-  letter-spacing: 0.5px;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .bhx-inner {
-    padding: 40px 16px 60px;
-  }
-
-  .bhx-title {
-    font-size: clamp(32px, 6vw, 48px);
-    margin: 8px 0 60px;
-  }
-
-  :root {
-    --card-w: 220px;
-    --card-h: 170px;
-  }
-}
-
-@media (max-width: 768px) {
-  .bhx-inner {
-    padding: 32px 12px 48px;
-  }
-
-  .bhx-title {
-    font-size: clamp(28px, 7vw, 40px);
-    margin: 8px 0 48px;
-  }
-
-  :root {
-    --card-w: 200px;
-    --card-h: 150px;
-  }
-
-  .bhx-label {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 580px) {
-  .bhx-inner {
-    padding: 24px 8px 40px;
-  }
-
-  .bhx-title {
-    font-size: clamp(24px, 8vw, 32px);
-    margin: 8px 0 32px;
-  }
-
-  :root {
-    --card-w: 180px;
-    --card-h: 140px;
-  }
-
-  .bhx-label {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  :root {
-    --card-w: 160px;
-    --card-h: 120px;
-  }
-
-  .bhx-label {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 320px) {
-  :root {
-    --card-w: 140px;
-    --card-h: 110px;
-  }
-
-  .bhx-label {
-    font-size: 10px;
-  }
+@keyframes pulseFade {
+    0% {
+        opacity: 0.6;
+        transform: scale(0.98);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 0.6;
+        transform: scale(0.98);
+    }
 }

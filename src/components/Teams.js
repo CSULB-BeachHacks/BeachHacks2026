@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Teams = () => {
     const containerRef = useRef(null);
     const textPathRef = useRef(null);
-    const bubblesContainerRef = useRef(null);
+    const bubblesWrapperRef = useRef(null);
     const crabRef = useRef(null);
 
     useGSAP(
@@ -20,117 +20,129 @@ const Teams = () => {
                 { attr: { startOffset: "100%" } },
                 {
                     attr: { startOffset: "-100%" },
-                    duration: 20,
+                    duration: 15,
                     repeat: -1,
                     ease: "none",
-                }
+                },
             );
         },
-        { scope: containerRef }
+        { scope: containerRef },
     );
 
     // Bubble animation - bubbles coming out of the crab
     useEffect(() => {
-        if (!bubblesContainerRef.current || !crabRef.current) return;
-
-        const bubblesContainer = bubblesContainerRef.current;
-        const crab = crabRef.current;
-
-        const getCrabPosition = () => {
-            const crabRect = crab.getBoundingClientRect();
-            const containerRect = bubblesContainer.getBoundingClientRect();
-            
-            // Calculate crab center position relative to bubbles container
-            const crabCenterX = crabRect.left - containerRect.left + crabRect.width / 2;
-            const crabCenterY = crabRect.top - containerRect.top + crabRect.height / 2;
-            
-            return { x: crabCenterX, y: crabCenterY };
-        };
+        const container = bubblesWrapperRef.current;
+        if (!container) return;
 
         const createBubble = () => {
-            const { x: crabCenterX, y: crabCenterY } = getCrabPosition();
-            
             const bubble = document.createElement("img");
             bubble.src = "/bubbles-3.png";
             bubble.alt = "";
             bubble.className = "animated-bubble";
-            bubblesContainer.appendChild(bubble);
+            container.appendChild(bubble);
 
-            // Random size between 80px and 150px
-            const size = Math.random() * 70 + 80;
+            // Random size between 40px and 80px
+            const size = Math.random() * 40 + 40;
             bubble.style.width = `${size}px`;
             bubble.style.height = "auto";
 
-            // Random angle for bubble to float (prefer upward angles)
-            const angle = (Math.random() * Math.PI * 1.5) - Math.PI * 0.25; // -45° to 135°
-            const distance = 200 + Math.random() * 300; // Distance bubbles travel
-            const endX = crabCenterX + Math.cos(angle) * distance;
-            const endY = crabCenterY + Math.sin(angle) * distance - 200; // Float upward
+            // Start near center (0,0 in the wrapper is the center of the crab)
+            // No need for getBoundingClientRect as we are in a relative container
+            const startX = (Math.random() - 0.5) * 40;
+            const startY = (Math.random() - 0.5) * 40;
 
-            // Random duration between 2-4 seconds
-            const duration = 2 + Math.random() * 2;
+            // Random angle for bubble to float upwards and outwards
+            // Move up significantly (-Y) and spread horizontally (X)
+            const endX = (Math.random() - 0.5) * 400;
+            const endY = -300 - Math.random() * 200;
 
-            // Start from crab center
+            // Random duration between 3-5 seconds
+            const duration = 3 + Math.random() * 2;
+
+            // Initialize position
             gsap.set(bubble, {
-                x: crabCenterX - size / 2,
-                y: crabCenterY - size / 2,
+                x: startX,
+                y: startY,
                 opacity: 0,
-                scale: 0.3,
+                scale: 0.2,
+                position: "absolute",
+                top: 0,
+                left: 0,
             });
 
-            // Animate bubble floating out
-            gsap.to(bubble, {
-                x: endX - size / 2,
-                y: endY - size / 2,
-                opacity: 0.8,
-                scale: 1,
-                duration: duration,
-                ease: "power1.out",
+            // Animate
+            const tl = gsap.timeline({
                 onComplete: () => {
-                    bubble.remove();
+                    if (bubble.parentNode) bubble.remove();
                 },
             });
 
-            // Fade out near the end
-            gsap.to(bubble, {
-                opacity: 0,
-                duration: 0.6,
-                delay: duration - 0.6,
-            });
+            tl.to(bubble, {
+                opacity: 0.8,
+                scale: 1,
+                duration: 0.5,
+                ease: "power1.out",
+            })
+                .to(
+                    bubble,
+                    {
+                        x: endX,
+                        y: endY,
+                        rotation: Math.random() * 90 - 45,
+                        duration: duration,
+                        ease: "power1.out",
+                    },
+                    "<",
+                )
+                .to(
+                    bubble,
+                    {
+                        opacity: 0,
+                        duration: 0.5,
+                    },
+                    `-=${0.5}`,
+                );
         };
 
-        // Wait a bit for layout to settle, then start creating bubbles
-        const timeout = setTimeout(() => {
-            // Create bubbles continuously
-            const interval = setInterval(createBubble, 1200); // New bubble every 1.2 seconds
-
-            // Store interval for cleanup
-            bubblesContainer._bubbleInterval = interval;
-        }, 500);
-
-        return () => {
-            clearTimeout(timeout);
-            if (bubblesContainer._bubbleInterval) {
-                clearInterval(bubblesContainer._bubbleInterval);
-            }
-            // Clean up any remaining bubbles
-            const bubbles = bubblesContainer.querySelectorAll(".animated-bubble");
-            bubbles.forEach((bubble) => bubble.remove());
-        };
+        const interval = setInterval(createBubble, 1200);
+        return () => clearInterval(interval);
     }, []);
 
-    // Placeholder members list
-    const members = Array.from({ length: 10 }, (_, i) => `Member #${i + 1}`);
-    const membersString = members.join(" \u2022 ");
-    const fullText = `Created by BeachHacks 9.0 Committee \u2022 ${membersString} \u2022 ${membersString}`;
+    const fullText =
+        "BeachHacks 9.0 Committee • BeachHacks 9.0 Committee • BeachHacks 9.0 Committee • BeachHacks 9.0 Committee • BeachHacks 9.0 Committee • ";
+
+    // List of committee members for the slider
+    const committeeMembers = [
+        { name: "Member 1", role: "Director", image: "/crabby_pyamid_1.png" },
+        { name: "Member 2", role: "Organizer", image: "/crabby_pyamid_1.png" },
+        { name: "Member 3", role: "Developer", image: "/crabby_pyamid_1.png" },
+        { name: "Member 4", role: "Designer", image: "/crabby_pyamid_1.png" },
+        { name: "Member 5", role: "Logistics", image: "/crabby_pyamid_1.png" },
+        {
+            name: "Member 6",
+            role: "Sponsorship",
+            image: "/crabby_pyamid_1.png",
+        },
+        { name: "Member 7", role: "Marketing", image: "/crabby_pyamid_1.png" },
+        { name: "Member 8", role: "Mentor", image: "/crabby_pyamid_1.png" },
+    ];
+
+    // Duplicate the list for seamless infinite scroll
+    const sliderMembers = [
+        ...committeeMembers,
+        ...committeeMembers,
+        ...committeeMembers,
+    ];
 
     return (
         <section className="teams" id="teams" ref={containerRef}>
-            <div className="bubbles-container" ref={bubblesContainerRef}></div>
-
             <div className="container">
                 <div className="teams-hero-wrapper">
                     <div className="crab-pyramid-container">
+                        <div
+                            className="bubbles-wrapper"
+                            ref={bubblesWrapperRef}
+                        ></div>
                         <img
                             ref={crabRef}
                             src="/crabby_pyamid_1.png"
@@ -170,11 +182,42 @@ const Teams = () => {
                     </div>
                 </div>
             </div>
-            
+
             <div className="teams-wave">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                    <path fill="#D2C79A" fillOpacity="1" d="M0,96L80,106.7C160,117,320,139,480,138.7C640,139,800,117,960,96C1120,75,1280,53,1360,42.7L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+                    <path
+                        fill="#D2C79A"
+                        fillOpacity="1"
+                        d="M0,96L80,106.7C160,117,320,139,480,138.7C640,139,800,117,960,96C1120,75,1280,53,1360,42.7L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+                    ></path>
                 </svg>
+            </div>
+
+            <div className="teams-ticker-container">
+                <div className="teams-ticker-wrapper">
+                    <div className="teams-ticker-track">
+                        {sliderMembers.map((member, index) => (
+                            <div className="team-member-card" key={index}>
+                                <div className="member-image-wrapper">
+                                    <img
+                                        src={member.image}
+                                        alt={member.name}
+                                        className="member-image"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.style.display = "none";
+                                            e.target.parentNode.classList.add(
+                                                "image-placeholder",
+                                            );
+                                        }}
+                                    />
+                                </div>
+                                <h3 className="member-name">{member.name}</h3>
+                                <p className="member-role">{member.role}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </section>
     );

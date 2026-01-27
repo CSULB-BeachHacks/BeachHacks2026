@@ -40,14 +40,9 @@ const About = () => {
         </div>
 
         <p className="about-description">
-          Lorem ipsum dolor sit amet <br />
-          consectetur. Adipiscing ut <br />
-          tempus felis in dignissim. <br />
-          Hendrerit lectus risus quis <br />
-          ullamcorper senectus tortor at <br />
-          varius. In in aliquam consequat ac. <br />
-          Orci pretium eget nunc gravida <br />
-          euismod diam tincidunt.
+          BeachHacks is one of the largest hackathons hosted at California State University Long Beach, where over 200 students come together to build, learn, and innovate within a 24-hour time frame. <br /> This year BeachHacks 9.0 will be hosted at the Pointe. Hackers will have the opportunity to create a fully deployable project using the newest technology and their creativity.
+
+Insterested in seeing what you can build yourself? Apply now!
         </p>
       </div>
     </section>

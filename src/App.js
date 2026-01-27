@@ -1,10 +1,10 @@
 // src/App.js
 import React, { useState, useEffect } from "react";
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Navigate,
 } from "react-router-dom";
 
 import "./App.css";
@@ -32,183 +32,205 @@ import { doc, getDoc } from "firebase/firestore";
 
 // Protected Route Component - redirects to home if not authenticated
 function ProtectedRoute({ children }) {
-  const { currentUser } = useAuth();
-  return currentUser ? children : <Navigate to="/" replace />;
+    const { currentUser } = useAuth();
+    return currentUser ? children : <Navigate to="/" replace />;
 }
 
 // Admin Protected Route - only allows admin user (checks Firestore isAdmin flag)
 function AdminProtectedRoute({ children }) {
-  const { currentUser } = useAuth();
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [loading, setLoading] = useState(true);
+    const { currentUser } = useAuth();
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function checkAdmin() {
-      if (!currentUser) {
-        setLoading(false);
-        return;
-      }
+    useEffect(() => {
+        async function checkAdmin() {
+            if (!currentUser) {
+                setLoading(false);
+                return;
+            }
 
-      try {
-        const userRef = doc(db, "users", currentUser.uid);
-        const userSnap = await getDoc(userRef);
-        setIsAdmin(userSnap.exists() && userSnap.data().isAdmin);
-      } catch (error) {
-        console.error("Error checking admin status:", error);
-        setIsAdmin(false);
-      } finally {
-        setLoading(false);
-      }
+            try {
+                const userRef = doc(db, "users", currentUser.uid);
+                const userSnap = await getDoc(userRef);
+                setIsAdmin(userSnap.exists() && userSnap.data().isAdmin);
+            } catch (error) {
+                console.error("Error checking admin status:", error);
+                setIsAdmin(false);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        checkAdmin();
+    }, [currentUser]);
+
+    if (loading) {
+        return (
+            <div
+                style={{
+                    minHeight: "100vh",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+            >
+                <p>Loading...</p>
+            </div>
+        );
     }
 
-    checkAdmin();
-  }, [currentUser]);
+    if (!currentUser || !isAdmin) {
+        return <Navigate to="/admin/login" replace />;
+    }
 
-  if (loading) {
-    return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <p>Loading...</p>
-      </div>
-    );
-  }
-
-  if (!currentUser || !isAdmin) {
-    return <Navigate to="/admin/login" replace />;
-  }
-
-  return children;
+    return children;
 }
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [showLoadingForTheme, setShowLoadingForTheme] = useState(false);
+    const [isDark, setIsDark] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    const [showLoadingForTheme, setShowLoadingForTheme] = useState(false);
 
-  const toggleTheme = () => {
-    // Show loading screen first, then change theme
-    if (!isLoading) {
-      // Show loading screen immediately
-      setShowLoadingForTheme(true);
-      
-      // Wait a bit to ensure loading screen is rendered and visible before changing theme
-      setTimeout(() => {
-        setIsDark((prev) => !prev);
-      }, 50);
-      
-      // Hide loading screen after animation completes (600ms show + 500ms fade = 1100ms total)
-      setTimeout(() => {
-        setShowLoadingForTheme(false);
-      }, 1100);
-    } else {
-      // If still loading initially, just change theme
-      setIsDark((prev) => !prev);
-    }
-  };
+    const toggleTheme = () => {
+        // Show loading screen first, then change theme
+        if (!isLoading) {
+            // Show loading screen immediately
+            setShowLoadingForTheme(true);
 
-  const handleLoadComplete = () => {
-    setIsLoading(false);
-  };
+            // Wait a bit to ensure loading screen is rendered and visible before changing theme
+            setTimeout(() => {
+                setIsDark((prev) => !prev);
+            }, 50);
 
-  // single global background for the whole app
-  const appClassName = `App is-default ${isDark ? "dark" : ""}`;
+            // Hide loading screen after animation completes (600ms show + 500ms fade = 1100ms total)
+            setTimeout(() => {
+                setShowLoadingForTheme(false);
+            }, 1100);
+        } else {
+            // If still loading initially, just change theme
+            setIsDark((prev) => !prev);
+        }
+    };
 
-  return (
-    <AuthProvider>
-      <Router>
-        {(isLoading || showLoadingForTheme) && (
-          <LoadingScreen 
-            isDark={isDark} 
-            onLoadComplete={handleLoadComplete}
-            skipInitialLoad={showLoadingForTheme}
-          />
-        )}
-        <Routes>
-          {/* Landing page */}
-          <Route
-            path="/"
-            element={
-              <div className={appClassName}>
-                <ConfettiCheck />
-                <Navbar isDark={isDark} onToggleTheme={toggleTheme} />
-                <Hero />
-                <About />
-                <Tracks />
-                <Speakers />
-                <FAQ />
-                <Sponsors />
-                <Teams />
-              </div>
-            }
-          />
+    const handleLoadComplete = () => {
+        setIsLoading(false);
+    };
 
-          {/* Application page (protected) */}
-          <Route
-            path="/apply"
-            element={
-              <ProtectedRoute>
-                <div className={appClassName}>
-                  <Navbar isDark={isDark} onToggleTheme={toggleTheme} />
-                  <Application />
-                </div>
-              </ProtectedRoute>
-            }
-          />
+    // single global background for the whole app
+    const appClassName = `App is-default ${isDark ? "dark" : ""}`;
 
-          {/* Dashboard (protected) */}
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <div className={appClassName}>
-                  <Navbar isDark={isDark} onToggleTheme={toggleTheme} />
-                  <Dashboard />
-                  <Teams />
-                </div>
-              </ProtectedRoute>
-            }
-          />
+    return (
+        <AuthProvider>
+            <Router>
+                {(isLoading || showLoadingForTheme) && (
+                    <LoadingScreen
+                        isDark={isDark}
+                        onLoadComplete={handleLoadComplete}
+                        skipInitialLoad={showLoadingForTheme}
+                    />
+                )}
+                <Routes>
+                    {/* Landing page */}
+                    <Route
+                        path="/"
+                        element={
+                            <div className={appClassName}>
+                                <ConfettiCheck />
+                                <Navbar
+                                    isDark={isDark}
+                                    onToggleTheme={toggleTheme}
+                                />
+                                <Hero />
+                                <About />
+                                <Tracks />
+                                <Speakers />
+                                <FAQ />
+                                <Sponsors />
+                                <Teams />
+                            </div>
+                        }
+                    />
 
-          {/* Admin Login Page */}
-          <Route
-            path="/admin/login"
-            element={
-              <div className={appClassName}>
-                <AdminLogin />
-              </div>
-            }
-          />
+                    {/* Application page (protected) */}
+                    <Route
+                        path="/apply"
+                        element={
+                            <ProtectedRoute>
+                                <div className={appClassName}>
+                                    <Navbar
+                                        isDark={isDark}
+                                        onToggleTheme={toggleTheme}
+                                    />
+                                    <Application />
+                                </div>
+                            </ProtectedRoute>
+                        }
+                    />
 
-          {/* Admin Dashboard (protected - admin only) */}
-          <Route
-            path="/admin/dashboard"
-            element={
-              <AdminProtectedRoute>
-                <div className={appClassName}>
-                  <Navbar isDark={isDark} onToggleTheme={toggleTheme} />
-                  <AdminDashboard />
-                  <Teams />
-                </div>
-              </AdminProtectedRoute>
-            }
-          />
+                    {/* Dashboard (protected) */}
+                    <Route
+                        path="/dashboard"
+                        element={
+                            <ProtectedRoute>
+                                <div className={appClassName}>
+                                    <Navbar
+                                        isDark={isDark}
+                                        onToggleTheme={toggleTheme}
+                                    />
+                                    <Dashboard />
+                                    <Teams />
+                                </div>
+                            </ProtectedRoute>
+                        }
+                    />
 
-          {/* User Detail Page (protected - admin only) */}
-          <Route
-            path="/admin/users/:userId"
-            element={
-              <AdminProtectedRoute>
-                <div className={appClassName}>
-                  <Navbar isDark={isDark} onToggleTheme={toggleTheme} />
-                  <UserDetail />
-                  <Teams />
-                </div>
-              </AdminProtectedRoute>
-            }
-          />
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
+                    {/* Admin Login Page */}
+                    <Route
+                        path="/admin/login"
+                        element={
+                            <div className={appClassName}>
+                                <AdminLogin />
+                            </div>
+                        }
+                    />
+
+                    {/* Admin Dashboard (protected - admin only) */}
+                    <Route
+                        path="/admin/dashboard"
+                        element={
+                            <AdminProtectedRoute>
+                                <div className={appClassName}>
+                                    <Navbar
+                                        isDark={isDark}
+                                        onToggleTheme={toggleTheme}
+                                    />
+                                    <AdminDashboard />
+                                    <Teams />
+                                </div>
+                            </AdminProtectedRoute>
+                        }
+                    />
+
+                    {/* User Detail Page (protected - admin only) */}
+                    <Route
+                        path="/admin/users/:userId"
+                        element={
+                            <AdminProtectedRoute>
+                                <div className={appClassName}>
+                                    <Navbar
+                                        isDark={isDark}
+                                        onToggleTheme={toggleTheme}
+                                    />
+                                    <UserDetail />
+                                    <Teams />
+                                </div>
+                            </AdminProtectedRoute>
+                        }
+                    />
+                </Routes>
+            </Router>
+        </AuthProvider>
+    );
 }
 
 export default App;
