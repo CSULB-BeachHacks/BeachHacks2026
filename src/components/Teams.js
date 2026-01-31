@@ -14,13 +14,16 @@ const Teams = () => {
 
     useGSAP(
         () => {
+            const spinDuration = 12;
+            const cutoffPoint = "-60%";
+
             // Infinite scrolling animation
             gsap.fromTo(
                 textPathRef.current,
                 { attr: { startOffset: "100%" } },
                 {
-                    attr: { startOffset: "-100%" },
-                    duration: 15,
+                    attr: { startOffset: cutoffPoint },
+                    duration: spinDuration,
                     repeat: -1,
                     ease: "none",
                 },

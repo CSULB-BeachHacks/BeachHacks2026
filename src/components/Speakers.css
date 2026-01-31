@@ -64,66 +64,20 @@
     display: flex;
     justify-content: center;
     margin-top: 3rem;
+    padding-left: 7rem; /* Shift content slightly right visually */
 }
 
 .speaker-text {
-    position: absolute;
-    right: calc(100% - 61% + calc(var(--bubble-w) * 0.27) / 2 + 2rem);
-    top: 42%;
-    transform: translateY(-50%);
-    max-width: calc(var(--bubble-w) * 0.35);
-    z-index: 2;
+    /* Removed wrapper positioning since children are now absolute */
+    display: contents;
 }
 
-.speaker-description {
-    font-size: clamp(14px, 2.5vw, 28px);
-    font-weight: 500;
-    color: #1e5a67;
-    font-family: inherit; /* Inherit global font (JetBrains Mono) */
-    margin-bottom: 1.5rem;
-    text-align: left;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    top: -90px;
-    left: 40px;
-}
-
-.speaker-name {
-    font-size: clamp(18px, 3.5vw, 36px);
-    font-weight: 700;
-    color: #1e5a67;
-    font-family: inherit; /* Inherit global font (JetBrains Mono) */
-    margin: 0;
-    text-align: left;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    top: 40px;
-    left: 65px;
-}
-
-.bubbles-wrap {
-    position: relative;
-    display: inline-block;
-    /* Base bubble width variable used by child elements */
-    --bubble-w: clamp(360px, 60vw, 980px);
-}
-
-.bubbles-center {
-    width: var(--bubble-w);
-    height: auto;
-    margin: 0 auto;
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
-}
-
-/* Clipped circular speaker photo overlay
-   Anchored relative to the bubbles wrapper using percentages */
+/* 1. Speaker Photo -> Top Left Bubble */
 .speaker-photo {
     position: absolute;
-    left: 61%;
-    top: 42%;
-    transform: translate(-50%, -50%);
+    /* Move to Top Left Bubble */
+    left: 30%;
+    transform: translate(-50%, -60%);
     width: calc(var(--bubble-w) * 0.27);
     height: calc(var(--bubble-w) * 0.27);
     border-radius: 50%;
@@ -131,6 +85,45 @@
     clip-path: circle(50% at 50% 50%);
     border: 8px solid rgba(88, 139, 214, 0.9);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+}
+
+/* 2. Speaker Name -> Middle Right Bubble */
+.speaker-name {
+    position: absolute;
+    /* Move to Middle Right Bubble */
+    left: 63%;
+    top: 42%;
+    transform: translate(-50%, -50%);
+
+    font-size: clamp(18px, 3.5vw, 36px);
+    font-weight: 700;
+    color: #1e5a67;
+    font-family: inherit;
+    margin: 0;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 25%;
+    z-index: 2;
+}
+
+/* 3. Speaker Description -> Bottom Left Bubble */
+.speaker-description {
+    position: absolute;
+    /* Move to Bottom Left Bubble */
+    left: 35%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+
+    font-size: clamp(13px, 2.1vw, 22px);
+    font-weight: 500;
+    color: #1e5a67;
+    font-family: inherit;
+    margin: 0;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    z-index: 2;
 }
 
 /* Bottom row: star + kelp on the sides */
