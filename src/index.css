@@ -1,5 +1,10 @@
+html,
 body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden; /* Strict horizontal clipping */
     font-family:
         "JetBrains Mono",
         -apple-system,
@@ -23,7 +28,15 @@ body {
         #b6aef9 100%
     );
     min-height: 100vh;
+}
+
+#root {
+    width: 100%;
+    max-width: 100vw;
     overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 code {

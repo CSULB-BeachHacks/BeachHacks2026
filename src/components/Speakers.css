@@ -207,22 +207,41 @@
         width: clamp(36px, 7vw, 70px);
     }
 
-    .speaker-description {
-        top: -60px;
-    }
+    /* Removed .speaker-description override to let it inherit % position */
 
     .bubbles-center {
-        width: clamp(240px, 85vw, 540px);
+        width: var(--bubble-w);
     }
 
     .bubbles-wrap {
-        --bubble-w: clamp(240px, 85vw, 540px);
+        --bubble-w: clamp(300px, 90vw, 540px);
     }
+
+    .row-middle {
+        padding-left: 0; /* Reset desktop padding */
+    }
+
+    /* Mobile Positions - Optimized for iPhone 11 (375px) */
     .speaker-photo {
-        left: 62%;
-        top: 44%;
-        width: calc(var(--bubble-w) * 0.32);
-        height: calc(var(--bubble-w) * 0.32);
+        left: 30%;
+        top: 30%;
+        width: calc(var(--bubble-w) * 0.27);
+        height: calc(var(--bubble-w) * 0.27);
+    }
+
+    .speaker-name {
+        left: 67%;
+        top: 40%;
+        font-size: clamp(14px, 4vw, 20px);
+        width: 35%;
+    }
+
+    .speaker-description {
+        top: 70%;
+        left: 34%;
+        font-size: clamp(8px, 2.4vw, 11px); /* Further reduced font size */
+        width: 38% !important; /* Force width */
+        line-height: 1.2;
     }
 
     .row-bottom {

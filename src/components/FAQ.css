@@ -185,7 +185,7 @@
     .header-star {
         width: 40px;
         height: 40px;
-        right: -40px;
+        right: -10px; /* Pulled in from -40px to prevent cutoff */
         top: -15px;
     }
 

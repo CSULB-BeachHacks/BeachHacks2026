@@ -3,7 +3,7 @@
 
 /* ---- Section: full-bleed background and centering ---- */
 .bhx-section {
-    width: 100vw;
+    width: 100%; /* Changed from 100vw to prevent scrollbar overlap issue */
     min-height: 100vh;
     display: grid;
     place-items: center;

@@ -154,6 +154,14 @@
     .teams-hero-wrapper {
         justify-content: center;
         align-items: center;
+        transform: translateY(15rem); /* Reduce downward shift on tablet */
+        margin-bottom: 5rem;
+    }
+
+    .text-ring-svg {
+        /* Scale down the ring slightly */
+        width: 100%;
+        height: 100%;
     }
 
     .crab-pyramid-container {
@@ -184,6 +192,11 @@
 @media screen and (max-width: 480px) {
     .teams {
         padding: 6rem 0 1rem;
+    }
+
+    .teams-hero-wrapper {
+        transform: translateY(15rem); /* Significantly reduce on mobile */
+        margin-bottom: 2rem;
     }
 
     .crab-pyramid-container {
@@ -243,16 +256,18 @@
 /* Wave Styling */
 .teams-wave {
     width: 100%;
-    line-height: 0; /* Removing vertical gap */
+    line-height: 0;
     position: relative;
     z-index: 1;
-    margin-top: 4rem; /* Add some space above the wave */
+    margin-top: 4rem;
+    margin-bottom: -50px; /* Crucial: pull the ticker up to hide sub-pixel gaps */
 }
 
 .teams-wave svg {
     display: block;
     width: 100%;
     height: auto;
+    vertical-align: bottom; /* Ensure no inline descent space */
 }
 
 /* Ticker Tape Styling */

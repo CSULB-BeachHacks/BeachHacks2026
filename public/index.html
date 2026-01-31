@@ -46,9 +46,8 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-        <a
-            id="mlh-trust-badge"
-            style="
+        <style>
+            #mlh-trust-badge {
                 display: block;
                 max-width: 100px;
                 min-width: 60px;
@@ -57,7 +56,17 @@
                 top: 85px;
                 width: 10%;
                 z-index: 999;
-            "
+            }
+            @media (max-width: 768px) {
+                #mlh-trust-badge {
+                    right: 15px !important;
+                    top: 75px !important;
+                    max-width: 60px !important;
+                }
+            }
+        </style>
+        <a
+            id="mlh-trust-badge"
             href="https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2026-season&utm_content=blue"
             target="_blank"
             ><img
