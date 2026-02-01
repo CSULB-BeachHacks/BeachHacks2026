@@ -20,11 +20,19 @@ import starDecoQR from "../Dashboard-images/Untitled design (12) 3.png";
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    const { currentUser, deleteAccount, logout, changePassword, reauthenticateGoogle, reauthenticateEmail } = useAuth();
+    const {
+        currentUser,
+        deleteAccount,
+        logout,
+        changePassword,
+        reauthenticateGoogle,
+        reauthenticateEmail,
+    } = useAuth();
     const [isWithdrawing, setIsWithdrawing] = useState(false);
     const [showWithdrawModal, setShowWithdrawModal] = useState(false);
     const [showReauthModal, setShowReauthModal] = useState(false);
-    const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+    const [showChangePasswordModal, setShowChangePasswordModal] =
+        useState(false);
     const [error, setError] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [hasApplication, setHasApplication] = useState(false);
@@ -41,20 +49,20 @@ const Dashboard = () => {
 
             // Block admin user from accessing regular dashboard
             try {
-              const userRef = doc(db, "users", currentUser.uid);
-              const userSnap = await getDoc(userRef);
-              if (userSnap.exists() && userSnap.data().isAdmin) {
-                navigate("/admin/dashboard");
-                return;
-              }
+                const userRef = doc(db, "users", currentUser.uid);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists() && userSnap.data().isAdmin) {
+                    navigate("/admin/dashboard");
+                    return;
+                }
             } catch (error) {
-              console.error("Error checking admin status:", error);
+                console.error("Error checking admin status:", error);
             }
 
             try {
                 const applicationRef = doc(db, "applications", currentUser.uid);
                 const applicationSnap = await getDoc(applicationRef);
-                
+
                 if (applicationSnap.exists()) {
                     const data = applicationSnap.data();
                     setHasApplication(true);
@@ -126,12 +134,16 @@ const Dashboard = () => {
         } catch (error) {
             console.error("Error withdrawing application:", error);
             setIsWithdrawing(false);
-            const errorMessage = error.message || "Failed to withdraw application. Please try again.";
+            const errorMessage =
+                error.message ||
+                "Failed to withdraw application. Please try again.";
             setError(errorMessage);
             // Keep reauth modal open if re-authentication failed
-            if (error.code === "auth/wrong-password" || 
+            if (
+                error.code === "auth/wrong-password" ||
                 error.code === "auth/invalid-credential" ||
-                error.code === "auth/requires-recent-login") {
+                error.code === "auth/requires-recent-login"
+            ) {
                 // Don't close modal on authentication errors
             } else {
                 setShowReauthModal(false);
@@ -164,7 +176,9 @@ const Dashboard = () => {
             alert("Password changed successfully!");
         } catch (error) {
             console.error("Error changing password:", error);
-            setError(error.message || "Failed to change password. Please try again.");
+            setError(
+                error.message || "Failed to change password. Please try again.",
+            );
             throw error; // Re-throw so modal can handle it
         }
     };
@@ -185,9 +199,10 @@ const Dashboard = () => {
 
     // Check if user signed in with Google
     // Email/password users have providerId "password", Google users have "google.com"
-    const isGoogleUser = currentUser?.providerData?.some(
-        provider => provider && provider.providerId === "google.com"
-    ) || false;
+    const isGoogleUser =
+        currentUser?.providerData?.some(
+            (provider) => provider && provider.providerId === "google.com",
+        ) || false;
 
     return (
         <main className="dashboard-container">
@@ -195,11 +210,13 @@ const Dashboard = () => {
             {applicationStatus === "rejected" && <RainAnimation />}
 
             <img
+                draggable="false"
                 src={starDecoLeft}
                 alt="Star Decoration"
                 className="star-deco-left"
             />
             <img
+                draggable="false"
                 src={starDecoQR}
                 alt="Star Decoration QR"
                 className="star-deco-qr"
@@ -218,18 +235,26 @@ const Dashboard = () => {
 
                     <figure className="status-bar-container">
                         <img
+                            draggable="false"
                             src={statusBarImg}
                             alt="Status Bar"
                             className="status-bar-bg"
                         />
                         <figcaption className="status-text">
-                            STATUS: {loading ? "Loading..." : (
-                                applicationStatus === "accepted" ? "ACCEPTED" :
-                                applicationStatus === "waitlisted" ? "WAITLISTED" :
-                                applicationStatus === "rejected" ? "REJECTED" :
-                                isSubmitted ? "We are currently reviewing your submission" :
-                                hasApplication ? "Incomplete" : "Not Submitted"
-                            )}
+                            STATUS:{" "}
+                            {loading
+                                ? "Loading..."
+                                : applicationStatus === "accepted"
+                                  ? "ACCEPTED"
+                                  : applicationStatus === "waitlisted"
+                                    ? "WAITLISTED"
+                                    : applicationStatus === "rejected"
+                                      ? "REJECTED"
+                                      : isSubmitted
+                                        ? "We are currently reviewing your submission"
+                                        : hasApplication
+                                          ? "Incomplete"
+                                          : "Not Submitted"}
                         </figcaption>
                     </figure>
 
@@ -239,14 +264,14 @@ const Dashboard = () => {
                         aria-label="Application actions"
                     >
                         {!loading && !isSubmitted && (
-                            <button 
+                            <button
                                 className="dashboard-btn edit-btn"
                                 onClick={handleEditClick}
                             >
                                 EDIT
                             </button>
                         )}
-                        <button 
+                        <button
                             className="dashboard-btn withdraw-btn"
                             onClick={handleWithdrawClick}
                             disabled={isWithdrawing}
@@ -262,14 +287,14 @@ const Dashboard = () => {
                             aria-label="Account actions"
                         >
                             {!isGoogleUser && (
-                                <button 
+                                <button
                                     className="dashboard-btn change-password-btn"
                                     onClick={handleChangePasswordClick}
                                 >
                                     CHANGE PASSWORD
                                 </button>
                             )}
-                            <button 
+                            <button
                                 className="dashboard-btn logout-btn"
                                 onClick={handleLogout}
                             >
@@ -288,6 +313,7 @@ const Dashboard = () => {
                         <aside className="mascot-container" aria-label="Mascot">
                             <div className="chat-bubble-container">
                                 <img
+                                    draggable="false"
                                     src={chatBubbleImg}
                                     alt="Chat Bubble"
                                     className="chat-bubble-bg"
@@ -305,13 +331,17 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             <img
+                                draggable="false"
                                 src={crabMascotImg}
                                 alt="Crab Mascot"
                                 className="crab-mascot"
                             />
                         </aside>
 
-                        <section className="qr-section" aria-labelledby="qr-title">
+                        <section
+                            className="qr-section"
+                            aria-labelledby="qr-title"
+                        >
                             <div className="qr-star-bg"></div>
                             <h3 id="qr-title" className="qr-title">
                                 QR Code
@@ -324,7 +354,8 @@ const Dashboard = () => {
                                 and check-in.
                             </p>
                             <div className="qr-placeholder">
-                                {currentUser && applicationStatus === "accepted" ? (
+                                {currentUser &&
+                                applicationStatus === "accepted" ? (
                                     <QRCodeSVG
                                         value={currentUser.uid}
                                         size={240}
@@ -346,6 +377,7 @@ const Dashboard = () => {
                         <aside className="mascot-container" aria-label="Mascot">
                             <div className="chat-bubble-container">
                                 <img
+                                    draggable="false"
                                     src={chatBubbleImg}
                                     alt="Chat Bubble"
                                     className="chat-bubble-bg"
@@ -395,7 +427,9 @@ const Dashboard = () => {
                                             <br />
                                             committee
                                         </>
-                                    ) : isSubmitted && (applicationStatus === "pending" || !applicationStatus) ? (
+                                    ) : isSubmitted &&
+                                      (applicationStatus === "pending" ||
+                                          !applicationStatus) ? (
                                         <>
                                             We are currently
                                             <br />
@@ -423,47 +457,69 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             <img
+                                draggable="false"
                                 src={crabMascotImg}
                                 alt="Crab Mascot"
                                 className="crab-mascot"
                             />
                         </aside>
-                        
+
                         {/* Discord Invite Container - Show when status is "We are currently reviewing your submission" or "waitlisted" */}
-                        {isSubmitted && (applicationStatus === "pending" || !applicationStatus || applicationStatus === "waitlisted") && (
-                            <div className={`discord-invite-container ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}>
-                                <div className="discord-invite-wrapper">
-                                    <p className={`discord-invite-description ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}>
-                                        {applicationStatus === "waitlisted" ? (
-                                            <>
-                                                Please look for DMs on Discord! We might make exceptions by asking questions to some waitlisted participants. 
-                                                Make sure to join the BeachHacks Discord server and check your messages!
-                                            </>
-                                        ) : (
-                                            <>
-                                                We will contact you via Discord, so please join our server to be accepted. 
-                                                We still try to contact via email, but Discord is highly recommended. 
-                                                Join the BeachHacks Discord!
-                                            </>
-                                        )}
-                                    </p>
-                                    <a
-                                        href="https://discord.gg/J4NGeVd"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={`discord-invite-link ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}
-                                        aria-label="Join our Discord server"
-                                    >
-                                        <img
-                                            src="/discord_logo.jpg"
-                                            alt="Discord Logo"
-                                            className="discord-logo"
-                                        />
-                                        <p className="discord-invite-text">Join Our Discord</p>
-                                    </a>
+                        {isSubmitted &&
+                            (applicationStatus === "pending" ||
+                                !applicationStatus ||
+                                applicationStatus === "waitlisted") && (
+                                <div
+                                    className={`discord-invite-container ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}
+                                >
+                                    <div className="discord-invite-wrapper">
+                                        <p
+                                            className={`discord-invite-description ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}
+                                        >
+                                            {applicationStatus ===
+                                            "waitlisted" ? (
+                                                <>
+                                                    Please look for DMs on
+                                                    Discord! We might make
+                                                    exceptions by asking
+                                                    questions to some waitlisted
+                                                    participants. Make sure to
+                                                    join the BeachHacks Discord
+                                                    server and check your
+                                                    messages!
+                                                </>
+                                            ) : (
+                                                <>
+                                                    We will contact you via
+                                                    Discord, so please join our
+                                                    server to be accepted. We
+                                                    still try to contact via
+                                                    email, but Discord is highly
+                                                    recommended. Join the
+                                                    BeachHacks Discord!
+                                                </>
+                                            )}
+                                        </p>
+                                        <a
+                                            href="https://discord.gg/J4NGeVd"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={`discord-invite-link ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}
+                                            aria-label="Join our Discord server"
+                                        >
+                                            <img
+                                                draggable="false"
+                                                src="/discord_logo.jpg"
+                                                alt="Discord Logo"
+                                                className="discord-logo"
+                                            />
+                                            <p className="discord-invite-text">
+                                                Join Our Discord
+                                            </p>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
                     </section>
                 )}
             </section>

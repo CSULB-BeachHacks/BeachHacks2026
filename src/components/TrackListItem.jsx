@@ -72,6 +72,7 @@ export default function TrackListItem({ open, closed, name }) {
     return (
         <div ref={containerRef} className="track-item">
             <img
+                draggable="false"
                 ref={imgRef}
                 src={imgSrc}
                 alt=""
@@ -82,6 +83,7 @@ export default function TrackListItem({ open, closed, name }) {
             {hasShaken && (
                 <>
                     <img
+                        draggable="false"
                         src={pearl}
                         className="track-item__pearl"
                         alt="pearl"

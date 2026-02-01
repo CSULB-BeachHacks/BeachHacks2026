@@ -122,6 +122,7 @@ const FAQ = () => {
                         FAQ
                     </h2>
                     <img
+                        draggable="false"
                         src={cyanStar}
                         alt="Cyan star"
                         className="header-star"
@@ -139,6 +140,7 @@ const FAQ = () => {
                                     aria-controls={`faq-answer-${item.id}`}
                                 >
                                     <img
+                                        draggable="false"
                                         src={item.star}
                                         alt=""
                                         className="question-star"

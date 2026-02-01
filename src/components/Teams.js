@@ -116,18 +116,67 @@ const Teams = () => {
 
     // List of committee members for the slider
     const committeeMembers = [
-        { name: "Member 1", role: "Director", image: "/crabby_pyamid_1.png" },
-        { name: "Member 2", role: "Organizer", image: "/crabby_pyamid_1.png" },
-        { name: "Member 3", role: "Developer", image: "/crabby_pyamid_1.png" },
-        { name: "Member 4", role: "Designer", image: "/crabby_pyamid_1.png" },
-        { name: "Member 5", role: "Logistics", image: "/crabby_pyamid_1.png" },
         {
-            name: "Member 6",
-            role: "Sponsorship",
+            name: "Keshav Jindal",
+            role: "Co-President",
             image: "/crabby_pyamid_1.png",
         },
-        { name: "Member 7", role: "Marketing", image: "/crabby_pyamid_1.png" },
-        { name: "Member 8", role: "Mentor", image: "/crabby_pyamid_1.png" },
+        {
+            name: "Winston Ta",
+            role: "Co-President",
+            image: "/crabby_pyamid_1.png",
+        },
+        {
+            name: "Vansh Patel",
+            role: "Tech Director",
+            image: "/vansh_patel.jpeg",
+            imageStyle: { transform: "scale(1.3)" },
+        },
+        {
+            name: "Marisol Morales",
+            role: "Logistics Director",
+            image: "/marisol_morales.jpg",
+        },
+        {
+            name: "Krisha Hemani",
+            role: "Treasurer",
+            image: "/crabby_pyamid_1.png",
+        },
+        {
+            name: "Karan Verma",
+            role: "Placeholder",
+            image: "/karan_verma.jpg",
+            imageStyle: { objectPosition: "70% 75%" },
+        },
+        {
+            name: "Jesus Santiago",
+            role: "Placeholder",
+            image: "/jesus_santiago.png",
+            imageStyle: {
+                width: "100%",
+                height: "auto",
+                objectFit: "unset",
+                transform: "scale(0.98) translateY(-7px)",
+            },
+        },
+        {
+            name: "Oscar Arenas",
+            role: "Placeholder",
+            image: "/oscar-arenas-head-shot.jpg",
+            imageStyle: { objectPosition: "50% 35%" },
+        },
+        {
+            name: "Sanchit Kaushik",
+            role: "Placeholder",
+            image: "/sanchit_kaushik.png",
+            imageStyle: { transform: "scale(1.3)" },
+        },
+        {
+            name: "Jaden Le",
+            role: "Placeholder",
+            image: "/jaden_le.jpg",
+            imageStyle: { transform: "scale(1.3) translate(15px, -15px)" },
+        },
     ];
 
     // Duplicate the list for seamless infinite scroll
@@ -147,6 +196,7 @@ const Teams = () => {
                             ref={bubblesWrapperRef}
                         ></div>
                         <img
+                            draggable="false"
                             ref={crabRef}
                             src="/crabby_pyamid_1.png"
                             alt="BeachHacks Crab Mascot"
@@ -203,9 +253,11 @@ const Teams = () => {
                             <div className="team-member-card" key={index}>
                                 <div className="member-image-wrapper">
                                     <img
+                                        draggable="false"
                                         src={member.image}
                                         alt={member.name}
                                         className="member-image"
+                                        style={member.imageStyle || {}}
                                         onError={(e) => {
                                             e.target.onerror = null;
                                             e.target.style.display = "none";

@@ -4,51 +4,71 @@ import { useGSAP } from "@gsap/react";
 import TrackListItem from "./TrackListItem";
 import "./Tracks.css"; // ← import the CSS file
 
-import lightBlueClosed from '../assets/lightblue_closed 1.svg';
-import lightBlueOpen from '../assets/lightblue_open 1.svg';
-import cyanClosed from '../assets/cyan_closed 1.svg';
-import cyanOpen from '../assets/cyan_open 1.svg';
-import navyClosed from '../assets/navy_closed 1.svg';
-import navyOpen from '../assets/navy_open 1.svg';
+import lightBlueClosed from "../assets/lightblue_closed 1.svg";
+import lightBlueOpen from "../assets/lightblue_open 1.svg";
+import cyanClosed from "../assets/cyan_closed 1.svg";
+import cyanOpen from "../assets/cyan_open 1.svg";
+import navyClosed from "../assets/navy_closed 1.svg";
+import navyOpen from "../assets/navy_open 1.svg";
 import bluePurpleStar from "../assets/blue_purple_star.svg";
 import purpleBlueStar from "../assets/purple_blue_star.svg";
 import purpleSmallStar from "../assets/purple_small_star.svg";
 
 const Tracks = () => {
-  const tracks = [
-    { open: lightBlueOpen, closed: lightBlueClosed, name: "Track 1" },
-    { open: navyOpen,     closed: navyClosed,      name: "Track 2" },
-    { open: cyanOpen,     closed: cyanClosed,      name: "Track 3" },
-    { open: lightBlueOpen,closed: lightBlueClosed, name: "Track 4" },
-    { open: navyOpen,     closed: navyClosed,      name: "Track 5" },
-    { open: cyanOpen,     closed: cyanClosed,      name: "Track 6" },
-  ];
+    const tracks = [
+        { open: lightBlueOpen, closed: lightBlueClosed, name: "Track 1" },
+        { open: navyOpen, closed: navyClosed, name: "Track 2" },
+        { open: cyanOpen, closed: cyanClosed, name: "Track 3" },
+        { open: lightBlueOpen, closed: lightBlueClosed, name: "Track 4" },
+        { open: navyOpen, closed: navyClosed, name: "Track 5" },
+        { open: cyanOpen, closed: cyanClosed, name: "Track 6" },
+    ];
 
-  useGSAP(() => {
-    gsap.to('.hover', {
-      y: -660,
-      duration: 5,
-      repeat: -1,
-      yoyo: true,
-      ease: 'power1.inOut',
-    });
-  }, []);
+    useGSAP(() => {
+        gsap.to(".hover", {
+            y: -660,
+            duration: 5,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+        });
+    }, []);
 
-  return (
-    <section className="tracks" id="tracks">
-      <h1 className="tracks__title">Tracks</h1>
+    return (
+        <section className="tracks" id="tracks">
+            <h1 className="tracks__title">Tracks</h1>
 
-      <img className="star--top-left" src={purpleBlueStar} alt="" />
-      <img className="star--small hover" src={purpleSmallStar} alt="" />
-      <img className="star--bottom-right" src={bluePurpleStar} alt="" />
+            <img
+                draggable="false"
+                className="star--top-left"
+                src={purpleBlueStar}
+                alt=""
+            />
+            <img
+                draggable="false"
+                className="star--small hover"
+                src={purpleSmallStar}
+                alt=""
+            />
+            <img
+                draggable="false"
+                className="star--bottom-right"
+                src={bluePurpleStar}
+                alt=""
+            />
 
-      <div className="tracks__grid">
-        {tracks.map((item, index) => (
-          <TrackListItem key={index} open={item.open} closed={item.closed} name={item.name} />
-        ))}
-      </div>
-    </section>
-  );
+            <div className="tracks__grid">
+                {tracks.map((item, index) => (
+                    <TrackListItem
+                        key={index}
+                        open={item.open}
+                        closed={item.closed}
+                        name={item.name}
+                    />
+                ))}
+            </div>
+        </section>
+    );
 };
 
 export default Tracks;

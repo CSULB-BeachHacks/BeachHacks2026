@@ -124,6 +124,7 @@ const Speakers = () => {
             <div className="speakers-grid">
                 <div className="row-top">
                     <img
+                        draggable="false"
                         ref={crabRef}
                         src="/crab_waving.png"
                         alt="Crab"
@@ -131,6 +132,7 @@ const Speakers = () => {
                     />
                     <h2 className="speakers-title">Speakers</h2>
                     <img
+                        draggable="false"
                         src="/purple_star.png"
                         alt="Star"
                         className="star-title"
@@ -144,6 +146,7 @@ const Speakers = () => {
                     >
                         <div className="bubbles-wrap" ref={contentRef}>
                             <img
+                                draggable="false"
                                 src="/bubbles.png"
                                 alt="Bubbles"
                                 className="bubbles-center"
@@ -151,6 +154,7 @@ const Speakers = () => {
 
                             {/* Top Left: Speaker Image */}
                             <img
+                                draggable="false"
                                 src={speakers[currentSpeakerIndex].image}
                                 alt="Speaker"
                                 className="speaker-photo"
@@ -171,17 +175,20 @@ const Speakers = () => {
 
                 <div className="row-bottom">
                     <img
+                        draggable="false"
                         src="/purple_star.png"
                         alt="Star"
                         className="star-flow"
                     />
                     <div className="kelp-wrap">
                         <img
+                            draggable="false"
                             src="/dark_blue_kelp.png"
                             alt="Kelp"
                             className="kelp-flow"
                         />
                         <img
+                            draggable="false"
                             src="/bottom_rock.png"
                             alt="Rock"
                             className="bottom-rock"
