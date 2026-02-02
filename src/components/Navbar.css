@@ -191,12 +191,6 @@
 
 .apply-btn:hover {
     transform: translateY(-1px);
-    filter: brightness(1.05);
-    box-shadow: 0 10px 28px rgba(21, 198, 187, 0.45);
-}
-
-.apply-btn:hover {
-    transform: translateY(-1px);
     filter: brightness(1.03);
     box-shadow: 0 10px 28px rgba(21, 198, 187, 0.45);
 }
@@ -215,6 +209,21 @@
     width: 28px;
     height: 28px;
     image-rendering: pixelated;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1366px) {
+    .nav-container {
+        padding: 0 1.5rem; /* Tighter padding for mid-tier */
+        max-width: 95%; /* Ensure it fits on smaller screens */
+    }
+
+    .nav-menu {
+        gap: 1.5rem; /* Reduce gap between items */
+    }
+
+    .nav-link {
+        font-size: 1rem; /* Slightly smaller font */
+    }
 }
 
 @media screen and (max-width: 1024px) {

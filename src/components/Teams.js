@@ -177,6 +177,11 @@ const Teams = () => {
             image: "/jaden_le.jpg",
             imageStyle: { transform: "scale(1.3) translate(15px, -15px)" },
         },
+        {
+            name: "Vien Le",
+            role: "Placeholder",
+            image: "/vien_le.jpg",
+        }
     ];
 
     // Duplicate the list for seamless infinite scroll

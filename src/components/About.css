@@ -108,10 +108,15 @@
     .right-about-coral {
         width: clamp(200px, 35vw, 380px);
         transform: translateY(clamp(-6rem, -7vw, -9rem));
+        right: -2rem; /* Pull in slightly to prevent overflow on smaller tablets */
+    }
+
+    .left-about-coral {
+        left: -1.5rem; /* Symmetry for the left coral */
     }
 
     .purple-blue-star {
-        right: clamp(0.75rem, 4vw, 2.5rem);
+        right: clamp(2rem, 4vw, 3rem); /* Move star inside a bit more */
         width: clamp(90px, 18vw, 180px);
         transform: translateY(clamp(15rem, 28vw, 22rem));
     }
