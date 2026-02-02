@@ -374,7 +374,7 @@ const Application = () => {
                             <input
                                 type="text"
                                 name="discordUsername"
-                                placeholder="handle123"
+                                placeholder="Username"
                                 value={formData.discordUsername}
                                 onChange={handleInputChange}
                                 className="form-input"
@@ -399,7 +399,7 @@ const Application = () => {
                                     <input
                                         type="text"
                                         name="school"
-                                        placeholder="school name"
+                                        placeholder="School Name"
                                         value={formData.school}
                                         onChange={handleInputChange}
                                         className="form-input"
@@ -420,7 +420,7 @@ const Application = () => {
                                     <input
                                         type="text"
                                         name="year"
-                                        placeholder="sophomore"
+                                        placeholder="Sophomore"
                                         value={formData.year}
                                         onChange={handleInputChange}
                                         className="form-input"
@@ -446,7 +446,7 @@ const Application = () => {
                             />
                             <textarea
                                 name="whyParticipate"
-                                placeholder="type here"
+                                placeholder="Type here"
                                 value={formData.whyParticipate}
                                 onChange={handleInputChange}
                                 className="form-textarea"
@@ -458,7 +458,7 @@ const Application = () => {
 
                     {/* Resume Upload Section (uploads to your Drive via Apps Script) */}
                     <div className="form-group">
-                        <label className="form-label">Resume (PDF/Doc)</label>
+                        <label className="form-label">Resume (PDF/Docx)</label>
                         <div className="file-upload-area">
                             <input
                                 type="file"
@@ -474,7 +474,7 @@ const Application = () => {
                             >
                                 <div className="file-upload-content">
                                     <span className="file-placeholder">
-                                        Drop your resume here
+                                        Drop Your Resume Here
                                     </span>
                                     {formData.resume && (
                                         <span className="file-name">

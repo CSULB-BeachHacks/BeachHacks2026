@@ -10,7 +10,7 @@
 .dashboard-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 8rem 2rem 2rem;
+    padding: 11rem 2rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -219,10 +219,10 @@
     transform: translate(-50%, -50%);
     width: 80%;
     text-align: center;
-    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
     font-weight: 700;
     line-height: 1.5;
-    color: var(--bh-text);
+    color: #000000;
     word-break: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
@@ -375,20 +375,20 @@
 .App.dark .discord-invite-description {
     background: rgba(15, 43, 51, 0.95);
     border-color: rgba(255, 255, 255, 0.3);
-    color: #DBF2F1;
+    color: #dbf2f1;
 }
 
 /* Waitlisted Discord Container - Yellow Background */
 .discord-invite-description.waitlisted {
     background: rgba(255, 235, 59, 0.95);
-    border-color: #F57F17;
+    border-color: #f57f17;
     color: #0f2b33;
     box-shadow: 4px 4px 0px rgba(245, 127, 23, 0.3);
 }
 
 .App.dark .discord-invite-description.waitlisted {
     background: rgba(255, 235, 59, 0.9);
-    border-color: #FFD54F;
+    border-color: #ffd54f;
     color: #0f2b33;
 }
 
@@ -446,13 +446,13 @@
 }
 
 .App.dark .discord-invite-text {
-    color: #DBF2F1;
+    color: #dbf2f1;
 }
 
 /* Waitlisted Discord Link - Yellow Background */
 .discord-invite-link.waitlisted {
     background: rgba(255, 235, 59, 0.95);
-    border-color: #F57F17;
+    border-color: #f57f17;
     box-shadow: 6px 6px 0px rgba(245, 127, 23, 0.3);
 }
 
@@ -466,7 +466,7 @@
 
 .App.dark .discord-invite-link.waitlisted {
     background: rgba(255, 235, 59, 0.9);
-    border-color: #FFD54F;
+    border-color: #ffd54f;
 }
 
 .App.dark .discord-invite-link.waitlisted .discord-invite-text {
@@ -837,9 +837,9 @@
     }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 340px) {
     .dashboard-content {
-        padding: 3.5rem 0.5rem 1rem;
+        padding: 6.5rem 0.5rem 1rem;
         overflow-x: hidden;
     }
 
