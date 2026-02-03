@@ -119,18 +119,18 @@ const Teams = () => {
         {
             name: "Keshav Jindal",
             role: "Co-President",
-            image: "/crabby_pyamid_1.png",
+            image: "/keshav_jindal.jpg",
         },
         {
             name: "Winston Ta",
             role: "Co-President",
-            image: "/crabby_pyamid_1.png",
+            image: "/winston_ta.jpg",
         },
         {
             name: "Vansh Patel",
             role: "Tech Director",
             image: "/vansh_patel.jpeg",
-            imageStyle: { transform: "scale(1.3)" },
+            imageStyle: { transform: "scale(1.8)", objectPosition: "60% 20%" },
         },
         {
             name: "Marisol Morales",
@@ -144,43 +144,47 @@ const Teams = () => {
         },
         {
             name: "Karan Verma",
-            role: "Placeholder",
+            role: "BeachHacks Committee",
             image: "/karan_verma.jpg",
             imageStyle: { objectPosition: "70% 75%" },
         },
         {
             name: "Jesus Santiago",
-            role: "Placeholder",
+            role: "BeachHacks Committee",
             image: "/jesus_santiago.png",
             imageStyle: {
-                width: "100%",
-                height: "auto",
-                objectFit: "unset",
-                transform: "scale(0.98) translateY(-7px)",
+                transform: "scale(0.98)",
+                objectPosition: "50% 10%",
             },
         },
         {
             name: "Oscar Arenas",
-            role: "Placeholder",
+            role: "BeachHacks Committee",
             image: "/oscar-arenas-head-shot.jpg",
-            imageStyle: { objectPosition: "50% 35%" },
+            imageStyle: { objectPosition: "50% 10%" },
         },
         {
             name: "Sanchit Kaushik",
-            role: "Placeholder",
+            role: "BeachHacks Committee",
             image: "/sanchit_kaushik.png",
             imageStyle: { transform: "scale(1.3)" },
         },
         {
             name: "Jaden Le",
-            role: "Placeholder",
+            role: "BeachHacks Committee",
             image: "/jaden_le.jpg",
             imageStyle: { transform: "scale(1.3) translate(15px, -15px)" },
         },
         {
             name: "Vien Le",
-            role: "Placeholder",
+            role: "BeachHacks Committee",
             image: "/vien_le.jpg",
+            imageStyle: { objectPosition: "50% 85%" },
+        },
+        {
+            name: "Dhara Shah",
+            role: "BeachHacks Committee",
+            image: "/dhara_shah.jpg",
         }
     ];
 
