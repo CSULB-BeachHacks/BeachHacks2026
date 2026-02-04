@@ -141,6 +141,11 @@ const Teams = () => {
             name: "Krisha Hemani",
             role: "Treasurer",
             image: "/crabby_pyamid_1.png",
+        },{
+            name: "Bryan Tineo",
+            role: "BeachHacks Committee",
+            image: "/bryan_tineo.jpg",
+            imageStyle: { objectPosition: "70% 75%" },
         },
         {
             name: "Karan Verma",
