@@ -54,6 +54,25 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
 
     const handleApplyClick = (e) => {
         e.preventDefault();
+
+        // TEMPORARY: Redirect to email signup (Applications opening soon)
+        if (location.pathname !== "/") {
+            navigate("/");
+            setTimeout(() => {
+                const element = document.getElementById("email-signup");
+                if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                }
+            }, 100);
+        } else {
+            const element = document.getElementById("email-signup");
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+
+        /* 
+        // ORIGINAL LOGIC (commented out temporarily)
         if (currentUser) {
             // Check if admin user
             if (isAdmin) {
@@ -69,6 +88,7 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
         } else {
             openSignup();
         }
+        */
     };
 
     const handleAuthSuccess = async () => {

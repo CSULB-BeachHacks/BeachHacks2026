@@ -122,6 +122,7 @@ export default function EmailSignup() {
 
     return (
         <section
+            id="email-signup"
             ref={sectionRef}
             className="email-signup"
             aria-label="Email Signup for Updates"
