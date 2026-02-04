@@ -1,0 +1,250 @@
+/* src/components/EmailSignup.css */
+
+.email-signup {
+    position: relative;
+    width: 100%;
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    text-align: center;
+    z-index: 10;
+}
+
+.email-signup__container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+/* Animated Teaser Text */
+.email-signup__teaser {
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--bh-text);
+    margin-bottom: 0.5rem;
+    /* Wave animation */
+    animation: wave-float 3s ease-in-out infinite;
+}
+
+.email-signup__teaser--glow {
+    /* Glow effect */
+    text-shadow: 
+        0 0 10px rgba(105, 219, 217, 0.5),
+        0 0 20px rgba(105, 219, 217, 0.3),
+        0 0 30px rgba(105, 219, 217, 0.2);
+}
+
+.dark .email-signup__teaser--glow {
+    text-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.6),
+        0 0 20px rgba(0, 255, 255, 0.4),
+        0 0 40px rgba(0, 255, 255, 0.3);
+}
+
+.email-signup__subtitle {
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--bh-muted);
+    margin-bottom: 2rem;
+    animation: wave-float 3s ease-in-out infinite 0.2s;
+}
+
+/* Wave animation keyframes */
+@keyframes wave-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Glow pulse animation */
+@keyframes glow-pulse {
+    0%, 100% {
+        filter: brightness(1);
+        text-shadow: 
+            0 0 10px rgba(105, 219, 217, 0.5),
+            0 0 20px rgba(105, 219, 217, 0.3);
+    }
+    50% {
+        filter: brightness(1.1);
+        text-shadow: 
+            0 0 15px rgba(105, 219, 217, 0.7),
+            0 0 30px rgba(105, 219, 217, 0.5),
+            0 0 45px rgba(105, 219, 217, 0.3);
+    }
+}
+
+.dark .email-signup__teaser--glow {
+    animation: wave-float 3s ease-in-out infinite, glow-pulse-dark 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-dark {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px rgba(0, 255, 255, 0.6),
+            0 0 20px rgba(0, 255, 255, 0.4);
+    }
+    50% {
+        text-shadow: 
+            0 0 20px rgba(0, 255, 255, 0.8),
+            0 0 40px rgba(0, 255, 255, 0.6),
+            0 0 60px rgba(0, 255, 255, 0.4);
+    }
+}
+
+/* Form Styling */
+.email-signup__form {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.email-signup__input-wrapper {
+    position: relative;
+    flex: 1;
+    max-width: 350px;
+    min-width: 250px;
+}
+
+.email-signup__input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-family: "JetBrains Mono", "Pixelify Sans", monospace;
+    font-size: 1rem;
+    color: var(--bh-text);
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(105, 219, 217, 0.4);
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.dark .email-signup__input {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(0, 255, 255, 0.3);
+}
+
+.email-signup__input::placeholder {
+    color: var(--bh-muted);
+    opacity: 0.7;
+}
+
+.email-signup__input:focus {
+    border-color: #69dbd9;
+    box-shadow: 
+        0 0 10px rgba(105, 219, 217, 0.4),
+        0 0 20px rgba(105, 219, 217, 0.2);
+}
+
+.dark .email-signup__input:focus {
+    border-color: #00ffff;
+    box-shadow: 
+        0 0 15px rgba(0, 255, 255, 0.5),
+        0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+/* Submit Button */
+.email-signup__button {
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    color: #0b3e45;
+    background: linear-gradient(135deg, #69dbd9 0%, #00bab7 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.email-signup__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 4px 15px rgba(105, 219, 217, 0.5),
+        0 0 30px rgba(105, 219, 217, 0.3);
+}
+
+.email-signup__button:active {
+    transform: translateY(0);
+}
+
+.email-signup__button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Success/Error Messages */
+.email-signup__message {
+    margin-top: 1.5rem;
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    animation: fadeInUp 0.4s ease;
+}
+
+.email-signup__message--success {
+    color: #4ade80;
+}
+
+.email-signup__message--error {
+    color: #f87171;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .email-signup {
+        padding: clamp(2rem, 5vw, 4rem) 0;
+    }
+
+    .email-signup__form {
+        flex-direction: column;
+    }
+
+    .email-signup__input-wrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .email-signup__button {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .email-signup__teaser {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+    }
+
+    .email-signup__subtitle {
+        font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+    }
+
+    .email-signup__input {
+        padding: 0.875rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .email-signup__button {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+}
