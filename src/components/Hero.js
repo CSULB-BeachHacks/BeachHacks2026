@@ -57,7 +57,7 @@ export default function Hero() {
         // Mobile: keep element centered with xPercent so CSS centering isn't overridden
         tl.fromTo(
           crabRef.current,
-          { xPercent: -120, y: 40, rotation: -6, opacity: 0 },
+          { xPercent: -50, y: 40, rotation: -6, opacity: 0 },
           { xPercent: -50, y: 0, rotation: 0, opacity: 1, duration: 1.2, ease: "power3.out" }
         );
   
