@@ -195,7 +195,7 @@ const Teams = () => {
         {
             name: "Anna Gelisanga",
             role: "BeachHacks Committee",
-            image: "/anna_gelisanga.jpg",
+            image: "/anna_gelisanga.JPG",
         },
         {
             name: "Chenchu H. Yakasiri Saravanan",
@@ -218,6 +218,12 @@ const Teams = () => {
             role: "BeachHacks Committee",
             image: "/deanna_solis.jpg",
         },
+        {
+            name: "Aalind Kale",
+            role: "BeachHacks Committee",
+            image: "/aalind_kale.jpg",
+            imageStyle: { transform: "scale(2.2)" },
+        },
     ];
 
     // Duplicate the list for seamless infinite scroll
@@ -228,9 +234,9 @@ const Teams = () => {
     ];
 
     return (
-        <section className="teams" id="teams" ref={containerRef}>
+        <section className="teams" ref={containerRef}>
             <div className="container">
-                <div className="teams-hero-wrapper">
+                <div className="teams-hero-wrapper" id="teams">
                     <div className="crab-pyramid-container">
                         <div
                             className="bubbles-wrapper"

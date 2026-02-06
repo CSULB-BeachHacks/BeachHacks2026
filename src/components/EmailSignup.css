@@ -216,16 +216,20 @@
 
     .email-signup__form {
         flex-direction: column;
+        width: 100%;
+        max-width: 400px; /* Constrain width when stacked */
+        margin: 0 auto;
     }
 
     .email-signup__input-wrapper {
         width: 100%;
-        max-width: 100%;
+        max-width: 100%; /* Take full width of parent */
+        min-width: 0; /* consistent flex behavior */
     }
 
     .email-signup__button {
         width: 100%;
-        max-width: 350px;
+        max-width: 100%; /* Take full width of parent */
     }
 }
 

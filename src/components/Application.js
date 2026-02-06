@@ -299,6 +299,23 @@ const Application = () => {
                     <br /> Application Form
                 </h1>
 
+                <div
+                    style={{
+                        backgroundColor: "#fff3cd",
+                        color: "#856404",
+                        padding: "1rem",
+                        borderRadius: "8px",
+                        marginBottom: "2rem",
+                        border: "1px solid #ffeeba",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                    }}
+                    role="alert"
+                >
+                    NOTE: This event is NOT overnight. Non-CSULB students should
+                    plan accordingly.
+                </div>
+
                 {submitMsg && (
                     <div
                         className={`submit-banner ${

@@ -51,7 +51,7 @@ const FAQ = () => {
             {
                 id: 19,
                 question: "Where is BeachHacks held?",
-                answer: "BeachHacks is held at California State University, Long Beach (CSULB), typically in the University Student Union (USU).",
+                answer: "BeachHacks is held at California State University, Long Beach (CSULB), at The Pointe (inside the Walter Pyramid).",
                 star: cyanSmallStar,
             },
             {
