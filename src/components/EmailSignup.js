@@ -132,7 +132,7 @@ export default function EmailSignup() {
                     ref={teaserRef}
                     className="email-signup__teaser email-signup__teaser--glow"
                 >
-                    Applications begin soon!
+                    Applications begin soon! [TEST]
                 </h2>
                 <p ref={subtitleRef} className="email-signup__subtitle">
                     Stay tuned for applications opening
