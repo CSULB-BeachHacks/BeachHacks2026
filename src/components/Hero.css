@@ -143,8 +143,11 @@
     }
 
     .hero__crab {
-        width: 140vw;
-        bottom: 25%;
+        width: 100vw;
+        max-width: 400px;
+        left: 50%;
+        bottom: 20%;
+        transform: translateX(-50%);
     }
 
     .hero__copy {
