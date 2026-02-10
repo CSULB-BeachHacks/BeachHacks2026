@@ -8,6 +8,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import "./Navbar.css";
 
+
 // Set to true when applications are open to show the Apply button
 const SHOW_APPLY_BUTTON = false;
 

@@ -444,6 +444,27 @@
     color: #6ec1e4;
 }
 
+/* MLH required/optional pills and note */
+.mlh-note {
+    display: inline-block;
+    margin-top: 0.35rem;
+    font-size: 0.85em;
+}
+.mlh-required-pill {
+    display: inline-block;
+    margin-right: 0.3rem;
+    color: rgba(220, 80, 80, 0.98);
+    font-weight: 900;
+    font-size: 1.2em;
+}
+.mlh-optional-pill {
+    display: inline-block;
+    margin-right: 0.3rem;
+    color: rgba(104, 187, 114, 0.98);
+    font-weight: 900;
+    font-size: 1.1em;
+}
+
 /* Input Fields */
 
 /* Image-framed input wrapper */

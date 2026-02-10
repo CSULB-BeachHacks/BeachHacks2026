@@ -204,7 +204,6 @@ const Application = () => {
         if (!formData.resume) missingFields.push("Resume");
         if (!formData.mlhCodeOfConduct) missingFields.push("MLH Code of Conduct agreement");
         if (!formData.mlhShareInfo) missingFields.push("MLH application sharing authorization");
-        if (!formData.mlhEmails) missingFields.push("MLH emails authorization");
 
         // If any fields are missing, show a comprehensive message
         if (missingFields.length > 0) {
@@ -862,7 +861,11 @@ const Application = () => {
                     {/* MLH Partnership Section */}
                     <div className="form-group mlh-section">
                         <p className="form-disclaimer">
-                            Much of the demographic and contact information above is collected for our partnership with MLH events. We are currently in the process of partnering with MLH. The following 3 checkboxes are for this partnership. If we do not end up partnering with MLH, your information will not be shared. You must check all three boxes to submit your application.
+                            Much of the demographic and contact information above is collected for our partnership with MLH events. We are currently in the process of partnering with MLH. The following 3 checkboxes are for this partnership. If we do not end up partnering with MLH, your information will not be shared.
+                            <br />
+                            <span className="mlh-note">
+                                <span className="mlh-required-pill">*</span> The first two boxes are mandatory. Please click and read the linked MLH policies before checking these boxes. The third (MLH emails) is optional.
+                            </span>
                         </p>
                         <div className="mlh-checkboxes">
                             <div className="mlh-checkbox-row">
@@ -875,6 +878,7 @@ const Application = () => {
                                     required
                                 />
                                 <label htmlFor="mlh-code-of-conduct" className="mlh-checkbox-text">
+                                    <span className="mlh-required-pill">*</span>{" "}
                                     I have read and agree to the{" "}
                                     <a href="https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md" target="_blank" rel="noopener noreferrer">MLH Code of Conduct</a>.
                                 </label>
@@ -889,6 +893,7 @@ const Application = () => {
                                     required
                                 />
                                 <label htmlFor="mlh-share-info" className="mlh-checkbox-text">
+                                    <span className="mlh-required-pill">*</span>{" "}
                                     I authorize you to share my application/registration information with Major League Hacking for event administration, ranking, and MLH administration in-line with the{" "}
                                     <a href="https://github.com/MLH/mlh-policies/blob/main/privacy-policy.md" target="_blank" rel="noopener noreferrer">MLH Privacy Policy</a>. I further agree to the terms of both the{" "}
                                     <a href="https://github.com/MLH/mlh-policies/blob/main/contest-terms.md" target="_blank" rel="noopener noreferrer">MLH Contest Terms and Conditions</a> and the{" "}
@@ -902,25 +907,24 @@ const Application = () => {
                                     name="mlhEmails"
                                     checked={formData.mlhEmails}
                                     onChange={handleCheckboxChange}
-                                    required
                                 />
                                 <label htmlFor="mlh-emails" className="mlh-checkbox-text">
-                                    I authorize MLH to send me occasional emails about relevant events, career opportunities, and community announcements.
+                                    I authorize MLH to send me occasional emails about relevant events, career opportunities, and community announcements. (Optional)
                                 </label>
                             </div>
                         </div>
                     </div>
 
-                    {/* Submit Button – disabled until all 3 MLH checkboxes are checked */}
+                    {/* Submit Button – disabled until the first 2 MLH checkboxes are checked */}
                     {(() => {
                         const allMlhChecked =
-                            formData.mlhCodeOfConduct && formData.mlhShareInfo && formData.mlhEmails;
+                            formData.mlhCodeOfConduct && formData.mlhShareInfo;
                         return (
                     <button
                         type="submit"
                         className={`submit-button ${submitting ? "submitting" : ""}`}
                         disabled={submitting || !allMlhChecked}
-                        title={!allMlhChecked ? "You must check all three MLH agreement boxes above to submit." : undefined}
+                        title={!allMlhChecked ? "You must check the first two MLH agreement boxes above to submit." : undefined}
                     >
                         {submitting ? (
                             <span>
