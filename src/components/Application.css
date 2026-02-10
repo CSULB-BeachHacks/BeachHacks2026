@@ -37,9 +37,12 @@
 
 .application-container {
     max-width: 800px;
+    width: 100%;
     margin: 0 auto;
+    padding: 0 0.5rem;
     position: relative;
     z-index: 1;
+    box-sizing: border-box;
 }
 
 /* Auth gate styles */
@@ -97,6 +100,8 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 /* Crab positioned at top left next to Name label */
@@ -180,6 +185,8 @@
     flex-direction: column;
     gap: 0.75rem;
     position: relative;
+    max-width: 100%;
+    min-width: 0;
 }
 
 .application .form-label {
@@ -198,12 +205,243 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+    max-width: 100%;
+    min-width: 0;
 }
 
 .form-field-group {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+}
+
+/* Select dropdowns – same frame as text inputs (input_field.png) */
+.select-wrap {
+    /* uses same .input-wrap layout; select overlays the image */
+    display: block;
+}
+/* Smaller row for Year in School + Level of Study so text fits without truncation */
+.application .form-row-sm .form-input,
+.application .form-row-sm .form-select {
+    font-size: clamp(0.95rem, 2.2vw, 1.5rem) !important;
+}
+.application .form-row-sm .form-select option {
+    font-size: clamp(0.95rem, 2.2vw, 1.5rem) !important;
+}
+
+/* Select – same font family as .form-input, slightly smaller so long options fit */
+.application .form-select {
+    width: 90%;
+    padding: 0;
+    position: absolute;
+    inset: var(--pad-y) var(--pad-x);
+    height: auto;
+    line-height: normal;
+    z-index: 2;
+    font-family: "Pixelify Sans", "Courier New", monospace !important;
+    font-size: clamp(0.95rem, 2.2vw, 1.5rem) !important;
+    font-weight: 700 !important;
+    color: #084860;
+    caret-color: #084860;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23084860' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4% center;
+    background-size: 0.8em;
+    padding-right: 1.5em;
+    text-align: center;
+    text-align-last: center;
+    image-rendering: pixelated;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+}
+.application .form-select:focus {
+    outline: none;
+    box-shadow: none;
+}
+.dark .application .form-select {
+    color: #ffffff;
+    caret-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+}
+.application .form-select option {
+    background: var(--bh-bg, #fff);
+    color: var(--bh-text, #084860);
+    font-family: "Pixelify Sans", "Courier New", monospace !important;
+    font-size: clamp(0.95rem, 2.2vw, 1.5rem) !important;
+    font-weight: 700 !important;
+}
+.dark .application .form-select option {
+    background: #1e2832;
+    color: #fff;
+}
+
+/* Form hint text – same family as form-label */
+.form-hint {
+    margin: 0 0 0.5rem 0;
+    font-family: "Pixelify Sans", "Courier New", monospace;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-weight: 700;
+    color: var(--bh-text, #084860);
+    opacity: 0.85;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+.dark .form-hint {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Optional field label */
+.optional-label {
+    font-weight: 600;
+    opacity: 0.8;
+    font-size: 0.9em;
+}
+
+/* Checkbox group wrapper – same visual style as other form fields (border + backdrop) */
+.checkbox-group-wrap {
+    border: 3px solid rgba(8, 72, 96, 0.35);
+    border-radius: 16px;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(4px);
+}
+.dark .checkbox-group-wrap {
+    border-color: rgba(110, 193, 228, 0.35);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Checkbox groups – same font/weight as form-label and form-input */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+}
+.checkbox-label {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-family: "Pixelify Sans", "Courier New", monospace;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 700;
+    color: var(--bh-text, #084860);
+    cursor: pointer;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+.checkbox-label input {
+    flex-shrink: 0;
+    width: 1.15rem;
+    min-width: 1.15rem;
+    height: 1.15rem;
+    margin: 0.25rem 0 0 0;
+    accent-color: #6ec1e4;
+    vertical-align: middle;
+}
+.checkbox-label input[type="checkbox"] {
+    display: inline-block;
+}
+.checkbox-label a {
+    color: #0a6b8a;
+    text-decoration: underline;
+}
+.checkbox-label a:hover {
+    color: #084860;
+}
+.dark .checkbox-label {
+    color: rgba(255, 255, 255, 0.95);
+}
+.dark .checkbox-label a {
+    color: #6ec1e4;
+}
+
+/* MLH section – same as auth-gate / form field style, smaller font */
+.mlh-section {
+    border: 3px solid rgba(8, 72, 96, 0.35);
+    border-radius: 16px;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(4px);
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.dark .mlh-section {
+    border-color: rgba(110, 193, 228, 0.35);
+    background: rgba(0, 0, 0, 0.2);
+}
+.mlh-section.form-group {
+    align-items: stretch;
+}
+.form-disclaimer {
+    margin: 0 0 0.75rem 0;
+    font-family: "Pixelify Sans", "Courier New", monospace;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-weight: 700;
+    color: var(--bh-text, #084860);
+    line-height: 1.45;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+.dark .form-disclaimer {
+    color: rgba(255, 255, 255, 0.9);
+}
+.mlh-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    width: 100%;
+}
+
+/* Each row: checkbox on the LEFT, text immediately to its RIGHT */
+.mlh-checkbox-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    width: 100%;
+    text-align: left;
+}
+.mlh-checkbox-row input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 1.15rem;
+    min-width: 1.15rem;
+    height: 1.15rem;
+    margin: 0.2em 0 0 0;
+    accent-color: #6ec1e4;
+}
+.mlh-checkbox-text {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-family: "Pixelify Sans", "Courier New", monospace;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-weight: 700;
+    color: var(--bh-text, #084860);
+    line-height: 1.4;
+    cursor: pointer;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+.mlh-checkbox-text a {
+    color: #0a6b8a;
+    text-decoration: underline;
+}
+.mlh-checkbox-text a:hover {
+    color: #084860;
+}
+.dark .mlh-checkbox-text {
+    color: rgba(255, 255, 255, 0.95);
+}
+.dark .mlh-checkbox-text a {
+    color: #6ec1e4;
 }
 
 /* Input Fields */
@@ -286,8 +524,9 @@ input[name="discordUsername"],
     appearance: none !important;
 }
 
-/* Ensure all inputs/textareas inside the form render fully transparent */
-.application .form-group input,
+/* Ensure all text inputs/textareas inside the form render fully transparent
+   (do NOT affect checkboxes/radios so layout stays correct) */
+.application .form-group input:not([type="checkbox"]):not([type="radio"]),
 .application .form-group textarea {
     width: 80%;
     background: transparent !important;
@@ -508,7 +747,9 @@ input[name="discordUsername"],
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem;
 }
 
 /* Dropbox image logo */
@@ -520,22 +761,37 @@ input[name="discordUsername"],
     pointer-events: none;
 }
 
-.file-placeholder,
-.file-name {
-    color: white;
-    font-family: "Pixelify Sans", "Courier New", monospace;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    font-weight: 700;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    image-rendering: pixelated;
-}
-
 .file-placeholder {
     display: none;
 }
 
+/* Clear “document uploaded” badge when a file is present */
+.file-uploaded-badge {
+    display: block;
+    font-family: "Pixelify Sans", "Courier New", monospace;
+    font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.02em;
+}
+
+/* File name – larger and easy to read so it’s clear which document was uploaded */
 .file-name {
+    display: block;
+    max-width: 90%;
+    font-family: "Pixelify Sans", "Courier New", monospace;
+    font-size: clamp(1.15rem, 3.2vw, 1.85rem);
+    font-weight: 700;
     color: #a6d9f9;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    word-break: break-word;
+    line-height: 1.3;
+    padding: 0.5rem 0.75rem;
+    background: rgba(8, 72, 96, 0.35);
+    border-radius: 8px;
+    border: 2px solid rgba(166, 217, 249, 0.5);
 }
 
 /* Submit Button */
@@ -701,6 +957,14 @@ input[name="discordUsername"],
         grid-template-columns: 1fr;
     }
 
+    .application-container {
+        padding: 0 0.75rem;
+    }
+
+    .mlh-section {
+        padding: 1rem;
+    }
+
     /* Inputs: slightly tighter insets on mobile */
     .input-wrap {
         --pad-x: 7%;
@@ -740,19 +1004,17 @@ input[name="discordUsername"],
 @media screen and (max-width: 480px) {
     .application {
         overflow: hidden;
+        padding: 8rem 0.75rem 2rem;
     }
 
     .application-container {
         overflow: hidden;
+        padding: 0 0.5rem;
     }
 
     .application-title {
         font-size: 1.5rem;
         margin-bottom: 2rem;
-    }
-
-    .crab-application {
-        display: none;
     }
 
     .application-form {
@@ -769,7 +1031,16 @@ input[name="discordUsername"],
     }
 
     .file-upload-label {
-        max-width: 420px;
+        max-width: 100%;
         min-height: clamp(200px, 74vw, 420px);
+    }
+
+    .mlh-section {
+        padding: 0.85rem;
+    }
+
+    .form-disclaimer,
+    .mlh-checkbox-text {
+        font-size: clamp(0.75rem, 3.5vw, 0.95rem);
     }
 }

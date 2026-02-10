@@ -214,18 +214,72 @@ export default function UserDetail() {
                   <strong>Name:</strong> {userData.firstName} {userData.lastName}
                 </div>
                 <div className="user-detail-field">
-                  <strong>Email:</strong> {userData.email || userData.userId || "Not available"}
+                  <strong>Email:</strong> {userData.email || "Not available"}
                 </div>
                 <div className="user-detail-field">
-                  <strong>Discord Username:</strong> {userData.discordUsername}
+                  <strong>Phone Number:</strong> {userData.phoneNumber || "—"}
                 </div>
                 <div className="user-detail-field">
-                  <strong>School:</strong> {userData.school}
+                  <strong>Age:</strong> {userData.age || "—"}
                 </div>
                 <div className="user-detail-field">
-                  <strong>Year:</strong> {userData.year}
+                  <strong>Discord Username:</strong> {userData.discordUsername || "—"}
                 </div>
+                <div className="user-detail-field">
+                  <strong>School:</strong> {userData.school || "—"}
+                </div>
+                <div className="user-detail-field">
+                  <strong>Year in School:</strong> {userData.year || "—"}
+                </div>
+                <div className="user-detail-field">
+                  <strong>Level of Study:</strong> {userData.levelOfStudy || "—"}
+                </div>
+                <div className="user-detail-field">
+                  <strong>Country of Residence:</strong> {userData.countryOfResidence || "—"}
+                </div>
+                {(userData.dietaryRestrictions && userData.dietaryRestrictions.length > 0) && (
+                  <>
+                    <div className="user-detail-field">
+                      <strong>Dietary Restrictions:</strong> {userData.dietaryRestrictions.join(", ")}
+                    </div>
+                    {userData.dietaryRestrictions.includes("Allergies") && userData.allergiesSpecify && (
+                      <div className="user-detail-field">
+                        <strong>Allergy details:</strong> {userData.allergiesSpecify}
+                      </div>
+                    )}
+                  </>
+                )}
+                {userData.gender && (
+                  <div className="user-detail-field">
+                    <strong>Gender:</strong> {userData.gender}
+                  </div>
+                )}
+                {(userData.pronouns || userData.pronounsOther) && (
+                  <div className="user-detail-field">
+                    <strong>Pronouns:</strong> {userData.pronouns === "Other" && userData.pronounsOther ? userData.pronounsOther : (userData.pronouns || userData.pronounsOther) || "—"}
+                  </div>
+                )}
+                {(userData.raceEthnicity || userData.raceEthnicityOther) && (
+                  <div className="user-detail-field">
+                    <strong>Race / Ethnicity:</strong> {userData.raceEthnicity === "Other" && userData.raceEthnicityOther ? userData.raceEthnicityOther : (userData.raceEthnicity || userData.raceEthnicityOther) || "—"}
+                  </div>
+                )}
               </div>
+
+              {(userData.mlhCodeOfConduct !== undefined || userData.mlhShareInfo !== undefined || userData.mlhEmails !== undefined) && (
+                <div className="user-detail-section">
+                  <h2 className="user-detail-section-title">MLH Partnership</h2>
+                  <div className="user-detail-field">
+                    <strong>MLH Code of Conduct agreed:</strong> {userData.mlhCodeOfConduct ? "Yes" : "No"}
+                  </div>
+                  <div className="user-detail-field">
+                    <strong>Share application with MLH:</strong> {userData.mlhShareInfo ? "Yes" : "No"}
+                  </div>
+                  <div className="user-detail-field">
+                    <strong>MLH emails authorized:</strong> {userData.mlhEmails ? "Yes" : "No"}
+                  </div>
+                </div>
+              )}
 
               <div className="user-detail-section">
                 <h2 className="user-detail-section-title">Why Participate</h2>
