@@ -8,8 +8,8 @@ import Login from "./Login";
 import Signup from "./Signup";
 import "./Navbar.css";
 
-// Applications open Monday 16 February at midnight (12:00 AM) local – timer hides and Apply shows after this
-const APPLICATIONS_OPEN_DATE = new Date(2026, 1, 16, 0, 0, 0); // Feb 16, 2026 12:00 AM (month 1 = February)
+// Applications open Monday 16 February at 10:00 AM local – timer hides and Apply shows after this
+const APPLICATIONS_OPEN_DATE = new Date(2026, 1, 16, 10, 0, 0); // Feb 16, 2026 10:00 AM (month 1 = February)
 
 const Navbar = ({ isDark = false, onToggleTheme }) => {
   const [showLogin, setShowLogin] = useState(false);
@@ -228,11 +228,10 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
           <div className="nav-right">
             {!applicationsOpen && timeLeft !== null && (
               <div className="nav-apply-countdown" aria-live="polite">
-                <span className="nav-apply-countdown-label">Applications open in</span>
                 <span className="nav-apply-countdown-time">
                   {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
                 </span>
-                <span className="nav-apply-countdown-date">Mon, Feb 16 @ 12:00 AM</span>
+                <span className="nav-apply-countdown-date">Opens Feb 16, 10:00 AM</span>
               </div>
             )}
             {applicationsOpen && (
