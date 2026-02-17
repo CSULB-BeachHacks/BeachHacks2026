@@ -74,7 +74,7 @@
     position: absolute;
     font-size: 2.2rem; /* ~ Tailwind text-4xl */
     line-height: 2.5rem;
-    color: white;
+    color: #0f2036;
     font-family: inherit; /* Inherit global font (JetBrains Mono) */
     font-weight: 500;
 }
