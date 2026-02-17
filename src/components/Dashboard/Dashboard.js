@@ -501,7 +501,7 @@ const Dashboard = () => {
                                             )}
                                         </p>
                                         <a
-                                            href="https://discord.gg/J4NGeVd"
+                                            href="http://discord.com/invite/zYRBYU2nqD"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className={`discord-invite-link ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}
