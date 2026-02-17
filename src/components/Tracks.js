@@ -16,12 +16,12 @@ import purpleSmallStar from "../assets/purple_small_star.svg";
 
 const Tracks = () => {
     const tracks = [
-        { open: lightBlueOpen, closed: lightBlueClosed, name: "Track 1" },
-        { open: navyOpen, closed: navyClosed, name: "Track 2" },
-        { open: cyanOpen, closed: cyanClosed, name: "Track 3" },
-        { open: lightBlueOpen, closed: lightBlueClosed, name: "Track 4" },
-        { open: navyOpen, closed: navyClosed, name: "Track 5" },
-        { open: cyanOpen, closed: cyanClosed, name: "Track 6" },
+        { open: lightBlueOpen, closed: lightBlueClosed, name: "Entertainment" },
+        { open: navyOpen, closed: navyClosed, name: "Sustainability" },
+        { open: cyanOpen, closed: cyanClosed, name: "Mental Health" },
+        { open: lightBlueOpen, closed: lightBlueClosed, name: "Funniest" },
+        { open: navyOpen, closed: navyClosed, name: "Best Overall" },
+        { open: navyOpen, closed: navyClosed, name: "fetch.ai" }
     ];
 
     useGSAP(() => {

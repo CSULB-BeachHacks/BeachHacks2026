@@ -24,7 +24,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import UserDetail from "./components/UserDetail";
 import ConfettiCheck from "./components/ConfettiCheck";
 import LoadingScreen from "./components/LoadingScreen";
-import EmailSignup from "./components/EmailSignup";
+
 
 // Auth Provider + hook
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
@@ -142,7 +142,6 @@ function App() {
                                     onToggleTheme={toggleTheme}
                                 />
                                 <Hero />
-                                <EmailSignup />
                                 <About />
                                 <Tracks />
                                 <Speakers />

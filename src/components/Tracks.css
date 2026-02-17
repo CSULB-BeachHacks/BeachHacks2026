@@ -72,9 +72,9 @@
 
 .track-item__name {
     position: absolute;
-    font-size: 2.25rem; /* ~ Tailwind text-4xl */
+    font-size: 2.2rem; /* ~ Tailwind text-4xl */
     line-height: 2.5rem;
-    color: #0f2036;
+    color: white;
     font-family: inherit; /* Inherit global font (JetBrains Mono) */
     font-weight: 500;
 }
