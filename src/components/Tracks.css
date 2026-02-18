@@ -52,8 +52,18 @@
 @media (min-width: 768px) {
     .tracks__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        row-gap: 2rem; /* gap-8 */
-        column-gap: 6rem; /* gap-x-24 */
+        row-gap: 2rem;
+        /* gap-8 */
+        column-gap: 6rem;
+        /* gap-x-24 */
+    }
+
+    /* Center the last item if it's the 7th (or any odd last child) */
+    .tracks__grid>.track-item:last-child:nth-child(odd) {
+        grid-column: span 2;
+        /* spans full width (2 columns) */
+        justify-self: center;
+        /* centers the item horizontally */
     }
 }
 
@@ -72,8 +82,9 @@
 
 .track-item__name {
     position: absolute;
-    font-size: 2.2rem; /* ~ Tailwind text-4xl */
-    line-height: 2.5rem;
+    font-size: 1.25rem;
+    /* Standardized small font size */
+    line-height: 1.6rem;
     color: #0f2036;
     font-family: inherit; /* Inherit global font (JetBrains Mono) */
     font-weight: 500;

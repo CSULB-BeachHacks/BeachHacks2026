@@ -88,7 +88,16 @@ export default function TrackListItem({ open, closed, name }) {
                         className="track-item__pearl"
                         alt="pearl"
                     />
-                    <h1 className="track-item__name">{name}</h1>
+                    <h1 className="track-item__name">
+                        {name === "Mental Health" || name === "Best Overall" || name === "Code and Coffee"
+                            ? name.split(" ").map((word, i) => (
+                                <span key={i}>
+                                    {word}
+                                    <br />
+                                </span>
+                            ))
+                            : name}
+                    </h1>
                 </>
             )}
         </div>

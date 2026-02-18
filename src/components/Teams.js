@@ -224,6 +224,39 @@ const Teams = () => {
             image: "/aalind_kale.jpg",
             imageStyle: { transform: "scale(2.2)" },
         },
+        {
+            name: "Hong Nguyen",
+            role: "BeachHacks Committee",
+            image: "/hong_nguyen.png",
+            imageStyle: { transform: "scale(1.8)", objectPosition: "40% 5%" },
+        },
+        {
+            name: "Sai Kaung Khant Zaw",
+            role: "BeachHacks Committee",
+            image: "/sai_kaung_khant_zaw.jpg",
+        },
+        {
+            name: "Tiago Borges",
+            role: "BeachHacks Committee",
+            image: "/tiago_borges.jpg",
+        },
+        {
+            name: "Thanh Ngoc Tran",
+            role: "BeachHacks Committee",
+            image: "/thanh_ngoc_tran.jpg",
+            imageStyle: { transform: "scale(1.7)", objectPosition: "20% 75%" }
+        },
+        {
+            name: "Hoang Khoi Do",
+            role: "BeachHacks Committee",
+            image: "/hoang_khoi_do.png",
+            imageStyle: { objectPosition: "70% 15%" }
+        },
+        {
+            name: "Min Zin Hein",
+            role: "BeachHacks Committee",
+            image: "/min_zin_hein.jpg",
+        },
     ];
 
     // Duplicate the list for seamless infinite scroll
