@@ -257,6 +257,16 @@ const Teams = () => {
             role: "BeachHacks Committee",
             image: "/min_zin_hein.jpg",
         },
+        {
+            name: "Kiki Han",
+            role: "BeachHacks Committee",
+            image: "/kiki_han.jpg",
+        },
+        {
+            name: "Ronak Adhikari",
+            role: "BeachHacks Committee",
+            image: "/ronak_adhikari.png",
+        },
     ];
 
     // Duplicate the list for seamless infinite scroll
