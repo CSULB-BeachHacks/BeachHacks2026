@@ -245,16 +245,16 @@ const Dashboard = () => {
                             {loading
                                 ? "Loading..."
                                 : applicationStatus === "accepted"
-                                  ? "ACCEPTED"
-                                  : applicationStatus === "waitlisted"
-                                    ? "WAITLISTED"
-                                    : applicationStatus === "rejected"
-                                      ? "REJECTED"
-                                      : isSubmitted
-                                        ? "We are currently reviewing your submission"
-                                        : hasApplication
-                                          ? "Incomplete"
-                                          : "Not Submitted"}
+                                    ? "ACCEPTED"
+                                    : applicationStatus === "waitlisted"
+                                        ? "WAITLISTED"
+                                        : applicationStatus === "rejected"
+                                            ? "REJECTED"
+                                            : isSubmitted
+                                                ? "We are currently reviewing your submission"
+                                                : hasApplication
+                                                    ? "Incomplete"
+                                                    : "Not Submitted"}
                         </figcaption>
                     </figure>
 
@@ -355,7 +355,7 @@ const Dashboard = () => {
                             </p>
                             <div className="qr-placeholder">
                                 {currentUser &&
-                                applicationStatus === "accepted" ? (
+                                    applicationStatus === "accepted" ? (
                                     <QRCodeSVG
                                         value={currentUser.uid}
                                         size={240}
@@ -428,8 +428,8 @@ const Dashboard = () => {
                                             committee
                                         </>
                                     ) : isSubmitted &&
-                                      (applicationStatus === "pending" ||
-                                          !applicationStatus) ? (
+                                        (applicationStatus === "pending" ||
+                                            !applicationStatus) ? (
                                         <>
                                             We are currently
                                             <br />
@@ -477,7 +477,7 @@ const Dashboard = () => {
                                             className={`discord-invite-description ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}
                                         >
                                             {applicationStatus ===
-                                            "waitlisted" ? (
+                                                "waitlisted" ? (
                                                 <>
                                                     Please look for DMs on
                                                     Discord! We might make
@@ -496,7 +496,7 @@ const Dashboard = () => {
                                                     still try to contact via
                                                     email, but Discord is highly
                                                     recommended. Join the
-                                                    BeachHacks Discord!
+                                                    ACM Discord!
                                                 </>
                                             )}
                                         </p>
