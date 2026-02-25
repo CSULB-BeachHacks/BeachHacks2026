@@ -62,7 +62,7 @@ const FAQ = () => {
             },
             {
                 id: 21,
-                question: "What facilities are not provided?",
+                question: "What facilities are NOT provided?",
                 answer: "We do not provide computers, monitors, or sleeping gear (sleeping bags, pillows). Please bring your own laptop and charger!",
                 star: purpleSmallStar,
             },

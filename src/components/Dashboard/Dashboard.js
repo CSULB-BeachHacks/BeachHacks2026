@@ -245,16 +245,16 @@ const Dashboard = () => {
                             {loading
                                 ? "Loading..."
                                 : applicationStatus === "accepted"
-                                  ? "ACCEPTED"
-                                  : applicationStatus === "waitlisted"
-                                    ? "WAITLISTED"
-                                    : applicationStatus === "rejected"
-                                      ? "REJECTED"
-                                      : isSubmitted
-                                        ? "We are currently reviewing your submission"
-                                        : hasApplication
-                                          ? "Incomplete"
-                                          : "Not Submitted"}
+                                    ? "ACCEPTED"
+                                    : applicationStatus === "waitlisted"
+                                        ? "WAITLISTED"
+                                        : applicationStatus === "rejected"
+                                            ? "REJECTED"
+                                            : isSubmitted
+                                                ? "We are currently reviewing your submission"
+                                                : hasApplication
+                                                    ? "Incomplete"
+                                                    : "Not Submitted"}
                         </figcaption>
                     </figure>
 
@@ -355,7 +355,7 @@ const Dashboard = () => {
                             </p>
                             <div className="qr-placeholder">
                                 {currentUser &&
-                                applicationStatus === "accepted" ? (
+                                    applicationStatus === "accepted" ? (
                                     <QRCodeSVG
                                         value={currentUser.uid}
                                         size={240}
@@ -409,7 +409,7 @@ const Dashboard = () => {
                                             <br />
                                             time to review, but
                                             <br />
-                                            there's a high chance
+                                            there's a chance
                                             <br />
                                             you'll be accepted!
                                             <br />
@@ -428,8 +428,8 @@ const Dashboard = () => {
                                             committee
                                         </>
                                     ) : isSubmitted &&
-                                      (applicationStatus === "pending" ||
-                                          !applicationStatus) ? (
+                                        (applicationStatus === "pending" ||
+                                            !applicationStatus) ? (
                                         <>
                                             We are currently
                                             <br />
@@ -477,26 +477,13 @@ const Dashboard = () => {
                                             className={`discord-invite-description ${applicationStatus === "waitlisted" ? "waitlisted" : ""}`}
                                         >
                                             {applicationStatus ===
-                                            "waitlisted" ? (
+                                                "waitlisted" ? (
                                                 <>
-                                                    Please look for DMs on
-                                                    Discord! We might make
-                                                    exceptions by asking
-                                                    questions to some waitlisted
-                                                    participants. Make sure to
-                                                    join the BeachHacks Discord
-                                                    server and check your
-                                                    messages!
+                                                    Thank you for submitting your BeachHacks application! As of now, you are currently waitlisted as your application status. Check your email (the one used on this application) frequently as you may get accepted if the seating count allows for additional participants. Check spam or junk folders as well to ensure you receive the email. Also join the CSULB ACM Discord, where we announce our exciting events and community activities!
                                                 </>
                                             ) : (
                                                 <>
-                                                    We will contact you via
-                                                    Discord, so please join our
-                                                    server to be accepted. We
-                                                    still try to contact via
-                                                    email, but Discord is highly
-                                                    recommended. Join the
-                                                    BeachHacks Discord!
+                                                    Thank you for submitting your BeachHacks application! Stay alert for your email inbox as this is where we'll be sending out BeachHacks application decisions (the email you used in this application). If necessary, check spam or junk folders to ensure you get our emails. Also join the CSULB ACM Discord, where we announce our exciting events and community activities!
                                                 </>
                                             )}
                                         </p>
