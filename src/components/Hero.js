@@ -14,7 +14,7 @@ export default function Hero() {
 
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
-  
+
     mm.add("(min-width: 981px)", () => {
       const ctx = gsap.context(() => {
         const tl = gsap.timeline();
@@ -35,7 +35,7 @@ export default function Hero() {
           repeat: -1,
           yoyo: true
         });
-  
+
         // Desktop-only parallax
         const onMove = (e) => {
           const rect = sectionRef.current.getBoundingClientRect();
@@ -44,30 +44,30 @@ export default function Hero() {
           gsap.to(crabRef.current, { xPercent: relX * 3, yPercent: relY * 3, duration: 0.3 });
         };
         sectionRef.current.addEventListener("mousemove", onMove);
-  
+
         return () => sectionRef.current?.removeEventListener("mousemove", onMove);
       }, sectionRef);
       return () => ctx.revert();
     });
-  
+
     mm.add("(max-width: 980px)", () => {
       const ctx = gsap.context(() => {
         const tl = gsap.timeline();
-  
+
         // Mobile: keep element centered with xPercent so CSS centering isn't overridden
         tl.fromTo(
           crabRef.current,
           { xPercent: -50, y: 40, rotation: -6, opacity: 0 },
           { xPercent: -50, y: 0, rotation: 0, opacity: 1, duration: 1.2, ease: "power3.out" }
         );
-  
+
         tl.fromTo(
           copyRef.current,
           { y: 16, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.7, ease: "power2.out" },
           "-=0.3"
         );
-  
+
         gsap.to(crabRef.current, {
           keyframes: [{ y: -8, rotation: -1.2, duration: 2 }, { y: 0, rotation: 0.6, duration: 2 }],
           ease: "sine.inOut",
@@ -77,10 +77,10 @@ export default function Hero() {
       }, sectionRef);
       return () => ctx.revert();
     });
-  
+
     return () => mm.revert();
   }, []);
-  
+
   return (
     <section
       id="home-hero"
@@ -97,7 +97,10 @@ export default function Hero() {
       />
       <div ref={copyRef} className="hero__copy">
         <h1 className="hero__title">BeachHacks 9.0</h1>
-        <p className="hero__date">(03/21)–(03/22)</p>
+        <div className="hero__meta">
+          <p className="hero__date">(03/21)–(03/22)</p>
+          <span className="hero__powered">Powered by ASI</span>
+        </div>
         <h2 className="hero__sub">DIVE IN</h2>
         <div className="hero__countdown">
           <Countdown date={eventStart} />
@@ -105,5 +108,5 @@ export default function Hero() {
       </div>
     </section>
   );
-  
+
 }
