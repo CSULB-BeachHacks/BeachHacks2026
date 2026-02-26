@@ -1,11 +1,11 @@
 // src/components/Navbar.js
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import { db } from "../firebase";
+import { useAuth } from "../../contexts/AuthContext";
+import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import Login from "./Login";
-import Signup from "./Signup";
+import Login from "../Login";
+import Signup from "../Signup";
 import "./Navbar.css";
 
 // Applications open Monday 16 February at 10:00 AM local – timer hides and Apply shows after this

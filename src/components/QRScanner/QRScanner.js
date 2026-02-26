@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import * as XLSX from "xlsx";
 import "./QRScanner.css";

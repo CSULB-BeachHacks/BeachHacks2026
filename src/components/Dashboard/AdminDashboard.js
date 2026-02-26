@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import { db } from "../firebase";
+import { useAuth } from "../../contexts/AuthContext";
+import { db } from "../../firebase";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
-import ChangePasswordModal from "./ChangePasswordModal";
-import QRScanner from "./QRScanner";
+import ChangePasswordModal from "../ChangePasswordModal/ChangePasswordModal";
+import QRScanner from "../QRScanner/QRScanner";
 import "./AdminDashboard.css";
 
 export default function AdminDashboard() {

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import pearl from "../assets/pearl.svg";
-import "./Tracks.css";
+import "./Tracks/Tracks.css";
 
 export default function TrackListItem({ open, closed, name }) {
     const containerRef = useRef(null);

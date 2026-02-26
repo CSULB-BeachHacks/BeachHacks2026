@@ -1,12 +1,12 @@
 import React from "react";
 import "./About.css";
 
-import blueStar from "../assets/bluestar.svg";
-import cyanStar from "../assets/cyan_small_star.svg";
-import tinyBubbles from "../assets/tinybubbles.svg";
-import leftAboutCoral from "../assets/l_about_coral.svg";
-import rightAboutCoral from "../assets/r_about_coral.svg";
-import purpleBlueStar from "../assets/purple_blue_star.svg";
+import blueStar from "../../assets/bluestar.svg";
+import cyanStar from "../../assets/cyan_small_star.svg";
+import tinyBubbles from "../../assets/tinybubbles.svg";
+import leftAboutCoral from "../../assets/l_about_coral.svg";
+import rightAboutCoral from "../../assets/r_about_coral.svg";
+import purpleBlueStar from "../../assets/purple_blue_star.svg";
 
 const About = () => {
     return (

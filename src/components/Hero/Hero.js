@@ -1,7 +1,7 @@
 // src/components/Hero.js
 import React, { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
-import Countdown from "./Countdown";
+import Countdown from "../Countdown/Countdown";
 import "./Hero.css";
 
 export default function Hero() {
