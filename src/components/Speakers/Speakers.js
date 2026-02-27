@@ -189,6 +189,12 @@ const Speakers = () => {
                         />
                         <img
                             draggable="false"
+                            src="/dark_blue_kelp.png"
+                            alt="Kelp overlay"
+                            className="kelp-flow kelp-flow-overlay"
+                        />
+                        <img
+                            draggable="false"
                             src="/bottom_rock.png"
                             alt="Rock"
                             className="bottom-rock"

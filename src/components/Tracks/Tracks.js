@@ -13,6 +13,7 @@ import navyOpen from "../../assets/navy_open 1.svg";
 import bluePurpleStar from "../../assets/blue_purple_star.svg";
 import purpleBlueStar from "../../assets/purple_blue_star.svg";
 import purpleSmallStar from "../../assets/purple_small_star.svg";
+import tinyBubbles from "../../assets/tinybubbles.svg";
 
 const Tracks = () => {
     const tracks = [
@@ -50,6 +51,36 @@ const Tracks = () => {
                 className="star--small hover"
                 src={purpleSmallStar}
                 alt=""
+            />
+            <img
+                draggable="false"
+                className="tiny-bubbles bg-img"
+                src={tinyBubbles}
+                alt="tiny bubbles"
+            />
+            <img
+                draggable="false"
+                className="tracks-right-rock bg-img"
+                src="/right-rock.png"
+                alt="right coral rock"
+            />
+            <img
+                draggable="false"
+                className="tracks-right-plant-top bg-img"
+                src="/purple_sea_plant.svg"
+                alt="top purple sea plant"
+            />
+            <img
+                draggable="false"
+                className="tracks-right-plant-bottom bg-img"
+                src="/purple_sea_plant.svg"
+                alt="bottom purple sea plant"
+            />
+            <img
+                draggable="false"
+                className="tracks-left-rock bg-img"
+                src="/bottom_rock.png"
+                alt="left coral rock"
             />
             <img
                 draggable="false"
