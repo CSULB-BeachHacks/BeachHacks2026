@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import pearl from "../assets/pearl.svg";
 import "./Tracks/Tracks.css";
@@ -10,27 +9,33 @@ export default function TrackListItem({ open, closed, name }) {
     const [hasShaken, setHasShaken] = useState(false);
     const [imgSrc, setImgSrc] = useState(closed);
 
-    // idle float loop
-    useGSAP(() => {
+    const handleHoverStart = () => {
         if (!containerRef.current) return;
-        gsap.fromTo(
+        gsap.killTweensOf(containerRef.current);
+        gsap.to(
             containerRef.current,
-            { y: -5 },
             {
-                y: 5,
-                duration: 3,
+                y: -6,
+                duration: 0.45,
                 repeat: -1,
                 yoyo: true,
                 ease: "power1.inOut",
             },
         );
-    }, []);
+    };
 
-    const handleMouseEnter = () => {
-        if (hasShaken || !imgRef.current) return;
-
-        // pause/kill the float on the container while we rattle the image
+    const handleHoverEnd = () => {
+        if (!containerRef.current) return;
         gsap.killTweensOf(containerRef.current);
+        gsap.to(containerRef.current, {
+            y: 0,
+            duration: 0.2,
+            ease: "power2.out",
+        });
+    };
+
+    const handleReveal = () => {
+        if (hasShaken || !imgRef.current) return;
 
         const el = imgRef.current;
 
@@ -46,17 +51,6 @@ export default function TrackListItem({ open, closed, name }) {
                 setImgSrc(open);
                 setHasShaken(true);
                 gsap.set(el, { y: 0 });
-                gsap.fromTo(
-                    containerRef.current,
-                    { y: -5 },
-                    {
-                        y: 5,
-                        duration: 3,
-                        repeat: -1,
-                        yoyo: true,
-                        ease: "power1.inOut",
-                    },
-                );
             },
         });
 
@@ -76,8 +70,9 @@ export default function TrackListItem({ open, closed, name }) {
                 ref={imgRef}
                 src={imgSrc}
                 alt=""
-                onMouseEnter={handleMouseEnter}
-                onClick={handleMouseEnter} // Force open on click/tap for mobile
+                onMouseEnter={handleHoverStart}
+                onMouseLeave={handleHoverEnd}
+                onClick={handleReveal}
                 style={{ cursor: "pointer" }}
             />
             {hasShaken && (
