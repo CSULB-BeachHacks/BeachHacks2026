@@ -144,11 +144,20 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
     e.preventDefault();
     setIsMenuOpen(false);
 
+    const scrollToHero = () => {
+      const heroSection = document.getElementById("home-hero");
+      if (heroSection) {
+        heroSection.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
     if (location.pathname !== "/") {
       navigate("/");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      setTimeout(scrollToHero, 100);
     } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      scrollToHero();
     }
   };
 
@@ -157,7 +166,7 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
       <nav className="navbar">
         <div className="nav-container">
           {/* LOGO */}
-          <a href="#top" className="nav-logo" onClick={handleLogoClick}>
+          <a href="#home-hero" className="nav-logo" onClick={handleLogoClick}>
             <img
               draggable="false"
               src={isDark ? "/white_logo.svg" : "/acm_logo.png"}
