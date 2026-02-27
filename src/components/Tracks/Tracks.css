@@ -50,9 +50,7 @@
 @media (prefers-reduced-motion: reduce) {
     .tracks .tiny-bubbles,
     .track-item__shell,
-    .tracks .tracks-right-rock,
-    .tracks .tracks-right-plant-top,
-    .tracks .tracks-right-plant-bottom {
+    .tracks .tracks-right-rock {
         animation: none;
     }
 }
@@ -112,59 +110,6 @@
     pointer-events: none;
     animation: tracksRightRockTwoFrame 1s steps(2, end) infinite;
     will-change: transform;
-}
-
-.tracks .tracks-right-plant-top {
-    position: absolute;
-    left: clamp(-30px, -2vw, -16px);
-    bottom: clamp(70px, 8vw, 120px);
-    width: clamp(110px, 14vw, 190px);
-    z-index: 2;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    pointer-events: none;
-    transform-origin: 86% 100%;
-    animation: tracksPlantTopTwoFrame 1s steps(2, end) infinite;
-    will-change: transform;
-}
-
-.tracks .tracks-right-plant-bottom {
-    position: absolute;
-    left: clamp(-20px, -1vw, -6px);
-    margin-left: 10rem;
-    margin-bottom: 8rem;
-    bottom: clamp(-30px, -2.2vw, -8px);
-    width: clamp(110px, 14vw, 190px);
-    z-index: 2;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    pointer-events: none;
-    transform-origin: 86% 100%;
-    animation: tracksPlantBottomTwoFrame 1s steps(2, end) infinite;
-    animation-delay: -0.5s;
-    will-change: transform;
-}
-
-@keyframes tracksPlantTopTwoFrame {
-    0%,
-    49.999% {
-        transform: translateY(0) rotate(0deg);
-    }
-    50%,
-    100% {
-        transform: translateY(-5px) rotate(3deg);
-    }
-}
-
-@keyframes tracksPlantBottomTwoFrame {
-    0%,
-    49.999% {
-        transform: translateY(0) rotate(0deg);
-    }
-    50%,
-    100% {
-        transform: translateY(-4px) rotate(2deg);
-    }
 }
 
 .tracks .tracks-left-rock {
