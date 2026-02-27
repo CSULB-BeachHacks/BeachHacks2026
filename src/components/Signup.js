@@ -85,7 +85,7 @@ export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
         {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
+          <div className="form-group" style={{ color: "black" }}>
             <label htmlFor="displayName">Full Name</label>
             <input
               type="text"
@@ -96,7 +96,7 @@ export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group" style={{ color: "black" }}>
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -107,7 +107,7 @@ export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group" style={{ color: "black" }}>
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -119,7 +119,7 @@ export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group" style={{ color: "black" }}>
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
               type="password"
@@ -162,11 +162,11 @@ export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
               d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
             />
           </svg>
-          Continue with Google
+          <span style={{ color: "black" }}>Continue with Google</span>
         </button>
 
         <div className="auth-footer">
-          <p>
+          <p style={{ color: "white", fontWeight: "bold" }}>
             Already have an account?{" "}
             <button
               type="button"

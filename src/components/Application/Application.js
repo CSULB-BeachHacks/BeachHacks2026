@@ -370,13 +370,12 @@ const Application = () => {
 
                 {submitMsg && (
                     <div
-                        className={`submit-banner ${
-                            submitMsg.toLowerCase().includes("fail") ||
-                            submitMsg.toLowerCase().includes("missing") ||
-                            submitMsg.toLowerCase().includes("complete")
+                        className={`submit-banner ${submitMsg.toLowerCase().includes("fail") ||
+                                submitMsg.toLowerCase().includes("missing") ||
+                                submitMsg.toLowerCase().includes("complete")
                                 ? "error"
                                 : "success"
-                        }`}
+                            }`}
                         role="status"
                         aria-live="polite"
                         ref={bannerRef}
@@ -609,12 +608,12 @@ const Application = () => {
                                         className="form-select"
                                         required
                                     >
-<option value="">e.g. Undergraduate</option>
-                                    <option value="High School">High School</option>
-                                    <option value="Undergraduate">Undergraduate</option>
-                                    <option value="Graduate">Graduate</option>
-                                    <option value="Postgraduate">Postgraduate</option>
-                                    <option value="Other">Other</option>
+                                        <option value="">e.g. Undergraduate</option>
+                                        <option value="High School">High School</option>
+                                        <option value="Undergraduate">Undergraduate</option>
+                                        <option value="Graduate">Graduate</option>
+                                        <option value="Postgraduate">Postgraduate</option>
+                                        <option value="Other">Other</option>
                                     </select>
                                 </div>
                             </div>
@@ -760,8 +759,8 @@ const Application = () => {
                                 onChange={handleInputChange}
                                 className="form-select"
                             >
-<option value="">e.g. Prefer Not to Answer</option>
-                            <option value="Asian Indian">Asian Indian</option>
+                                <option value="">e.g. Prefer Not to Answer</option>
+                                <option value="Asian Indian">Asian Indian</option>
                                 <option value="Black or African">Black or African</option>
                                 <option value="Chinese">Chinese</option>
                                 <option value="Filipino">Filipino</option>
@@ -920,25 +919,25 @@ const Application = () => {
                         const allMlhChecked =
                             formData.mlhCodeOfConduct && formData.mlhShareInfo;
                         return (
-                    <button
-                        type="submit"
-                        className={`submit-button ${submitting ? "submitting" : ""}`}
-                        disabled={submitting || !allMlhChecked}
-                        title={!allMlhChecked ? "You must check the first two MLH agreement boxes above to submit." : undefined}
-                    >
-                        {submitting ? (
-                            <span>
-                                Submitting
-                                <span className="loading-dots">
-                                    <span>.</span>
-                                    <span>.</span>
-                                    <span>.</span>
-                                </span>
-                            </span>
-                        ) : (
-                            "Submit Application"
-                        )}
-                    </button>
+                            <button
+                                type="submit"
+                                className={`submit-button ${submitting ? "submitting" : ""}`}
+                                disabled={submitting || !allMlhChecked}
+                                title={!allMlhChecked ? "You must check the first two MLH agreement boxes above to submit." : undefined}
+                            >
+                                {submitting ? (
+                                    <span>
+                                        Submitting
+                                        <span className="loading-dots">
+                                            <span>.</span>
+                                            <span>.</span>
+                                            <span>.</span>
+                                        </span>
+                                    </span>
+                                ) : (
+                                    "Submit Application"
+                                )}
+                            </button>
                         );
                     })()}
                 </form>
