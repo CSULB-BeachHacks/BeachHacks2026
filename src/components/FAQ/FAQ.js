@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./FAQ.css";
 
 // Import images
-import blueSmallStar from "./FAQ-images/blue_small_star.png";
-import cyanSmallStar from "./FAQ-images/cyan_small_star.png";
-import cyanStar from "./FAQ-images/cyan_star.png";
-import purpleSmallStar from "./FAQ-images/purple_small_star.png";
+import blueSmallStar from "../FAQ-images/blue_small_star.png";
+import cyanSmallStar from "../FAQ-images/cyan_small_star.png";
+import cyanStar from "../FAQ-images/cyan_star.png";
+import purpleSmallStar from "../FAQ-images/purple_small_star.png";
 
 const FAQ = () => {
     const [openItem, setOpenItem] = useState(null);

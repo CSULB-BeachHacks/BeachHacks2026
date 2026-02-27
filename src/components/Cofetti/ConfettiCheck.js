@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
-import { db } from "../firebase";
+import { useAuth } from "../../contexts/AuthContext";
+import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import ConfettiAnimation from "./Confetti";
-import RainAnimation from "./Rain";
+import RainAnimation from "../Rain/Rain";
 
 export default function ConfettiCheck() {
   const { currentUser } = useAuth();

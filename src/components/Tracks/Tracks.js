@@ -1,18 +1,18 @@
 import React from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import TrackListItem from "./TrackListItem";
+import TrackListItem from "../TrackListItem";
 import "./Tracks.css"; // ← import the CSS file
 
-import lightBlueClosed from "../assets/lightblue_closed 1.svg";
-import lightBlueOpen from "../assets/lightblue_open 1.svg";
-import cyanClosed from "../assets/cyan_closed 1.svg";
-import cyanOpen from "../assets/cyan_open 1.svg";
-import navyClosed from "../assets/navy_closed 1.svg";
-import navyOpen from "../assets/navy_open 1.svg";
-import bluePurpleStar from "../assets/blue_purple_star.svg";
-import purpleBlueStar from "../assets/purple_blue_star.svg";
-import purpleSmallStar from "../assets/purple_small_star.svg";
+import lightBlueClosed from "../../assets/lightblue_closed 1.svg";
+import lightBlueOpen from "../../assets/lightblue_open 1.svg";
+import cyanClosed from "../../assets/cyan_closed 1.svg";
+import cyanOpen from "../../assets/cyan_open 1.svg";
+import navyClosed from "../../assets/navy_closed 1.svg";
+import navyOpen from "../../assets/navy_open 1.svg";
+import bluePurpleStar from "../../assets/blue_purple_star.svg";
+import purpleBlueStar from "../../assets/purple_blue_star.svg";
+import purpleSmallStar from "../../assets/purple_small_star.svg";
 
 const Tracks = () => {
     const tracks = [

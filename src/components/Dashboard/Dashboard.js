@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase";
 import { doc, deleteDoc, getDoc } from "firebase/firestore";
-import ConfirmModal from "../ConfirmModal";
-import ReauthModal from "../ReauthModal";
-import ChangePasswordModal from "../ChangePasswordModal";
-import ConfettiAnimation from "../Confetti";
-import RainAnimation from "../Rain";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import ReauthModal from "../ReauthModal/ReauthModal";
+import ChangePasswordModal from "../ChangePasswordModal/ChangePasswordModal";
+import ConfettiAnimation from "../Cofetti/Confetti";
+import RainAnimation from "../Rain/Rain";
 import { QRCodeSVG } from "qrcode.react";
 import "./Dashboard.css";
 
