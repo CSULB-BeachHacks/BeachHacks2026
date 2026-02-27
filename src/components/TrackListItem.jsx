@@ -38,6 +38,7 @@ export default function TrackListItem({ open, closed, name }) {
         if (hasShaken || !imgRef.current) return;
 
         const el = imgRef.current;
+        el.style.animation = "none";
 
         // timeline where only the duration shrinks each step
         const steps = 10; // number of back/forth moves
@@ -68,6 +69,7 @@ export default function TrackListItem({ open, closed, name }) {
             <img
                 draggable="false"
                 ref={imgRef}
+                className="track-item__shell"
                 src={imgSrc}
                 alt=""
                 onMouseEnter={handleHoverStart}

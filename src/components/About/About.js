@@ -9,7 +9,6 @@ import "./About.css";
 
 import blueStar from "../../assets/bluestar.svg";
 import cyanStar from "../../assets/cyan_small_star.svg";
-import tinyBubbles from "../../assets/tinybubbles.svg";
 import leftAboutCoral from "../../assets/l_about_coral.svg";
 import rightAboutCoral from "../../assets/r_about_coral.svg";
 
@@ -106,12 +105,6 @@ const About = () => {
                     className="cyan-star bg-img"
                     src={cyanStar}
                     alt="cyan star"
-                />
-                <img
-                    draggable="false"
-                    className="tiny-bubbles bg-img"
-                    src={tinyBubbles}
-                    alt="tiny bubbles"
                 />
                 <img
                     draggable="false"
