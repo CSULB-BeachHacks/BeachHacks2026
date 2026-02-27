@@ -66,18 +66,6 @@ const Tracks = () => {
             />
             <img
                 draggable="false"
-                className="tracks-right-plant-top bg-img"
-                src="/purple_sea_plant.svg"
-                alt="top purple sea plant"
-            />
-            <img
-                draggable="false"
-                className="tracks-right-plant-bottom bg-img"
-                src="/purple_sea_plant.svg"
-                alt="bottom purple sea plant"
-            />
-            <img
-                draggable="false"
                 className="tracks-left-rock bg-img"
                 src="/bottom_rock.png"
                 alt="left coral rock"
