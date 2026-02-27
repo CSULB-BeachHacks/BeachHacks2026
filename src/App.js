@@ -9,21 +9,21 @@ import {
 
 import "./App.css";
 
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Tracks from "./components/Tracks";
-import Speakers from "./components/Speakers";
-import FAQ from "./components/FAQ";
-import Sponsors from "./components/Sponsors";
-import Teams from "./components/Teams";
-import Application from "./components/Application";
+import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/Hero/Hero";
+import About from "./components/About/About";
+import Tracks from "./components/Tracks/Tracks";
+import Speakers from "./components/Speakers/Speakers";
+import FAQ from "./components/FAQ/FAQ";
+import Sponsors from "./components/Sponsors/Sponsors";
+import Teams from "./components/Teams/Teams";
+import Application from "./components/Application/Application";
 import Dashboard from "./components/Dashboard/Dashboard";
-import AdminLogin from "./components/AdminLogin";
-import AdminDashboard from "./components/AdminDashboard";
-import UserDetail from "./components/UserDetail";
-import ConfettiCheck from "./components/ConfettiCheck";
-import LoadingScreen from "./components/LoadingScreen";
+import AdminLogin from "./components/Dashboard/AdminLogin";
+import AdminDashboard from "./components/Dashboard/AdminDashboard";
+import UserDetail from "./components/UserDetail/UserDetail";
+import ConfettiCheck from "./components/Cofetti/ConfettiCheck";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 
 
 // Auth Provider + hook
