@@ -1,7 +1,7 @@
 /* Section container */
 .speakers {
-    padding: 8rem 0;
-    min-height: 150vh;
+    padding: clamp(2.25rem, 4vh, 4rem) 0;
+    min-height: 90svh;
     overflow: hidden;
     position: relative;
     /* Base styles optimized for default desktop (e.g. 1366px - 1600px) */
@@ -14,7 +14,7 @@
     padding: 0;
     display: grid;
     grid-template-rows: auto auto auto;
-    gap: clamp(2rem, 4vw, 6rem);
+    gap: clamp(0.75rem, 2vw, 2rem);
     align-items: center;
 }
 
@@ -24,7 +24,7 @@
     align-items: center;
     gap: clamp(0.5rem, 2vw, 1.25rem);
     /* Default excessive padding for desktop "artsy" layout */
-    padding: 0 2rem 0 clamp(240px, 34vw, 520px);
+    padding: 0 1.5rem 0 clamp(130px, 20vw, 280px);
     flex-wrap: wrap;
 }
 
@@ -32,7 +32,7 @@
     position: absolute;
     left: -1rem;
     top: clamp(16px, 2.5vw, 28px);
-    width: clamp(280px, 36vw, 760px);
+    width: clamp(180px, 24vw, 430px);
     height: auto;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
@@ -42,7 +42,7 @@
 
 .speakers-title {
     flex: 1 1 auto;
-    font-size: clamp(64px, 8.5vw, 180px);
+    font-size: clamp(40px, 5.4vw, 96px);
     font-weight: 800;
     font-family: "Pixelify Sans", "Courier New", monospace;
     letter-spacing: 0;
@@ -62,8 +62,8 @@
 .row-middle {
     display: flex;
     justify-content: center;
-    margin-top: 3rem;
-    padding-left: 7rem; /* Default desktop offset */
+    margin-top: 0.75rem;
+    padding-left: 1rem; /* Reduced desktop offset for tighter one-page flow */
     position: relative;
     z-index: 3;
 }
@@ -75,7 +75,7 @@
 /* Base Bubble Properties (Desktop) */
 .bubbles-wrap {
     /* Default width for 1440px+ screens */
-    --bubble-w: clamp(600px, 52vw, 1200px);
+    --bubble-w: clamp(390px, 38vw, 760px);
 }
 
 .bubbles-center {
@@ -138,7 +138,7 @@
     justify-content: space-between;
     align-items: flex-end;
     padding: 0 2rem;
-    margin-top: -7rem;
+    margin-top: -2.75rem;
     z-index: 2;
 }
 
@@ -230,13 +230,13 @@
 /* 1. Ultra-Wide Screens (Min 1600px) */
 @media screen and (min-width: 1600px) {
     .speakers {
-        min-height: 160vh;
+        min-height: 92svh;
     }
     .speakers-title {
-        font-size: clamp(120px, 7vw, 220px);
+        font-size: clamp(56px, 6vw, 124px);
     }
     .bubbles-wrap {
-        --bubble-w: clamp(600px, 52vw, 1200px);
+        --bubble-w: clamp(450px, 42vw, 820px);
     }
     .speaker-photo {
         right: clamp(120px, 16vw, 280px);
@@ -254,7 +254,7 @@
 /* 2. Large Desktop / Small Ultra (1367px - 1599px) */
 @media screen and (min-width: 1367px) and (max-width: 1599px) {
     .bubbles-wrap {
-        --bubble-w: clamp(700px, 45vw, 650px);
+        --bubble-w: clamp(460px, 40vw, 650px);
     }
 
     .speaker-photo {
@@ -277,11 +277,11 @@
 /* 3. Mid-tier / Tablet Landscape / Laptop (769px - 1366px) */
 @media screen and (min-width: 769px) and (max-width: 1366px) {
     .speakers {
-        padding: 6rem 0;
+        padding: 3.5rem 0;
         min-height: auto;
     }
     .speakers-grid {
-        gap: 3rem;
+        gap: 1.5rem;
     }
 
     /* Fix: Center the title */
@@ -293,18 +293,18 @@
     .speakers-title {
         text-align: center;
         flex: 0 0 auto;
-        font-size: clamp(48px, 6vw, 96px);
+        font-size: clamp(36px, 4.6vw, 66px);
     }
 
     /* Fix: Reset offset */
     .row-middle {
         padding-left: 0;
-        margin-top: 2rem;
+        margin-top: 0.75rem;
     }
 
     /* Fix: Smaller Bubble Asset */
     .bubbles-wrap {
-        --bubble-w: clamp(580px, 45vw, 1000px);
+        --bubble-w: clamp(380px, 46vw, 620px);
     }
 
     /* Fix: Larger Speaker Images relative to bubble */
@@ -328,6 +328,10 @@
         line-height: 1.3;
     }
 
+    .row-bottom {
+        margin-top: -2rem;
+    }
+
     /* Bottom decorations */
     .kelp-wrap {
         --kelp-w: clamp(130px, 18vw, 200px);
@@ -345,17 +349,17 @@
 /* 4. Tablet Portrait / Mobile (Max 768px) */
 @media screen and (max-width: 768px) {
     .speakers {
-        padding: 6rem 0; /* equal top/bottom on small screens */
+        padding: 3rem 0; /* tighter one-page spacing on small screens */
         min-height: auto; /* let height be content-driven */
     }
 
     .row-top {
-        padding: 0 1rem 0 clamp(160px, 48vw, 280px);
+        padding: 0 1rem 0 clamp(130px, 42vw, 240px);
         justify-content: space-between;
     }
 
     .speakers-title {
-        font-size: clamp(32px, 9vw, 72px);
+        font-size: clamp(28px, 8vw, 60px);
         text-align: left;
     }
 
@@ -376,7 +380,7 @@
     }
 
     .bubbles-wrap {
-        --bubble-w: clamp(300px, 90vw, 540px);
+        --bubble-w: clamp(220px, 78vw, 390px);
     }
     .bubbles-center {
         width: var(--bubble-w);
@@ -403,7 +407,7 @@
     }
 
     .row-bottom {
-        margin-top: -4rem;
+        margin-top: -1.5rem;
         padding: 0 1rem;
     }
 
@@ -420,14 +424,14 @@
 /* 5. Extra Small Devices (Max 500px) */
 @media screen and (max-width: 500px) {
     .speakers-title {
-        font-size: clamp(28px, 10.5vw, 56px);
+        font-size: clamp(24px, 10vw, 48px);
     }
 }
 
 /* 6. Small Phone (Max 420px) */
 @media screen and (max-width: 420px) {
     .speakers {
-        padding: 5rem 0;
+        padding: 2.5rem 0;
         min-height: auto;
     }
     .kelp-wrap {
