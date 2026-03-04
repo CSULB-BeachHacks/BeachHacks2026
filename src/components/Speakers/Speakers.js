@@ -126,7 +126,7 @@ const Speakers = () => {
                     <img
                         draggable="false"
                         ref={crabRef}
-                        src="/crab_waving.png"
+                        src="/crabwaving.gif"
                         alt="Crab"
                         className="crab-flow"
                     />
