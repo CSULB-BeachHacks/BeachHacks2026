@@ -15,7 +15,8 @@ export default function AdminDashboard() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [error, setError] = useState("");
-  const [acceptedSearchQuery, setAcceptedSearchQuery] = useState("");
+  const [globalSearchQuery, setGlobalSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all"); // "all", "pending", "accepted", "waitlisted", "rejected"
 
   useEffect(() => {
     async function checkAdminAndLoadUsers() {
@@ -28,7 +29,7 @@ export default function AdminDashboard() {
         // Check if user is admin
         const userRef = doc(db, "users", currentUser.uid);
         const userSnap = await getDoc(userRef);
-        
+
         if (!userSnap.exists() || !userSnap.data().isAdmin) {
           navigate("/admin/login");
           return;
@@ -39,7 +40,7 @@ export default function AdminDashboard() {
         // Load all applications
         const applicationsRef = collection(db, "applications");
         const applicationsSnap = await getDocs(applicationsRef);
-        
+
         const usersList = [];
         applicationsSnap.forEach((doc) => {
           const data = doc.data();
@@ -156,185 +157,251 @@ export default function AdminDashboard() {
             </div>
           </div>
 
+          <div className="admin-filters-section">
+            <div className="admin-search-container global">
+              <input
+                type="text"
+                placeholder="Search globally by name, email, or school..."
+                value={globalSearchQuery}
+                onChange={(e) => setGlobalSearchQuery(e.target.value)}
+                className="admin-search-input"
+              />
+            </div>
+            <div className="admin-status-filter-container">
+              <label htmlFor="status-filter" className="admin-status-filter-label">Filter by Status:</label>
+              <select
+                id="status-filter"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="admin-status-dropdown"
+              >
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="waitlisted">Waitlisted</option>
+                <option value="accepted">Accepted</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+          </div>
+
           {/* QR Code Scanner Section */}
           <div className="admin-qr-section">
             <QRScanner />
           </div>
 
           {/* Applied (Pending) Section */}
-          <div className="admin-users-list">
-            <h2 className="admin-list-title">Applied (Pending Review)</h2>
-            {(() => {
-              const appliedUsers = users.filter(u => (u.status || "pending") === "pending" && u.submittedAt);
-              return appliedUsers.length === 0 ? (
-                <p className="admin-no-users">No applications pending review.</p>
-              ) : (
-                <div className="admin-users-grid">
-                  {appliedUsers.map((user) => (
-                    <div
-                      key={user.id}
-                      className="admin-user-card"
-                      onClick={() => handleUserClick(user.id)}
-                    >
-                      <div className="admin-user-card-header">
-                        <h3 className="admin-user-name">
-                          {user.firstName} {user.lastName}
-                        </h3>
-                        <span className="admin-status-badge admin-status-pending">
-                          pending
-                        </span>
+          {(statusFilter === "all" || statusFilter === "pending") && (
+            <div className="admin-users-list">
+              <h2 className="admin-list-title">Applied (Pending Review)</h2>
+              {(() => {
+                let appliedUsers = users.filter(u => (u.status || "pending") === "pending" && u.submittedAt);
+
+                // Apply global search filter
+                if (globalSearchQuery.trim()) {
+                  const query = globalSearchQuery.toLowerCase().trim();
+                  appliedUsers = appliedUsers.filter(user => {
+                    const fullName = `${user.firstName || ""} ${user.lastName || ""}`.toLowerCase();
+                    const email = (user.email || user.userId || "").toLowerCase();
+                    const school = (user.school || "").toLowerCase();
+                    return fullName.includes(query) || email.includes(query) || school.includes(query);
+                  });
+                }
+
+                return appliedUsers.length === 0 ? (
+                  <p className="admin-no-users">No applications pending review.</p>
+                ) : (
+                  <div className="admin-users-grid">
+                    {appliedUsers.map((user) => (
+                      <div
+                        key={user.id}
+                        className="admin-user-card"
+                        onClick={() => handleUserClick(user.id)}
+                      >
+                        <div className="admin-user-card-header">
+                          <h3 className="admin-user-name">
+                            {user.firstName} {user.lastName}
+                          </h3>
+                          <span className="admin-status-badge admin-status-pending">
+                            pending
+                          </span>
+                        </div>
+                        <div className="admin-user-details">
+                          <p className="admin-user-email">{user.email || user.userId}</p>
+                          <p className="admin-user-school">{user.school}</p>
+                          <p className="admin-submitted">Submitted</p>
+                        </div>
                       </div>
-                      <div className="admin-user-details">
-                        <p className="admin-user-email">{user.email || user.userId}</p>
-                        <p className="admin-user-school">{user.school}</p>
-                        <p className="admin-submitted">Submitted</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              );
-            })()}
-          </div>
+                    ))}
+                  </div>
+                );
+              })()}
+            </div>
+          )}
 
           {/* Waitlisted Section */}
-          <div className="admin-users-list">
-            <h2 className="admin-list-title">Waitlisted</h2>
-            {(() => {
-              const waitlistedUsers = users.filter(u => u.status === "waitlisted");
-              return waitlistedUsers.length === 0 ? (
-                <p className="admin-no-users">No waitlisted applications.</p>
-              ) : (
-                <div className="admin-users-grid">
-                  {waitlistedUsers.map((user) => (
-                    <div
-                      key={user.id}
-                      className="admin-user-card"
-                      onClick={() => handleUserClick(user.id)}
-                    >
-                      <div className="admin-user-card-header">
-                        <h3 className="admin-user-name">
-                          {user.firstName} {user.lastName}
-                        </h3>
-                        <span className="admin-status-badge admin-status-waitlisted">
-                          waitlisted
-                        </span>
-                      </div>
-                      <div className="admin-user-details">
-                        <p className="admin-user-email">{user.email || user.userId}</p>
-                        <p className="admin-user-school">{user.school}</p>
-                        <p className="admin-submitted">
-                          {user.submittedAt ? "Submitted" : "Not Submitted"}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              );
-            })()}
-          </div>
+          {(statusFilter === "all" || statusFilter === "waitlisted") && (
+            <div className="admin-users-list">
+              <h2 className="admin-list-title">Waitlisted</h2>
+              {(() => {
+                let waitlistedUsers = users.filter(u => u.status === "waitlisted");
 
-          {/* Accepted Section */}
-          <div className="admin-users-list">
-            <div className="admin-list-header">
-              <h2 className="admin-list-title">Accepted</h2>
-              <div className="admin-search-container">
-                <input
-                  type="text"
-                  placeholder="Search by name, email, or school..."
-                  value={acceptedSearchQuery}
-                  onChange={(e) => setAcceptedSearchQuery(e.target.value)}
-                  className="admin-search-input"
-                />
-              </div>
+                // Apply global search filter
+                if (globalSearchQuery.trim()) {
+                  const query = globalSearchQuery.toLowerCase().trim();
+                  waitlistedUsers = waitlistedUsers.filter(user => {
+                    const fullName = `${user.firstName || ""} ${user.lastName || ""}`.toLowerCase();
+                    const email = (user.email || user.userId || "").toLowerCase();
+                    const school = (user.school || "").toLowerCase();
+                    return fullName.includes(query) || email.includes(query) || school.includes(query);
+                  });
+                }
+
+                return waitlistedUsers.length === 0 ? (
+                  <p className="admin-no-users">No waitlisted applications.</p>
+                ) : (
+                  <div className="admin-users-grid">
+                    {waitlistedUsers.map((user) => (
+                      <div
+                        key={user.id}
+                        className="admin-user-card"
+                        onClick={() => handleUserClick(user.id)}
+                      >
+                        <div className="admin-user-card-header">
+                          <h3 className="admin-user-name">
+                            {user.firstName} {user.lastName}
+                          </h3>
+                          <span className="admin-status-badge admin-status-waitlisted">
+                            waitlisted
+                          </span>
+                        </div>
+                        <div className="admin-user-details">
+                          <p className="admin-user-email">{user.email || user.userId}</p>
+                          <p className="admin-user-school">{user.school}</p>
+                          <p className="admin-submitted">
+                            {user.submittedAt ? "Submitted" : "Not Submitted"}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
             </div>
-            {(() => {
-              const acceptedUsers = users.filter(u => u.status === "accepted");
-              
-              // Filter accepted users based on search query
-              const filteredAcceptedUsers = acceptedUsers.filter((user) => {
-                if (!acceptedSearchQuery.trim()) return true;
-                const query = acceptedSearchQuery.toLowerCase().trim();
-                const fullName = `${user.firstName || ""} ${user.lastName || ""}`.toLowerCase();
-                const email = (user.email || user.userId || "").toLowerCase();
-                const school = (user.school || "").toLowerCase();
-                
-                return fullName.includes(query) || 
-                       email.includes(query) || 
-                       school.includes(query);
-              });
-              
-              return filteredAcceptedUsers.length === 0 ? (
-                <p className="admin-no-users">
-                  {acceptedUsers.length === 0 
-                    ? "No accepted applications." 
-                    : "No users found matching your search."}
-                </p>
-              ) : (
-                <div className="admin-users-grid">
-                  {filteredAcceptedUsers.map((user) => (
-                    <div
-                      key={user.id}
-                      className="admin-user-card"
-                      onClick={() => handleUserClick(user.id)}
-                    >
-                      <div className="admin-user-card-header">
-                        <h3 className="admin-user-name">
-                          {user.firstName} {user.lastName}
-                        </h3>
-                        <span className="admin-status-badge admin-status-accepted">
-                          accepted
-                        </span>
-                      </div>
-                      <div className="admin-user-details">
-                        <p className="admin-user-email">{user.email || user.userId}</p>
-                        <p className="admin-user-school">{user.school}</p>
-                        <p className="admin-submitted">
-                          {user.submittedAt ? "Submitted" : "Not Submitted"}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              );
-            })()}
-          </div>
+          )}
 
-          {/* Rejected Section */}
-          <div className="admin-users-list">
-            <h2 className="admin-list-title">Rejected</h2>
-            {(() => {
-              const rejectedUsers = users.filter(u => u.status === "rejected");
-              return rejectedUsers.length === 0 ? (
-                <p className="admin-no-users">No rejected applications.</p>
-              ) : (
-                <div className="admin-users-grid">
-                  {rejectedUsers.map((user) => (
-                    <div
-                      key={user.id}
-                      className="admin-user-card"
-                      onClick={() => handleUserClick(user.id)}
-                    >
-                      <div className="admin-user-card-header">
-                        <h3 className="admin-user-name">
-                          {user.firstName} {user.lastName}
-                        </h3>
-                        <span className="admin-status-badge admin-status-rejected">
-                          rejected
-                        </span>
+          {(statusFilter === "all" || statusFilter === "accepted") && (
+            <div className="admin-users-list">
+              <div className="admin-list-header">
+                <h2 className="admin-list-title">Accepted</h2>
+              </div>
+              {(() => {
+                let acceptedUsers = users.filter((u) => u.status === "accepted");
+
+                // Apply global search filter
+                if (globalSearchQuery.trim()) {
+                  const query = globalSearchQuery.toLowerCase().trim();
+                  acceptedUsers = acceptedUsers.filter((user) => {
+                    const fullName = `${user.firstName || ""} ${user.lastName || ""}`.toLowerCase();
+                    const email = (user.email || user.userId || "").toLowerCase();
+                    const school = (user.school || "").toLowerCase();
+                    return (
+                      fullName.includes(query) ||
+                      email.includes(query) ||
+                      school.includes(query)
+                    );
+                  });
+                }
+
+                return acceptedUsers.length === 0 ? (
+                  <p className="admin-no-users">No users found.</p>
+                ) : (
+                  <div className="admin-users-grid">
+                    {acceptedUsers.map((user) => (
+                      <div
+                        key={user.id}
+                        className="admin-user-card"
+                        onClick={() => handleUserClick(user.id)}
+                      >
+                        <div className="admin-user-card-header">
+                          <h3 className="admin-user-name">
+                            {user.firstName} {user.lastName}
+                          </h3>
+                          <span className="admin-status-badge admin-status-accepted">
+                            accepted
+                          </span>
+                        </div>
+                        <div className="admin-user-details">
+                          <p className="admin-user-email">
+                            {user.email || user.userId}
+                          </p>
+                          <p className="admin-user-school">{user.school}</p>
+                          <p className="admin-submitted">
+                            {user.submittedAt ? "Submitted" : "Not Submitted"}
+                          </p>
+                        </div>
                       </div>
-                      <div className="admin-user-details">
-                        <p className="admin-user-email">{user.email || user.userId}</p>
-                        <p className="admin-user-school">{user.school}</p>
-                        <p className="admin-submitted">
-                          {user.submittedAt ? "Submitted" : "Not Submitted"}
-                        </p>
+                    ))}
+                  </div>
+                );
+              })()}
+            </div>
+          )}
+
+          {(statusFilter === "all" || statusFilter === "rejected") && (
+            <div className="admin-users-list">
+              <h2 className="admin-list-title">Rejected</h2>
+              {(() => {
+                let rejectedUsers = users.filter((u) => u.status === "rejected");
+
+                // Apply global search filter
+                if (globalSearchQuery.trim()) {
+                  const query = globalSearchQuery.toLowerCase().trim();
+                  rejectedUsers = rejectedUsers.filter((user) => {
+                    const fullName = `${user.firstName || ""} ${user.lastName || ""}`.toLowerCase();
+                    const email = (user.email || user.userId || "").toLowerCase();
+                    const school = (user.school || "").toLowerCase();
+                    return (
+                      fullName.includes(query) ||
+                      email.includes(query) ||
+                      school.includes(query)
+                    );
+                  });
+                }
+
+                return rejectedUsers.length === 0 ? (
+                  <p className="admin-no-users">No rejected applications.</p>
+                ) : (
+                  <div className="admin-users-grid">
+                    {rejectedUsers.map((user) => (
+                      <div
+                        key={user.id}
+                        className="admin-user-card"
+                        onClick={() => handleUserClick(user.id)}
+                      >
+                        <div className="admin-user-card-header">
+                          <h3 className="admin-user-name">
+                            {user.firstName} {user.lastName}
+                          </h3>
+                          <span className="admin-status-badge admin-status-rejected">
+                            rejected
+                          </span>
+                        </div>
+                        <div className="admin-user-details">
+                          <p className="admin-user-email">
+                            {user.email || user.userId}
+                          </p>
+                          <p className="admin-user-school">{user.school}</p>
+                          <p className="admin-submitted">
+                            {user.submittedAt ? "Submitted" : "Not Submitted"}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              );
-            })()}
-          </div>
+                    ))}
+                  </div>
+                );
+              })()}
+            </div>
+          )}
         </div>
       </div>
 

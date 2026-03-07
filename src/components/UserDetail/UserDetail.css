@@ -270,8 +270,35 @@
 }
 
 .status-btn-rejected.active {
-  background: #a93226;
-  box-shadow: 0 6px 16px rgba(231, 76, 60, 0.4);
+  background-color: #d32f2f;
+  border-color: #d32f2f;
+  color: white;
+}
+
+.user-detail-revert-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #fce4e4;
+  color: #d32f2f;
+  border: 2px solid #d32f2f;
+  border-radius: 4px;
+  font-family: "Pixelify Sans", "Courier New", monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: auto;
+  align-self: flex-start;
+}
+
+.user-detail-revert-btn:hover:not(:disabled) {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.user-detail-revert-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .user-detail-location-controls,

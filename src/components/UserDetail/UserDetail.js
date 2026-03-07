@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, deleteField } from "firebase/firestore";
 import "./UserDetail.css";
 
 export default function UserDetail() {
@@ -31,7 +31,7 @@ export default function UserDetail() {
         // Check if user is admin
         const userRef = doc(db, "users", currentUser.uid);
         const userSnap = await getDoc(userRef);
-        
+
         if (!userSnap.exists() || !userSnap.data().isAdmin) {
           navigate("/admin/dashboard");
           return;
@@ -42,10 +42,10 @@ export default function UserDetail() {
         // Load user application data
         const applicationRef = doc(db, "applications", userId);
         const applicationSnap = await getDoc(applicationRef);
-        
+
         if (applicationSnap.exists()) {
           const appData = applicationSnap.data();
-          
+
           // If email is not in application, try to get it from users collection
           if (!appData.email) {
             try {
@@ -58,9 +58,9 @@ export default function UserDetail() {
               console.error("Error fetching email from users collection:", error);
             }
           }
-          
+
           setUserData(appData);
-          
+
           // Set location status and meals from user data
           setLocationStatus(appData.locationStatus || "");
           setMeals(appData.meals || { breakfast: false, lunch: false, dinner: false });
@@ -85,11 +85,40 @@ export default function UserDetail() {
         status: newStatus,
         updatedAt: new Date(),
       });
-      
+
       setUserData({ ...userData, status: newStatus });
     } catch (error) {
       console.error("Error updating status:", error);
       alert("Failed to update status. Please try again.");
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const handleRevertStatus = async () => {
+    if (!userData) return;
+    const confirmRevert = window.confirm(
+      "Are you sure you want to revert this decision? The user's status will return to pending."
+    );
+    if (!confirmRevert) return;
+
+    try {
+      setUpdating(true);
+      const applicationRef = doc(db, "applications", userId);
+
+      await updateDoc(applicationRef, {
+        status: "pending",
+        updatedAt: new Date(),
+        agreedToOvernight: deleteField()
+      });
+
+      const newUserData = { ...userData, status: "pending" };
+      delete newUserData.agreedToOvernight;
+      setUserData(newUserData);
+
+    } catch (error) {
+      console.error("Error reverting status:", error);
+      alert("Failed to revert status. Please try again.");
     } finally {
       setUpdating(false);
     }
@@ -105,7 +134,7 @@ export default function UserDetail() {
         locationStatus: locationStatus,
         updatedAt: new Date(),
       });
-      
+
       setUserData({ ...userData, locationStatus: locationStatus });
       alert("Location status updated successfully!");
     } catch (error) {
@@ -134,7 +163,7 @@ export default function UserDetail() {
         meals: meals,
         updatedAt: new Date(),
       });
-      
+
       setUserData({ ...userData, meals: meals });
       alert("Meals updated successfully!");
     } catch (error) {
@@ -342,13 +371,20 @@ export default function UserDetail() {
                   </div>
                 </div>
               )}
-              
+
               {/* Show message if status is final (accepted or rejected) */}
               {(currentStatus === "accepted" || currentStatus === "rejected") && (
                 <div className="user-detail-section">
                   <p className="user-detail-status-final">
-                    Status is final and cannot be changed.
+                    Status is final, but can be reverted if a mistake was made.
                   </p>
+                  <button
+                    onClick={handleRevertStatus}
+                    disabled={updating}
+                    className="user-detail-revert-btn"
+                  >
+                    Revert to Pending
+                  </button>
                 </div>
               )}
 
