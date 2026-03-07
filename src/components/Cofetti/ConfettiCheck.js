@@ -12,6 +12,16 @@ export default function ConfettiCheck() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (showConfetti || showRain) {
+      const timer = setTimeout(() => {
+        setShowConfetti(false);
+        setShowRain(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showConfetti, showRain]);
+
+  useEffect(() => {
     async function checkStatus() {
       if (!currentUser) {
         setShowConfetti(false);
@@ -24,7 +34,7 @@ export default function ConfettiCheck() {
         // Check if user is admin - don't show animations for admins
         const userRef = doc(db, "users", currentUser.uid);
         const userSnap = await getDoc(userRef);
-        
+
         if (userSnap.exists() && userSnap.data().isAdmin) {
           setShowConfetti(false);
           setShowRain(false);
@@ -35,7 +45,7 @@ export default function ConfettiCheck() {
         // Check application status
         const applicationRef = doc(db, "applications", currentUser.uid);
         const applicationSnap = await getDoc(applicationRef);
-        
+
         if (applicationSnap.exists()) {
           const data = applicationSnap.data();
           const status = data.status || "pending";

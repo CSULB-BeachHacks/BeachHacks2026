@@ -38,6 +38,17 @@ const Dashboard = () => {
     const [hasApplication, setHasApplication] = useState(false);
     const [applicationStatus, setApplicationStatus] = useState(null); // "pending", "accepted", "waitlisted", "rejected"
     const [loading, setLoading] = useState(true);
+    const [showAnimation, setShowAnimation] = useState(true);
+
+    useEffect(() => {
+        if (applicationStatus === "accepted" || applicationStatus === "rejected") {
+            setShowAnimation(true);
+            const timer = setTimeout(() => {
+                setShowAnimation(false);
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [applicationStatus]);
 
     // Check if application is submitted
     useEffect(() => {
@@ -206,8 +217,8 @@ const Dashboard = () => {
 
     return (
         <main className="dashboard-container">
-            {applicationStatus === "accepted" && <ConfettiAnimation />}
-            {applicationStatus === "rejected" && <RainAnimation />}
+            {applicationStatus === "accepted" && showAnimation && <ConfettiAnimation />}
+            {applicationStatus === "rejected" && showAnimation && <RainAnimation />}
 
             <img
                 draggable="false"
