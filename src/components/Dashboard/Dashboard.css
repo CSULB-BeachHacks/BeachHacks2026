@@ -17,7 +17,8 @@
     font-family: "Pixelify Sans", "Courier New", monospace;
     color: var(--bh-text);
     position: relative;
-    z-index: 1; /* Ensure content is above decorations */
+    z-index: 1;
+    /* Ensure content is above decorations */
     width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
@@ -104,10 +105,10 @@
     max-width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 6.7%;
+    padding: 0.5rem 6.7% 0;
     box-sizing: border-box;
     margin-bottom: 2rem;
-    overflow-x: hidden;
+    overflow: visible;
 }
 
 .account-actions {
@@ -173,6 +174,24 @@
     transform: translateY(-2px);
     filter: brightness(1.05);
     box-shadow: 0 6px 16px rgba(21, 198, 187, 0.4);
+}
+
+.join-discord-btn {
+    background: #5865F2;
+    color: white;
+    border: 2px solid var(--bh-text);
+    padding: 0.75rem 2rem;
+    border-radius: 999px;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+    transition: all 0.2s ease;
+}
+
+.join-discord-btn:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 16px rgba(88, 101, 242, 0.4);
 }
 
 /* Bottom Section: Mascot and QR */
@@ -252,11 +271,24 @@
     margin-top: -11.5rem;
 }
 
+.timeline-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 8rem auto 4rem auto;
+    z-index: 10;
+    position: relative;
+    padding: 0 2rem;
+    box-sizing: border-box;
+}
+
 .star-deco-qr {
     position: absolute;
-    top: 800px; /* Adjusted top to be near QR section */
-    right: 0; /* Touching right edge */
-    width: 400px; /* Much larger */
+    top: 800px;
+    /* Adjusted top to be near QR section */
+    right: 0;
+    /* Touching right edge */
+    width: 400px;
+    /* Much larger */
     height: auto;
     image-rendering: pixelated;
     z-index: 0;
@@ -270,11 +302,9 @@
     transform: translate(-50%, -50%);
     width: 620px;
     height: 620px;
-    background: radial-gradient(
-        circle,
-        rgba(0, 160, 255, 0.4) 0%,
-        transparent 70%
-    );
+    background: radial-gradient(circle,
+            rgba(0, 160, 255, 0.4) 0%,
+            transparent 70%);
     z-index: -1;
     pointer-events: none;
 }
@@ -325,9 +355,12 @@
 
 .star-deco-left {
     position: absolute;
-    top: 100px; /* Adjusted top */
-    left: 0; /* Touching left edge */
-    width: 350px; /* Much larger */
+    top: 100px;
+    /* Adjusted top */
+    left: 0;
+    /* Touching left edge */
+    width: 350px;
+    /* Much larger */
     height: auto;
     image-rendering: pixelated;
     z-index: 0;
@@ -643,6 +676,10 @@
 
     .qr-desc {
         font-size: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    .timeline-section {
+        margin-top: 0;
     }
 
     .status-text {

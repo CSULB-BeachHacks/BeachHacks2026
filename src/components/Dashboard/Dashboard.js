@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase";
-import { doc, deleteDoc, getDoc } from "firebase/firestore";
+import { doc, deleteDoc, getDoc, setDoc } from "firebase/firestore";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import ReauthModal from "../ReauthModal/ReauthModal";
 import ChangePasswordModal from "../ChangePasswordModal/ChangePasswordModal";
 import ConfettiAnimation from "../Cofetti/Confetti";
 import RainAnimation from "../Rain/Rain";
+import Timeline from "../Timeline/Timeline";
+import JoinDiscordModal from "../JoinDiscordModal/JoinDiscordModal";
 import { QRCodeSVG } from "qrcode.react";
 import "./Dashboard.css";
 
@@ -39,6 +41,9 @@ const Dashboard = () => {
     const [applicationStatus, setApplicationStatus] = useState(null); // "pending", "accepted", "waitlisted", "rejected"
     const [loading, setLoading] = useState(true);
     const [showAnimation, setShowAnimation] = useState(true);
+
+    const [showDiscordModal, setShowDiscordModal] = useState(false);
+    const [hasAgreedToOvernight, setHasAgreedToOvernight] = useState(false);
 
     useEffect(() => {
         if (applicationStatus === "accepted" || applicationStatus === "rejected") {
@@ -80,6 +85,10 @@ const Dashboard = () => {
                     setIsSubmitted(!!data.submittedAt);
                     // Get the status from Firestore (pending, accepted, waitlisted, rejected)
                     setApplicationStatus(data.status || "pending");
+
+                    if (data.agreedToOvernight) {
+                        setHasAgreedToOvernight(true);
+                    }
                 } else {
                     setHasApplication(false);
                     setIsSubmitted(false);
@@ -97,6 +106,25 @@ const Dashboard = () => {
 
     const handleEditClick = () => {
         navigate("/apply");
+    };
+
+    const handleJoinDiscordClick = () => {
+        setShowDiscordModal(true);
+    };
+
+    const handleDiscordConsent = async () => {
+        try {
+            if (currentUser) {
+                const applicationRef = doc(db, "applications", currentUser.uid);
+                await getDoc(applicationRef).then(async (docSnap) => {
+                    await setDoc(applicationRef, { agreedToOvernight: true }, { merge: true });
+                });
+                setHasAgreedToOvernight(true);
+            }
+        } catch (err) {
+            console.error("Error setting overnight consent:", err);
+            throw err;
+        }
     };
 
     const handleWithdrawClick = () => {
@@ -282,6 +310,14 @@ const Dashboard = () => {
                                 EDIT
                             </button>
                         )}
+                        {!loading && applicationStatus === "accepted" && (
+                            <button
+                                className="dashboard-btn join-discord-btn"
+                                onClick={handleJoinDiscordClick}
+                            >
+                                JOIN DISCORD
+                            </button>
+                        )}
                         <button
                             className="dashboard-btn withdraw-btn"
                             onClick={handleWithdrawClick}
@@ -317,69 +353,76 @@ const Dashboard = () => {
 
                 {/* Show different content based on application status */}
                 {applicationStatus === "accepted" ? (
-                    <section
-                        className="bottom-section"
-                        aria-label="Additional Information"
-                    >
-                        <aside className="mascot-container" aria-label="Mascot">
-                            <div className="chat-bubble-container">
+                    <>
+                        <section
+                            className="bottom-section"
+                            aria-label="Additional Information"
+                        >
+                            <aside className="mascot-container" aria-label="Mascot">
+                                <div className="chat-bubble-container">
+                                    <img
+                                        draggable="false"
+                                        src={chatBubbleImg}
+                                        alt="Chat Bubble"
+                                        className="chat-bubble-bg"
+                                    />
+                                    <div className="chat-text">
+                                        Thank you for
+                                        <br />
+                                        participating.
+                                        <br />
+                                        Happy Hacking!
+                                        <br />
+                                        -BeachHacks 9.0
+                                        <br />
+                                        committee
+                                    </div>
+                                </div>
                                 <img
                                     draggable="false"
-                                    src={chatBubbleImg}
-                                    alt="Chat Bubble"
-                                    className="chat-bubble-bg"
+                                    src={crabMascotImg}
+                                    alt="Crab Mascot"
+                                    className="crab-mascot"
                                 />
-                                <div className="chat-text">
-                                    Thank you for
-                                    <br />
-                                    participating.
-                                    <br />
-                                    Happy Hacking!
-                                    <br />
-                                    -BeachHacks 9.0
-                                    <br />
-                                    committee
-                                </div>
-                            </div>
-                            <img
-                                draggable="false"
-                                src={crabMascotImg}
-                                alt="Crab Mascot"
-                                className="crab-mascot"
-                            />
-                        </aside>
+                            </aside>
 
-                        <section
-                            className="qr-section"
-                            aria-labelledby="qr-title"
-                        >
-                            <div className="qr-star-bg"></div>
-                            <h3 id="qr-title" className="qr-title">
-                                QR Code
-                            </h3>
-                            <p className="qr-desc">
-                                On day of event, scan the qr
-                                <br />
-                                code to confirm attendance
-                                <br />
-                                and check-in.
-                            </p>
-                            <div className="qr-placeholder">
-                                {currentUser &&
-                                    applicationStatus === "accepted" ? (
-                                    <QRCodeSVG
-                                        value={currentUser.uid}
-                                        size={240}
-                                        level="H"
-                                        includeMargin={false}
-                                        className="qr-code"
-                                    />
-                                ) : (
-                                    <div className="qr-box"></div>
-                                )}
-                            </div>
+                            <section
+                                className="qr-section"
+                                aria-labelledby="qr-title"
+                            >
+                                <div className="qr-star-bg"></div>
+                                <h3 id="qr-title" className="qr-title">
+                                    QR Code
+                                </h3>
+                                <p className="qr-desc">
+                                    On day of event, scan the qr
+                                    <br />
+                                    code to confirm attendance
+                                    <br />
+                                    and check-in.
+                                </p>
+                                <div className="qr-placeholder">
+                                    {currentUser &&
+                                        applicationStatus === "accepted" ? (
+                                        <QRCodeSVG
+                                            value={currentUser.uid}
+                                            size={240}
+                                            level="H"
+                                            includeMargin={false}
+                                            className="qr-code"
+                                        />
+                                    ) : (
+                                        <div className="qr-box"></div>
+                                    )}
+                                </div>
+                            </section>
                         </section>
-                    </section>
+
+                        {/* Timeline outside of the Flex container for Mascot/QR */}
+                        <section className="timeline-section" aria-labelledby="timeline-title">
+                            <Timeline />
+                        </section>
+                    </>
                 ) : (
                     <section
                         className="bottom-section"
@@ -546,6 +589,14 @@ const Dashboard = () => {
                 onConfirm={handleChangePassword}
                 onCancel={handleCancelChangePassword}
                 error={error}
+            />
+
+            <JoinDiscordModal
+                isOpen={showDiscordModal}
+                onClose={() => setShowDiscordModal(false)}
+                onConfirm={handleDiscordConsent}
+                hasAgreed={hasAgreedToOvernight}
+                discordLink="https://discord.gg/eKBqGM6kzc"
             />
         </main>
     );
