@@ -5,7 +5,7 @@ import Countdown from "../Countdown/Countdown";
 import "./Hero.css";
 
 export default function Hero() {
-  const eventStart = "2026-03-21T09:00:00-07:00";
+  const eventStart = "2026-03-14T23:59:00-07:00";
 
   // refs for animation targets
   const sectionRef = useRef(null);
@@ -101,7 +101,7 @@ export default function Hero() {
           <p className="hero__date">(03/21)–(03/22)</p>
           <span className="hero__powered">Powered by ASI</span>
         </div>
-        <h2 className="hero__sub">DIVE IN</h2>
+        <h2 className="hero__sub">APPLICATIONS CLOSE IN:</h2>
         <div className="hero__countdown">
           <Countdown date={eventStart} />
         </div>

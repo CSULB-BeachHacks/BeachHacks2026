@@ -5,9 +5,15 @@ import { db } from "../../firebase";
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import "./Application.css";
 
+// Set the hard deadline: March 14, 2026, 23:59:00 Pacific TIme
+const DEADLINE = new Date("2026-03-14T23:59:00-07:00");
+
 const Application = () => {
     const { currentUser } = useAuth();
     const navigate = useNavigate();
+
+    const [isPastDeadline, setIsPastDeadline] = useState(false);
+
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -98,6 +104,15 @@ const Application = () => {
     const [loading, setLoading] = useState(true);
     const bannerRef = useRef(null);
 
+    useEffect(() => {
+        const checkDeadline = () => {
+            setIsPastDeadline(new Date() > DEADLINE);
+        };
+        checkDeadline(); // Check immediately
+        const intervalId = setInterval(checkDeadline, 10000); // Re-check every 10 seconds
+        return () => clearInterval(intervalId);
+    }, []);
+
     // Check if user has an existing application
     useEffect(() => {
         async function checkExistingApplication() {
@@ -185,6 +200,13 @@ const Application = () => {
 
         if (!currentUser) {
             setSubmitMsg("Please sign in to submit your application.");
+            return;
+        }
+
+        // Failsafe check right before submission
+        if (new Date() > DEADLINE) {
+            setSubmitMsg("The application deadline has passed. We can no longer accept submissions.");
+            setIsPastDeadline(true);
             return;
         }
 
@@ -300,6 +322,21 @@ const Application = () => {
                         <h2 className="auth-gate-title">Loading...</h2>
                         <p className="auth-gate-text">
                             Checking your application status...
+                        </p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    if (isPastDeadline) {
+        return (
+            <section className="application" id="application">
+                <div className="application-container">
+                    <div className="auth-gate" role="alert">
+                        <h2 className="auth-gate-title">Applications Closed</h2>
+                        <p className="auth-gate-text">
+                            The deadline for BeachHacks 9.0 applications has passed. Thank you for your interest!
                         </p>
                     </div>
                 </div>

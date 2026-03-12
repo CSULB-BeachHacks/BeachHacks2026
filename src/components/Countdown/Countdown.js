@@ -41,8 +41,10 @@ export default function Countdown({ date }) {
         </div>
     );
 
+    const isFinished = left.days === 0 && left.hours === 0 && left.minutes === 0 && left.seconds === 0;
+
     return (
-        <div className="bh-countdown">
+        <div className={`bh-countdown ${isFinished ? "finished" : ""}`}>
             {bubble(left.days, "days")}
             {bubble(left.hours, "hours")}
             {bubble(left.minutes, "minutes")}

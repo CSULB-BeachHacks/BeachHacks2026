@@ -49,6 +49,29 @@
   text-align: center;
   transform: translateX(7%);
 }
+
+@keyframes flash-red {
+  0% { color: #0b3e45; opacity: 1; }
+  50% { color: #ff0000; opacity: 1; }
+  100% { color: #0b3e45; opacity: 1; }
+}
+
+@keyframes flash-red-dark {
+  0% { color: #ffffff; opacity: 1; }
+  50% { color: #ff0000; opacity: 1; }
+  100% { color: #ffffff; opacity: 1; }
+}
+
+.bh-countdown.finished .bh-bubble-number,
+.bh-countdown.finished .bh-bubble-label {
+  animation: flash-red 2s infinite alternate ease-in-out;
+}
+
+.App.dark .bh-countdown.finished .bh-bubble-number,
+.App.dark .bh-countdown.finished .bh-bubble-label {
+  animation: flash-red-dark 2s infinite alternate ease-in-out;
+}
+
 /* <= 980px: align bubbles to the right and keep them on one row */
 @media (max-width: 980px){
   .bh-countdown{

@@ -23,8 +23,6 @@
     display: flex;
     align-items: center;
     gap: clamp(0.5rem, 2vw, 1.25rem);
-    /* Default excessive padding for desktop "artsy" layout */
-    padding: 0 1.5rem 0 clamp(130px, 20vw, 280px);
     flex-wrap: wrap;
 }
 
@@ -48,6 +46,7 @@
     letter-spacing: 0;
     line-height: 1;
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
 }
 
 .star-title {

@@ -65,6 +65,11 @@
     color: #084860;
 }
 
+.App.dark .auth-gate-title,
+.App.dark .auth-gate-text {
+    color: #DBF2F1;
+}
+
 .application-title {
     text-align: center;
     font-size: clamp(2rem, 5vw, 4rem);
