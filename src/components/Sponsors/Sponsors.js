@@ -10,7 +10,7 @@ export default function Sponsors() {
                 <h2 className="bhx-title">Sponsors</h2>
                 <div className="bhx-sponsors-grid">
                     <a href="https://fetch.ai/" target="_blank" rel="noopener noreferrer" className="bhx-sponsor-link">
-                        <img src="/fetch_ai.png" alt="Fetch.ai" className="bhx-sponsor-logo" />
+                        <img src="/fetch_ai.webp" alt="Fetch.ai" className="bhx-sponsor-logo" />
                     </a>
                     <a href="https://asi1.ai/" target="_blank" rel="noopener noreferrer" className="bhx-sponsor-link">
                         <img src={ASI1LogoWhite} alt="ASI:One" className="bhx-sponsor-logo bhx-sponsor-logo--asi-white" />

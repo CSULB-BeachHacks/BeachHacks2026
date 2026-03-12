@@ -72,11 +72,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.2s ease;
+    animation: sponsorBounce 2s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+.bhx-sponsor-link:nth-child(2) {
+    animation-delay: 0.3s;
 }
 
 .bhx-sponsor-link:hover {
-    opacity: 0.8;
+    animation-play-state: paused;
+    transform: translateY(-12px);
+}
+
+@keyframes sponsorBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
 .bhx-sponsor-logo {
