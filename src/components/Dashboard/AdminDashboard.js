@@ -157,36 +157,41 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          <div className="admin-filters-section">
-            <div className="admin-search-container global">
-              <input
-                type="text"
-                placeholder="Search globally by name, email, or school..."
-                value={globalSearchQuery}
-                onChange={(e) => setGlobalSearchQuery(e.target.value)}
-                className="admin-search-input"
-              />
-            </div>
-            <div className="admin-status-filter-container">
-              <label htmlFor="status-filter" className="admin-status-filter-label">Filter by Status:</label>
-              <select
-                id="status-filter"
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="admin-status-dropdown"
-              >
-                <option value="all">All Statuses</option>
-                <option value="pending">Pending</option>
-                <option value="waitlisted">Waitlisted</option>
-                <option value="accepted">Accepted</option>
-                <option value="rejected">Rejected</option>
-              </select>
-            </div>
-          </div>
-
           {/* QR Code Scanner Section */}
           <div className="admin-qr-section">
             <QRScanner />
+          </div>
+
+          <div className="admin-filters-section">
+            <h2 className="admin-filters-title">Dashboard Filters</h2>
+            <form onSubmit={(e) => e.preventDefault()} className="admin-filters-form">
+              <div className="admin-filter-group">
+                <label htmlFor="global-search" className="admin-filter-label">Search Applicants:</label>
+                <input
+                  id="global-search"
+                  type="text"
+                  placeholder="Search by name, email, or school..."
+                  value={globalSearchQuery}
+                  onChange={(e) => setGlobalSearchQuery(e.target.value)}
+                  className="admin-filter-input"
+                />
+              </div>
+              <div className="admin-filter-group">
+                <label htmlFor="status-filter" className="admin-filter-label">Filter by Status:</label>
+                <select
+                  id="status-filter"
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  className="admin-filter-input"
+                >
+                  <option value="all">All Statuses</option>
+                  <option value="pending">Pending</option>
+                  <option value="waitlisted">Waitlisted</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+            </form>
           </div>
 
           {/* Applied (Pending) Section */}

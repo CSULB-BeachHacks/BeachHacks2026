@@ -12,23 +12,35 @@ const Speakers = () => {
 
     const speakers = [
         {
-            name: "Daniel Keyes",
-            description:
-                "Passionate about technology and innovation, our featured speaker brings years of experience in software development and entrepreneurship.",
-            image: "/speaker.jpg",
+            name: "Dave Winter",
+            description: "Ethics Professor @ CSULB.",
+            image: "/dave_winter.jpg",
         },
         {
-            name: "Bryant Pickford",
-            description:
-                "Leading expert in artificial intelligence and machine learning, with over 15 years of experience in cutting-edge research and development.",
-            image: "/speaker2.jpg",
+            name: "Asif Mansoor",
+            description: "Data Engineer @ Apple. Leads design and delivery of large-scale, high-fidelity data systems powering critical business lines.",
+            image: "/asif_mansoor.jpg",
         },
         {
-            name: "Mekhi Hart",
-            description:
-                "Full-stack developer and startup founder, specializing in web technologies and building scalable applications for modern businesses.",
-            image: "/speaker3.jpg",
+            name: "Tejaswi Chaudhari",
+            description: "Full Stack Developer II @ Sumeru. Specializes in building scalable web apps with React, Node.js, and AWS with AI/LLM integration.",
+            image: "/tejaswi_chaudhari.jpg",
         },
+        {
+            name: "Mani Khanuja",
+            description: "Founder, The Agentic Enterprise. Over two decades in ML/AI, focusing on RAG and intelligent agents. Former AI leader at AWS.",
+            image: "/mani_khanuja.jpg",
+        },
+        {
+            name: "Bradley Gallon",
+            description: "Software Engineer @ Google, Former teacher and math enthusiast passionate about creating high-quality personal toolkits.",
+            image: "/bradley_gallon.jpg",
+        },
+        {
+            name: "Anvit Patil",
+            description: "Software Developer/MLOps @ Lykas. Building scalable Cloud Solutions for Machine learning systems using Python, C++, and Docker.",
+            image: "/anvit_patil.jpg",
+        }
     ];
 
     useEffect(() => {
@@ -120,7 +132,7 @@ const Speakers = () => {
     }, [speakers.length]);
 
     return (
-        <section className="speakers" id="speakers" ref={sectionRef}>
+        <section className="speakers" id="judges" ref={sectionRef}>
             <div className="speakers-grid">
                 <div className="row-top">
                     <img
@@ -130,7 +142,7 @@ const Speakers = () => {
                         alt="Crab"
                         className="crab-flow"
                     />
-                    <h2 className="speakers-title">Speakers</h2>
+                    <h2 className="speakers-title">Judges</h2>
                     <img
                         draggable="false"
                         src="/purple_star.png"

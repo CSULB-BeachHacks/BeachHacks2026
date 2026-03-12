@@ -197,11 +197,11 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
             </li>
             <li className="nav-item">
               <a
-                href="#speakers"
+                href="#judges"
                 className="nav-link"
-                onClick={(e) => handleNavLinkClick(e, "speakers")}
+                onClick={(e) => handleNavLinkClick(e, "judges")}
               >
-                Speakers
+                Judges
               </a>
             </li>
             <li className="nav-item">

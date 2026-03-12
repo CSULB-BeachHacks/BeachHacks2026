@@ -232,16 +232,59 @@
   letter-spacing: 0.05em;
 }
 
-.admin-search-container {
-  flex: 1;
-  min-width: 250px;
-  max-width: 400px;
+.admin-filters-section {
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 3px solid #000;
+  font-family: "Pixelify Sans", "Courier New", monospace;
 }
 
-.admin-search-input {
+.App.dark .admin-filters-section {
+  background: rgba(15, 43, 51, 0.95);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.admin-filters-title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #0f2b33;
+  font-weight: 700;
+}
+
+.App.dark .admin-filters-title {
+  color: #DBF2F1;
+}
+
+.admin-filters-form {
+  margin-bottom: 0.5rem;
+}
+
+.admin-filter-group {
+  margin-bottom: 1rem;
+}
+
+.admin-filter-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 600;
+  color: #0f2b33;
+}
+
+.App.dark .admin-filter-label {
+  color: #DBF2F1;
+}
+
+.admin-filter-input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  padding: 0.75rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   border: 3px solid #000;
   border-radius: 4px;
   background: #fff;
@@ -251,13 +294,13 @@
   transition: all 0.2s;
 }
 
-.admin-search-input:focus {
+.admin-filter-input:focus {
   outline: none;
   box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
   transform: translate(-2px, -2px);
 }
 
-.admin-search-input::placeholder {
+.admin-filter-input::placeholder {
   color: #666;
   opacity: 0.7;
 }
@@ -389,9 +432,9 @@
     align-items: stretch;
   }
 
-  .admin-search-container {
+  .admin-filters-section {
     max-width: 100%;
-    min-width: 100%;
+    margin: 0 0 2rem 0;
   }
 
   .admin-dashboard {
@@ -496,7 +539,7 @@
     font-size: clamp(0.8rem, 2vw, 0.95rem);
   }
 
-  .admin-search-input {
+  .admin-filter-input {
     font-size: clamp(0.85rem, 2vw, 1rem);
     padding: 0.65rem 0.85rem;
   }
@@ -581,7 +624,7 @@
     font-size: clamp(1.2rem, 4vw, 1.5rem);
   }
 
-  .admin-search-input {
+  .admin-filter-input {
     font-size: clamp(0.8rem, 2.5vw, 0.95rem);
     padding: 0.6rem 0.75rem;
   }
