@@ -36,6 +36,31 @@
     opacity: 0.8;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.hero__asi-logo {
+    height: 1.8em;
+    width: auto;
+    vertical-align: middle;
+}
+
+.hero__asi-logo--white {
+    display: none;
+}
+
+.hero__asi-logo--black {
+    display: inline-block;
+}
+
+.dark .hero__asi-logo--white {
+    display: inline-block;
+}
+
+.dark .hero__asi-logo--black {
+    display: none;
 }
 
 .hero__sub {

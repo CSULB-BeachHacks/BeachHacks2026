@@ -57,3 +57,47 @@
         transform: scale(0.98);
     }
 }
+
+/* ---- Sponsors grid ---- */
+.bhx-sponsors-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 2rem;
+}
+
+.bhx-sponsor-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+}
+
+.bhx-sponsor-link:hover {
+    opacity: 0.8;
+}
+
+.bhx-sponsor-logo {
+    height: clamp(45px, 6vw, 75px);
+    width: auto;
+    object-fit: contain;
+}
+
+/* ASI logo: show white on dark, black on light */
+.bhx-sponsor-logo--asi-white {
+    display: none;
+}
+
+.bhx-sponsor-logo--asi-black {
+    display: inline-block;
+}
+
+.dark .bhx-sponsor-logo--asi-white {
+    display: inline-block;
+}
+
+.dark .bhx-sponsor-logo--asi-black {
+    display: none;
+}

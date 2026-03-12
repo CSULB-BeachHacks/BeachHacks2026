@@ -2,6 +2,8 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Countdown from "../Countdown/Countdown";
+import ASI1LogoWhite from "../../assets/ASI1_logo_white.svg";
+import ASI1LogoBlack from "../../assets/ASI1_logo_black.svg";
 import "./Hero.css";
 
 export default function Hero() {
@@ -99,7 +101,13 @@ export default function Hero() {
         <h1 className="hero__title">BeachHacks 9.0</h1>
         <div className="hero__meta">
           <p className="hero__date">(03/21)–(03/22)</p>
-          <span className="hero__powered">Powered by ASI</span>
+          <span className="hero__powered">
+            Powered by
+            <a href="https://asi1.ai/" target="_blank" rel="noopener noreferrer">
+              <img src={ASI1LogoWhite} alt="ASI:One logo" className="hero__asi-logo hero__asi-logo--white" />
+              <img src={ASI1LogoBlack} alt="ASI:One logo" className="hero__asi-logo hero__asi-logo--black" />
+            </a>
+          </span>
         </div>
         <h2 className="hero__sub">APPLICATIONS CLOSE IN:</h2>
         <div className="hero__countdown">
