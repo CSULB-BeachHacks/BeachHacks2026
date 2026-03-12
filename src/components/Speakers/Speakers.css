@@ -130,6 +130,12 @@
     z-index: 2;
 }
 
+.speaker-description--small {
+    font-size: clamp(8px, 1vw, 12px) !important;
+    line-height: 1.25 !important;
+    width: 38% !important; /* Slightly wider to accommodate longer text nicely */
+}
+
 /* Bottom Row */
 .row-bottom {
     position: relative;

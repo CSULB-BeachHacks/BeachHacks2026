@@ -13,7 +13,7 @@ const Speakers = () => {
     const speakers = [
         {
             name: "Dave Winter",
-            description: "Ethics Professor @ CSULB.",
+            description: "Dave Winter has been a lecturer at CSULB since 2011.  He used to own a web and app development studio in Long Beach, but focuses on teaching full time these days.  He's an avid supporter of open-source software and still has his hands in many personal code projects.",
             image: "/dave_winter.jpg",
         },
         {
@@ -178,7 +178,7 @@ const Speakers = () => {
                             </h3>
 
                             {/* Bottom Left: Speaker Description */}
-                            <p className="speaker-description">
+                            <p className={`speaker-description ${speakers[currentSpeakerIndex].name === "Dave Winter" ? "speaker-description--small" : ""}`}>
                                 {speakers[currentSpeakerIndex].description}
                             </p>
                         </div>
