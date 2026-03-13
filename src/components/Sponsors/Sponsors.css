@@ -1,30 +1,28 @@
 /* Pixel heading font (same look as your reference) */
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
-/* ---- Section: full-bleed background and centering ---- */
+/* ---- Section: compact and responsive ---- */
 .bhx-section {
     width: 100%; /* Changed from 100vw to prevent scrollbar overlap issue */
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    /* use the public svg so it resolves without bundler errors */
+    padding: clamp(5rem, 8vw, 7rem) 0 clamp(4rem, 7vw, 6rem);
 }
 
 .bhx-inner {
     /* keep content comfortably centered and not too wide */
     max-width: 1100px;
+    margin: 0 auto;
     width: 100%;
-    padding: 48px 16px 80px;
+    padding: 0 clamp(1rem, 4vw, 2rem);
 }
 
 /* ---- Title exactly like the mock ---- */
 .bhx-title {
     font-family: "Press Start 2P", system-ui, monospace;
-    font-size: clamp(40px, 5vw, 56px);
+    font-size: clamp(28px, 4.5vw, 56px);
     line-height: 1;
     letter-spacing: 1px;
     text-align: center;
-    margin: 8px 0 40px;
+    margin: 0 0 clamp(18px, 3.5vw, 36px);
 }
 
 .bhx-upcoming-container {
@@ -60,18 +58,19 @@
 
 /* ---- Sponsors grid ---- */
 .bhx-sponsors-grid {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    justify-items: center;
     align-items: center;
-    gap: 3rem;
-    padding: 2rem;
+    gap: clamp(14px, 3vw, 44px);
+    padding: clamp(12px, 2.5vw, 24px) 0;
 }
 
 .bhx-sponsor-link {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     animation: sponsorBounce 2s ease-in-out infinite;
     transition: transform 0.3s ease;
 }
@@ -95,13 +94,14 @@
 }
 
 .bhx-sponsor-logo {
-    height: clamp(45px, 6vw, 75px);
     width: auto;
+    max-width: min(320px, 100%);
     object-fit: contain;
+    max-height: clamp(46px, 8.5vh, 92px);
 }
 
 .bhx-sponsor-logo--coffee {
-    height: clamp(90px, 12vw, 150px);
+    max-height: clamp(58px, 10vh, 120px);
 }
 
 /* ASI logo: show white on dark, black on light */
@@ -123,30 +123,27 @@
 
 /* ---- Past Sponsors ---- */
 .bhx-past-sponsors {
-    min-height: auto; /* Don't need full viewport height for past sponsors */
-    padding-bottom: 80px;
+    margin-top: clamp(22px, 5vw, 44px);
 }
 
 .bhx-title--past {
-    font-size: clamp(24px, 4vw, 40px);
-    margin-bottom: 60px;
+    font-size: clamp(20px, 3.5vw, 40px);
+    margin: 0 0 clamp(16px, 3vw, 28px);
 }
 
 .bhx-past-sponsors-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    justify-items: center;
     align-items: center;
-    gap: 2.5rem 4rem;
-    padding: 1rem;
-    max-width: 900px;
-    margin: 0 auto;
+    gap: clamp(12px, 2.8vw, 28px);
 }
 
 .bhx-past-sponsor-item {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     /* Soft floating animation */
     animation: gentleFloat 4s ease-in-out infinite;
     transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
@@ -162,15 +159,15 @@
 }
 
 .bhx-past-sponsor-logo {
-    height: clamp(65px, 8vw, 110px);
-    width: auto;
+    width: min(220px, 100%);
     object-fit: contain;
-    max-width: 200px;
+    height: auto;
+    max-height: clamp(40px, 6.3vh, 86px);
 }
 
 .bhx-past-sponsor-logo--large {
-    height: clamp(85px, 11vw, 160px);
-    max-width: 250px;
+    max-height: clamp(46px, 7vh, 104px);
+    width: min(250px, 100%);
 }
 
 @keyframes gentleFloat {
@@ -182,5 +179,24 @@
     }
     66% {
         transform: translateY(3px) rotate(-1deg);
+    }
+}
+
+@media (max-width: 600px) {
+    .bhx-sponsors-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .bhx-past-sponsors-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 14px 18px;
+    }
+
+    .bhx-sponsor-logo {
+        max-height: clamp(44px, 7.5vh, 82px);
+    }
+
+    .bhx-sponsor-logo--coffee {
+        max-height: clamp(52px, 8.5vh, 98px);
     }
 }
