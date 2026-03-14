@@ -226,7 +226,7 @@
 .link-btn {
   background: none;
   border: none;
-  color: #15c6bb;
+  color: #0b6761; /* Darker teal for better contrast */
   text-decoration: underline;
   cursor: pointer;
   font-size: inherit;
@@ -236,7 +236,7 @@
 }
 
 .link-btn:hover {
-  color: #0fa89d;
+  color: #053b38; /* Even darker on hover */
 }
 
 .error-message {

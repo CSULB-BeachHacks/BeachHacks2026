@@ -166,7 +166,7 @@ export default function Signup({ onClose, onSwitchToLogin, onAuthSuccess }) {
         </button>
 
         <div className="auth-footer">
-          <p style={{ color: "white", fontWeight: "bold" }}>
+          <p style={{ color: "black", fontWeight: "bold" }}>
             Already have an account?{" "}
             <button
               type="button"

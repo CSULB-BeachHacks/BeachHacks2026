@@ -147,7 +147,7 @@ export default function Login({ onClose, onSwitchToSignup, onAuthSuccess }) {
         </button>
 
         <div className="auth-footer">
-          <p>
+          <p style={{ color: "black", fontWeight: "bold" }}>
             Don't have an account?{" "}
             <button
               type="button"
