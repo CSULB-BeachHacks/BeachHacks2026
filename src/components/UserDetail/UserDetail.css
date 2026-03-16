@@ -65,7 +65,7 @@
 }
 
 .user-detail-info {
-  background: linear-gradient(135deg, #6ec1e4 0%, #a6d9f9 40%, #d2eaff 70%, #b6aef9 100%);
+  background: #000000;
   padding: 3rem;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
