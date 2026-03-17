@@ -3,7 +3,8 @@
 
 /* ---- Section: compact and responsive ---- */
 .bhx-section {
-    width: 100%; /* Changed from 100vw to prevent scrollbar overlap issue */
+    width: 100%;
+    /* Changed from 100vw to prevent scrollbar overlap issue */
     padding: clamp(5rem, 8vw, 7rem) 0 clamp(4rem, 7vw, 6rem);
 }
 
@@ -33,7 +34,8 @@
 }
 
 .bhx-upcoming-text {
-    font-family: inherit; /* Inherit global font (JetBrains Mono) */
+    font-family: inherit;
+    /* Inherit global font (JetBrains Mono) */
     font-size: clamp(1.2rem, 3vw, 2rem);
     font-weight: 500;
     color: var(--bh-text);
@@ -46,10 +48,12 @@
         opacity: 0.6;
         transform: scale(0.98);
     }
+
     50% {
         opacity: 1;
         transform: scale(1.02);
     }
+
     100% {
         opacity: 0.6;
         transform: scale(0.98);
@@ -58,11 +62,11 @@
 
 /* ---- Sponsors grid ---- */
 .bhx-sponsors-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    justify-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
     align-items: center;
-    gap: clamp(14px, 3vw, 44px);
+    gap: clamp(24px, 4vw, 56px);
     padding: clamp(12px, 2.5vw, 24px) 0;
 }
 
@@ -70,7 +74,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    flex: 1;
     animation: sponsorBounce 2s ease-in-out infinite;
     transition: transform 0.3s ease;
 }
@@ -79,15 +83,25 @@
     animation-delay: 0.3s;
 }
 
+/* Code and Coffee: square logo needs a tighter container */
+.bhx-sponsor-link:nth-child(3) {
+    flex: 0 0 auto;
+    width: clamp(100px, 14vw, 180px);
+    animation-delay: 0.6s;
+}
+
 .bhx-sponsor-link:hover {
     animation-play-state: paused;
     transform: translateY(-12px);
 }
 
 @keyframes sponsorBounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-8px);
     }
@@ -101,7 +115,9 @@
 }
 
 .bhx-sponsor-logo--coffee {
-    max-height: clamp(58px, 10vh, 120px);
+    max-height: none;
+    width: 100%;
+    height: auto;
 }
 
 /* ASI logo: show white on dark, black on light */
@@ -190,12 +206,16 @@
 }
 
 @keyframes gentleFloat {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0) rotate(0deg);
     }
+
     33% {
         transform: translateY(-5px) rotate(1deg);
     }
+
     66% {
         transform: translateY(3px) rotate(-1deg);
     }
