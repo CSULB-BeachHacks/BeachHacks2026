@@ -7,7 +7,7 @@ import ASI1LogoBlack from "../../assets/ASI1_logo_black.svg";
 import "./Hero.css";
 
 export default function Hero() {
-  const eventStart = "2026-03-14T23:59:00-07:00";
+  const eventStart = "2026-03-21T10:00:00-07:00";
 
   // refs for animation targets
   const sectionRef = useRef(null);
@@ -109,7 +109,7 @@ export default function Hero() {
             </a>
           </span>
         </div>
-        <h2 className="hero__sub">APPLICATIONS CLOSE IN:</h2>
+        <h2 className="hero__sub">EVENT STARTS IN:</h2>
         <div className="hero__countdown">
           <Countdown date={eventStart} />
         </div>

@@ -74,6 +74,16 @@
     margin-top: 4px;
 }
 
+.hero__apps-closed {
+    margin-top: 16px;
+    font-size: clamp(11px, 1.2vw, 15px);
+    font-weight: 700;
+    color: var(--bh-muted);
+    opacity: 0.85;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
 .hero__crab {
     position: absolute;
     bottom: 0;

@@ -248,9 +248,9 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
                 <button className="apply-btn log-in-btn" onClick={currentUser ? handleApplyClick : openLogin} style={{ marginRight: '10px' }}>
                   {currentUser ? "PORTAL" : "LOGIN"}
                 </button>
-                <button className="apply-btn" onClick={handleApplyClick}>
+                {/* <button className="apply-btn" onClick={handleApplyClick}>
                   APPLY
-                </button>
+                </button> */}
               </>
             )}
 
