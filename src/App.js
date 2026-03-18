@@ -23,6 +23,7 @@ import AdminLogin from "./components/Dashboard/AdminLogin";
 import AdminDashboard from "./components/Dashboard/AdminDashboard";
 import UserDetail from "./components/UserDetail/UserDetail";
 import ConfettiCheck from "./components/Cofetti/ConfettiCheck";
+import AIAgentSection from "./components/AIAgentSection/AIAgentSection";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 
 
@@ -142,6 +143,7 @@ function App() {
                                     onToggleTheme={toggleTheme}
                                 />
                                 <Hero />
+                                <AIAgentSection />
                                 <About />
                                 <Tracks />
                                 <Speakers />
