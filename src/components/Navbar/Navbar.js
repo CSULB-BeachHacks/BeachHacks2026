@@ -1,4 +1,3 @@
-// src/components/Navbar.js
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -6,6 +5,7 @@ import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Login from "../Login";
 import Signup from "../Signup";
+import fetchAiIcon from "../../assets/fetch_ai.webp";
 import "./Navbar.css";
 
 // Applications open Monday 16 February at 10:00 AM local – timer hides and Apply shows after this
@@ -243,14 +243,20 @@ const Navbar = ({ isDark = false, onToggleTheme }) => {
                 <span className="nav-apply-countdown-date">Opens Feb 16, 10:00 AM</span>
               </div>
             )}
+            <a
+              href="https://fetch.ai/beachhacks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="chat-btn"
+            >
+              <img src={fetchAiIcon} alt="Fetch.ai" className="chat-btn-icon" />
+              <span>BeachHacks Agent</span>
+            </a>
             {applicationsOpen && (
               <>
                 <button className="apply-btn log-in-btn" onClick={currentUser ? handleApplyClick : openLogin} style={{ marginRight: '10px' }}>
                   {currentUser ? "PORTAL" : "LOGIN"}
                 </button>
-                {/* <button className="apply-btn" onClick={handleApplyClick}>
-                  APPLY
-                </button> */}
               </>
             )}
 
