@@ -42,6 +42,7 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [showAnimation, setShowAnimation] = useState(true);
     const [applicantName, setApplicantName] = useState("");
+    const [applicantEmail, setApplicantEmail] = useState("");
     const [applicantSchool, setApplicantSchool] = useState("");
 
     const [showDiscordModal, setShowDiscordModal] = useState(false);
@@ -92,7 +93,7 @@ const Dashboard = () => {
                     const fullName = [data.firstName, data.lastName].filter(Boolean).join(" ");
                     setApplicantName(fullName);
                     setApplicantSchool(data.school || "");
-
+                    setApplicantEmail(data.email || "");
                     if (data.agreedToOvernight) {
                         setHasAgreedToOvernight(true);
                     }
@@ -428,6 +429,10 @@ const Dashboard = () => {
                                         <div className="virtual-id-field">
                                             <span className="virtual-id-label">Name:</span>
                                             <span className="virtual-id-value">{applicantName || "N/A"}</span>
+                                        </div>
+                                        <div className="virtual-id-field">
+                                            <span className="virtual-id-label">Email:</span>
+                                            <span className="virtual-id-value">{applicantEmail || "N/A"}</span>
                                         </div>
                                         <div className="virtual-id-field">
                                             <span className="virtual-id-label">School:</span>
