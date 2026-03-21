@@ -506,6 +506,69 @@
     color: #0f2b33;
 }
 
+.virtual-id-card {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 255, 255, 0.92);
+    border: 3px solid #000;
+    border-radius: 8px;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+    font-family: "Pixelify Sans", "Courier New", monospace;
+    align-self: center;
+    width: 100%;
+    max-width: 340px;
+    box-sizing: border-box;
+}
+
+.App.dark .virtual-id-card {
+    background: rgba(15, 43, 51, 0.95);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.virtual-id-title {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 0.75rem;
+    color: #0f2b33;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.App.dark .virtual-id-title {
+    color: #dbf2f1;
+}
+
+.virtual-id-field {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+    align-items: baseline;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.virtual-id-label {
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    font-weight: 700;
+    color: #0f2b33;
+    white-space: nowrap;
+}
+
+.App.dark .virtual-id-label {
+    color: #a0d8d4;
+}
+
+.virtual-id-value {
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    font-weight: 600;
+    color: #333;
+}
+
+.App.dark .virtual-id-value {
+    color: #dbf2f1;
+}
+
 @media (max-width: 1024px) {
     .dashboard-content {
         padding: 6rem 1.5rem 2rem;

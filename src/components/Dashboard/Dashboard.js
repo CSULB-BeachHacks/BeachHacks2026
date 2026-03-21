@@ -41,6 +41,8 @@ const Dashboard = () => {
     const [applicationStatus, setApplicationStatus] = useState(null); // "pending", "accepted", "waitlisted", "rejected"
     const [loading, setLoading] = useState(true);
     const [showAnimation, setShowAnimation] = useState(true);
+    const [applicantName, setApplicantName] = useState("");
+    const [applicantSchool, setApplicantSchool] = useState("");
 
     const [showDiscordModal, setShowDiscordModal] = useState(false);
     const [hasAgreedToOvernight, setHasAgreedToOvernight] = useState(false);
@@ -85,6 +87,11 @@ const Dashboard = () => {
                     setIsSubmitted(!!data.submittedAt);
                     // Get the status from Firestore (pending, accepted, waitlisted, rejected)
                     setApplicationStatus(data.status || "pending");
+
+                    // Store applicant name and ID for Virtual ID card
+                    const fullName = [data.firstName, data.lastName].filter(Boolean).join(" ");
+                    setApplicantName(fullName);
+                    setApplicantSchool(data.school || "");
 
                     if (data.agreedToOvernight) {
                         setHasAgreedToOvernight(true);
@@ -415,6 +422,19 @@ const Dashboard = () => {
                                         <div className="qr-box"></div>
                                     )}
                                 </div>
+                                {applicationStatus === "accepted" && (
+                                    <div className="virtual-id-card">
+                                        <h4 className="virtual-id-title">Virtual ID</h4>
+                                        <div className="virtual-id-field">
+                                            <span className="virtual-id-label">Name:</span>
+                                            <span className="virtual-id-value">{applicantName || "N/A"}</span>
+                                        </div>
+                                        <div className="virtual-id-field">
+                                            <span className="virtual-id-label">School:</span>
+                                            <span className="virtual-id-value">{applicantSchool || "N/A"}</span>
+                                        </div>
+                                    </div>
+                                )}
                             </section>
                         </section>
 
