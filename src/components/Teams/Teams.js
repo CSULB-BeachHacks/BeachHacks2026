@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import "./Teams.css";
+import LazyImage from "../LazyImage/LazyImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -285,7 +286,7 @@ const Teams = () => {
                             className="bubbles-wrapper"
                             ref={bubblesWrapperRef}
                         ></div>
-                        <img
+                        <LazyImage
                             draggable="false"
                             ref={crabRef}
                             src="/crabby_pyamid_1.png"
@@ -342,7 +343,7 @@ const Teams = () => {
                         {sliderMembers.map((member, index) => (
                             <div className="team-member-card" key={index}>
                                 <div className="member-image-wrapper">
-                                    <img
+                                    <LazyImage
                                         draggable="false"
                                         src={member.image}
                                         alt={member.name}

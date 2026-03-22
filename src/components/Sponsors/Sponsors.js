@@ -2,6 +2,7 @@ import React from "react";
 import ASI1LogoWhite from "../../assets/ASI1_logo_white.svg";
 import ASI1LogoBlack from "../../assets/ASI1_logo_black.svg";
 import "./Sponsors.css";
+import LazyImage from "../LazyImage/LazyImage";
 
 const PAST_SPONSORS = [
     { src: "/past-sponsor-Google-logo.png", alt: "Google", link: "https://google.com/", scale: 1.6 },
@@ -26,15 +27,15 @@ export default function Sponsors() {
                 <h2 className="bhx-title">Sponsors</h2>
                 <div className="bhx-sponsors-grid">
                     <a href="https://fetch.ai/" target="_blank" rel="noopener noreferrer" className="bhx-sponsor-link">
-                        <img src="/Primary_logo_white.svg" alt="Fetch.ai" className="bhx-sponsor-logo bhx-sponsor-logo--fetch-white" />
-                        <img src="/Primary_logo_navy.svg" alt="Fetch.ai" className="bhx-sponsor-logo bhx-sponsor-logo--fetch-navy" />
+                        <LazyImage src="/Primary_logo_white.svg" alt="Fetch.ai" className="bhx-sponsor-logo bhx-sponsor-logo--fetch-white" />
+                        <LazyImage src="/Primary_logo_navy.svg" alt="Fetch.ai" className="bhx-sponsor-logo bhx-sponsor-logo--fetch-navy" />
                     </a>
                     <a href="https://asi1.ai/" target="_blank" rel="noopener noreferrer" className="bhx-sponsor-link">
-                        <img src={ASI1LogoWhite} alt="ASI:One" className="bhx-sponsor-logo bhx-sponsor-logo--asi-white" />
-                        <img src={ASI1LogoBlack} alt="ASI:One" className="bhx-sponsor-logo bhx-sponsor-logo--asi-black" />
+                        <LazyImage src={ASI1LogoWhite} alt="ASI:One" className="bhx-sponsor-logo bhx-sponsor-logo--asi-white" />
+                        <LazyImage src={ASI1LogoBlack} alt="ASI:One" className="bhx-sponsor-logo bhx-sponsor-logo--asi-black" />
                     </a>
                     <a href="https://codeandcoffee.dev/" target="_blank" rel="noopener noreferrer" className="bhx-sponsor-link">
-                        <img src="/past-sponsor-Code-and-Coffee-logo.svg" alt="Code and Coffee" className="bhx-sponsor-logo bhx-sponsor-logo--coffee" />
+                        <LazyImage src="/past-sponsor-Code-and-Coffee-logo.svg" alt="Code and Coffee" className="bhx-sponsor-logo bhx-sponsor-logo--coffee" />
                     </a>
                 </div>
                 <div className="bhx-past-sponsors" id="past-sponsors">
@@ -54,7 +55,7 @@ export default function Sponsors() {
                                     rel="noopener noreferrer"
                                     style={{ display: "contents" }}
                                 >
-                                    <img
+                                    <LazyImage
                                         src={sponsor.src}
                                         alt={sponsor.alt}
                                         className="bhx-past-sponsor-logo"
